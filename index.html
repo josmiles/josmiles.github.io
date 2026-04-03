@@ -1,1894 +1,1288 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Joseph Kamanja | Systems Builder · Nairobi, Kenya</title>
+<meta name="description" content="Full-stack developer building production AI systems for African markets. HealthAI, SmartQueue, GoldenEcho, StMartin EDU.">
+<meta property="og:title" content="Joseph Kamanja — Systems Builder">
+<meta property="og:description" content="I build real-world systems that solve African problems.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#C9A961">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230b0f1a'/><text x='16' y='22' text-anchor='middle' font-family='serif' font-size='18' font-weight='700' fill='%23C9A961'>JK</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* =============================================
+   TOKENS
+============================================= */
+:root {
+  --gold: #C9A961;
+  --gold-dim: rgba(201,169,97,0.1);
+  --gold-glow: 0 8px 32px rgba(201,169,97,0.25);
+  --d1: #0b0f1a; --d2: #111827; --d3: #1e293b; --d4: #263045;
+  --l1: #f8fafc; --l2: #ffffff; --l3: #f1f5f9;
+  --ok: #10b981; --warn: #f59e0b;
+  /* theme vars */
+  --bg: #0b0f1a; --bg2: #111827; --bg3: #1e293b;
+  --txt: #e2e8f0; --mut: #94a3b8; --dim: #64748b;
+  --card: rgba(17,24,39,0.9);
+  --bdr: rgba(201,169,97,0.12); --bdr-h: rgba(201,169,97,0.4);
+  --sh: 0 4px 24px rgba(0,0,0,0.4);
+  --fd: 'Syne', sans-serif; --fb: 'DM Sans', sans-serif;
+}
+[data-theme="light"] {
+  --bg: #f8fafc; --bg2: #ffffff; --bg3: #f1f5f9;
+  --txt: #1e293b; --mut: #475569; --dim: #94a3b8;
+  --card: rgba(255,255,255,0.97);
+  --bdr: rgba(30,41,59,0.1); --bdr-h: rgba(201,169,97,0.6);
+  --sh: 0 4px 24px rgba(0,0,0,0.07);
+}
 
-  <!-- ═══ SEO & Open Graph ═══ -->
-  <title>Joseph Kamanja | Systems Builder · Nairobi, Kenya</title>
-  <meta name="description" content="Full-stack developer building production-grade AI systems for African markets. HealthAI, SmartQueue, GoldenEcho, StMartin EDU — real users, real impact.">
-  <meta name="author" content="Joseph Kamanja">
-  <meta name="keywords" content="Joseph Kamanja, full-stack developer, Kenya, Nairobi, AI systems, cybersecurity, SmartQueue, GoldenEcho, HealthAI, StMartin EDU">
+/* =============================================
+   RESET
+============================================= */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--fb);
+  background: var(--bg);
+  color: var(--txt);
+  line-height: 1.65;
+  overflow-x: hidden;
+  transition: background 0.3s, color 0.3s;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; height: auto; }
+button { font-family: var(--fb); cursor: pointer; }
 
-  <!-- Open Graph (LinkedIn / Twitter previews) -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://josephkamanja.dev">
-  <meta property="og:title" content="Joseph Kamanja — Systems Builder">
-  <meta property="og:description" content="I build real-world systems that solve African problems. 4 production platforms. Real users. Africa-deployed.">
-  <meta property="og:image" content="https://og-image.josephkamanja.dev/og.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:locale" content="en_KE">
-  <meta property="og:site_name" content="Joseph Kamanja · Systems Lab">
+/* =============================================
+   NAVIGATION  — fixed, always legible
+============================================= */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  height: 60px;
+  display: flex; align-items: center;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.nav.stuck {
+  background: rgba(11,15,26,0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 1px 0 var(--bdr);
+}
+[data-theme="light"] .nav.stuck {
+  background: rgba(248,250,252,0.97);
+}
+.nav-inner {
+  width: 100%; max-width: 1280px; margin: 0 auto;
+  padding: 0 1rem;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 0.5rem;
+}
+/* Logo */
+.logo {
+  font-family: var(--fd); font-weight: 800;
+  font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+  display: flex; align-items: center; gap: 0.25rem;
+  flex-shrink: 0; white-space: nowrap;
+}
+.logo-w { color: var(--txt); }
+.logo-g { color: var(--gold); }
+.logo-pill {
+  font-size: 0.48rem; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--dim);
+  padding: 0.12rem 0.35rem; border: 1px solid var(--bdr);
+  border-radius: 3px; margin-left: 0.15rem;
+  white-space: nowrap;
+}
+/* Desktop links — hidden on small screens */
+.nav-links {
+  display: flex; list-style: none; gap: 0.1rem; align-items: center;
+}
+.nav-links a {
+  display: block; padding: 0.4rem 0.7rem;
+  font-size: 0.8rem; font-weight: 500; color: var(--mut);
+  border-radius: 6px; transition: all 0.2s; white-space: nowrap;
+}
+.nav-links a:hover { color: var(--gold); background: var(--gold-dim); }
+.nav-cta {
+  padding: 0.42rem 0.9rem !important;
+  background: var(--gold) !important; color: var(--d1) !important;
+  border-radius: 7px !important; font-weight: 700 !important;
+}
+.nav-cta:hover { background: #d4b472 !important; }
+/* Right side of nav — theme + burger always visible */
+.nav-right { display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0; }
+.theme-btn {
+  width: 36px; height: 36px; border-radius: 8px;
+  border: 1px solid var(--bdr); background: var(--gold-dim);
+  color: var(--gold); font-size: 0.9rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s; flex-shrink: 0;
+}
+.theme-btn:hover { background: var(--gold); color: var(--d1); border-color: var(--gold); }
+/* Burger — visible only on mobile */
+.burger {
+  display: none;
+  flex-direction: column; gap: 5px;
+  background: none; border: none;
+  padding: 6px; flex-shrink: 0;
+}
+.bun { width: 20px; height: 2px; background: var(--mut); border-radius: 2px; transition: all 0.3s; }
+.burger.on .bun:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger.on .bun:nth-child(2) { opacity: 0; }
+.burger.on .bun:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Joseph Kamanja — Systems Builder">
-  <meta name="twitter:description" content="I build real-world systems that solve African problems.">
-  <meta name="twitter:image" content="https://og-image.josephkamanja.dev/og.png">
+/* =============================================
+   MOBILE DRAWER
+============================================= */
+.drawer {
+  display: none; /* JS shows/hides */
+  position: fixed; top: 60px; right: 0; bottom: 0;
+  width: min(280px, 88vw);
+  background: var(--bg2); border-left: 1px solid var(--bdr);
+  padding: 1.25rem 1rem;
+  transform: translateX(100%);
+  transition: transform 0.32s cubic-bezier(0.4,0,0.2,1);
+  z-index: 999; overflow-y: auto;
+}
+.drawer.open { transform: translateX(0); }
+.drawer ul { list-style: none; display: flex; flex-direction: column; gap: 0.3rem; }
+.drawer a {
+  display: flex; align-items: center; gap: 0.7rem;
+  padding: 0.75rem 0.9rem; color: var(--mut);
+  font-size: 0.95rem; font-weight: 500;
+  border-radius: 8px; transition: all 0.2s;
+}
+.drawer a i { color: var(--gold); width: 16px; text-align: center; font-size: 0.85rem; }
+.drawer a:hover { background: var(--gold-dim); color: var(--gold); }
+.drawer-div { height: 1px; background: var(--bdr); margin: 0.85rem 0; }
+.drawer-theme {
+  display: flex; align-items: center; gap: 0.7rem;
+  padding: 0.75rem 0.9rem; color: var(--mut);
+  font-size: 0.95rem; font-weight: 500;
+  border-radius: 8px; cursor: pointer;
+  border: none; background: none; width: 100%;
+  font-family: var(--fb); transition: all 0.2s;
+}
+.drawer-theme i { color: var(--gold); width: 16px; text-align: center; font-size: 0.85rem; }
+.drawer-theme:hover { background: var(--gold-dim); color: var(--gold); }
+.overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.55); z-index: 998;
+}
+.overlay.open { display: block; }
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230b0f1a'/><text x='50%' y='52%' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-size='18' font-weight='700' fill='%23C9A961'>JK</text></svg>">
-  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' rx='40' fill='%230b0f1a'/><text x='50%' y='52%' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-size='90' font-weight='700' fill='%23C9A961'>JK</text></svg>">
+/* =============================================
+   BUTTONS
+============================================= */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  padding: 0.75rem 1.4rem;
+  font-family: var(--fb); font-size: 0.88rem; font-weight: 700;
+  border-radius: 10px; border: none; cursor: pointer;
+  transition: all 0.22s; text-decoration: none;
+  white-space: nowrap;
+}
+.btn-gold { background: var(--gold); color: var(--d1); }
+.btn-gold:hover { background: #d4b472; transform: translateY(-2px); box-shadow: var(--gold-glow); }
+.btn-outline {
+  background: transparent; color: var(--txt);
+  border: 1px solid var(--bdr);
+}
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+.btn-sm { padding: 0.55rem 1rem; font-size: 0.8rem; }
 
-  <!-- Web App Manifest -->
-  <link rel="manifest" href="data:application/json,%7B%22name%22%3A%22Joseph%20Kamanja%20%E2%80%94%20Systems%20Lab%22%2C%22short_name%22%3A%22JKamanja%22%2C%22start_url%22%3A%22%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%230b0f1a%22%2C%22theme_color%22%3A%22%23C9A961%22%7D">
-  <meta name="theme-color" content="#C9A961">
+/* action buttons in system cards */
+.act {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  padding: 0.38rem 0.75rem; border-radius: 6px;
+  font-size: 0.74rem; font-weight: 600;
+  transition: all 0.2s; border: none;
+  font-family: var(--fb); text-decoration: none;
+}
+.act-gold { background: var(--gold); color: var(--d1); }
+.act-gold:hover { background: #d4b472; }
+.act-out { background: transparent; color: var(--mut); border: 1px solid var(--bdr); }
+.act-out:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+.act-gh { background: transparent; color: var(--dim); border: 1px solid var(--bdr); padding: 0.38rem 0.6rem; }
+.act-gh:hover { color: var(--txt); }
 
-  <!-- Fonts — preloaded for performance -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap">
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+/* =============================================
+   LAYOUT HELPERS
+============================================= */
+.section { padding: 5rem 1rem; }
+.section-alt { background: var(--bg2); }
+.wrap { max-width: 1200px; margin: 0 auto; }
+.divider { height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.lbl {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.13em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem;
+}
+.lbl::before { content: ''; width: 18px; height: 1px; background: var(--gold); }
+.sec-h {
+  font-family: var(--fd);
+  font-size: clamp(1.75rem, 4vw, 2.8rem);
+  font-weight: 800; letter-spacing: -0.025em;
+  color: var(--txt); margin-bottom: 0.65rem;
+  line-height: 1.1; transition: color 0.3s;
+}
+[data-theme="light"] .sec-h { color: #0f172a; }
+.sec-sub {
+  color: var(--mut); font-size: 0.95rem; font-weight: 300;
+  max-width: 520px; margin-bottom: 2.5rem; line-height: 1.7;
+}
 
-  <!-- Font Awesome — deferred to avoid render block -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+/* =============================================
+   HERO
+============================================= */
+.hero {
+  min-height: 100svh;
+  padding: calc(60px + 2.5rem) 1rem 3rem;
+  display: flex; align-items: center;
+  position: relative; overflow: hidden;
+}
+/* grid bg */
+.hero::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(201,169,97,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,169,97,0.03) 1px, transparent 1px);
+  background-size: 52px 52px;
+}
+/* glow orbs */
+.orb {
+  position: absolute; border-radius: 50%;
+  filter: blur(70px); pointer-events: none;
+}
+.orb1 {
+  width: clamp(200px,50vw,480px); height: clamp(200px,50vw,480px);
+  background: radial-gradient(circle, rgba(201,169,97,0.12) 0%, transparent 70%);
+  top: -60px; right: -80px;
+  animation: flt 12s ease-in-out infinite;
+}
+.orb2 {
+  width: clamp(150px,40vw,360px); height: clamp(150px,40vw,360px);
+  background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%);
+  bottom: 0; left: -60px;
+  animation: flt 16s ease-in-out infinite reverse;
+}
+@keyframes flt { 0%,100%{transform:translate(0,0)} 50%{transform:translate(14px,-20px)} }
+.hero-grid {
+  position: relative; z-index: 1;
+  max-width: 1200px; margin: 0 auto; width: 100%;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 2.5rem; align-items: center;
+}
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.13em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 1.1rem;
+}
+.eyebrow::before { content: ''; width: 18px; height: 1px; background: var(--gold); }
+.hero-h {
+  font-family: var(--fd);
+  font-size: clamp(2rem, 5.5vw, 3.8rem);
+  font-weight: 800; line-height: 1.08; letter-spacing: -0.03em;
+  color: var(--txt); margin-bottom: 1.1rem; transition: color 0.3s;
+}
+[data-theme="light"] .hero-h { color: #0f172a; }
+.hero-h .hl { color: var(--gold); position: relative; }
+.hero-h .hl::after {
+  content: ''; position: absolute; bottom: -3px; left: 0; right: 0;
+  height: 3px; background: linear-gradient(90deg, var(--gold), transparent);
+}
+.hero-sub {
+  font-size: clamp(0.88rem, 2vw, 1.05rem); color: var(--mut);
+  font-weight: 300; line-height: 1.7; max-width: 440px; margin-bottom: 1.5rem;
+}
+.trust {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem;
+  padding: 0.6rem 0.9rem;
+  background: rgba(201,169,97,0.06); border: 1px solid var(--bdr);
+  border-radius: 8px; font-size: 0.72rem; font-weight: 500;
+  color: var(--mut); margin-bottom: 1.75rem; width: fit-content;
+}
+.tdot { color: var(--gold); animation: blink 1.5s ease-in-out infinite; }
+.tsep { color: var(--bdr); }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.hero-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; }
 
-  <style>
-    /* ═══════════════════════════════════════════
-       DESIGN TOKENS
-    ═══════════════════════════════════════════ */
-    :root {
-      --primary: #C9A961;
-      --primary-dim: rgba(201,169,97,0.12);
-      --primary-glow: rgba(201,169,97,0.3);
-      --dark:   #0b0f1a;
-      --dark-2: #111827;
-      --dark-3: #1e293b;
-      --dark-4: #263045;
-      --light-bg: #f8fafc;
-      --light-surface: #ffffff;
-      --light-surface2: #f1f5f9;
-      --text-dark: #e2e8f0;
-      --text-dark-muted: #94a3b8;
-      --text-dark-dim: #64748b;
-      --text-light: #1e293b;
-      --text-light-muted: #475569;
-      --text-light-dim: #94a3b8;
-      --success: #10b981;
-      --warning: #f59e0b;
-      --info: #3b82f6;
-      --card-bg-dark: rgba(17,24,39,0.85);
-      --card-bg-light: rgba(255,255,255,0.95);
-      --border-dark: rgba(201,169,97,0.12);
-      --border-hover-dark: rgba(201,169,97,0.35);
-      --border-light: rgba(30,41,59,0.12);
-      --border-hover-light: rgba(201,169,97,0.5);
-      --radius: 12px;
-      --radius-sm: 8px;
-      --shadow: 0 4px 24px rgba(0,0,0,0.35);
-      --shadow-gold: 0 8px 32px rgba(201,169,97,0.2);
-      --font-display: 'Syne', sans-serif;
-      --font-body: 'DM Sans', sans-serif;
+/* PROFILE CARD */
+.pcard {
+  background: var(--card); border: 1px solid var(--bdr);
+  border-radius: 18px; padding: 1.75rem;
+  backdrop-filter: blur(16px); position: relative; overflow: hidden;
+}
+.pcard::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.pring {
+  width: 96px; height: 96px; border-radius: 50%;
+  border: 2px solid var(--gold); padding: 3px;
+  margin: 0 auto 1.1rem; position: relative;
+}
+.pring::before {
+  content: ''; position: absolute; inset: -5px; border-radius: 50%;
+  border: 1px solid rgba(201,169,97,0.2);
+  animation: pulse 2.5s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:0.3;transform:scale(1)} 50%{opacity:0.7;transform:scale(1.04)} }
+.pimg {
+  width: 100%; height: 100%; border-radius: 50%;
+  object-fit: cover; background: var(--bg3); display: block;
+}
+.pfb {
+  width: 100%; height: 100%; border-radius: 50%;
+  background: linear-gradient(135deg,var(--d3),var(--d4));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--fd); font-size: 1.6rem; font-weight: 800; color: var(--gold);
+}
+.pname {
+  font-family: var(--fd); font-size: 1.15rem; font-weight: 800;
+  text-align: center; color: var(--txt); margin-bottom: 0.2rem;
+  transition: color 0.3s;
+}
+[data-theme="light"] .pname { color: #0f172a; }
+.prole {
+  text-align: center; color: var(--gold);
+  font-size: 0.72rem; font-weight: 500;
+  letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 1.1rem;
+}
+.sgrid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0.55rem; margin-bottom: 1.1rem;
+}
+.sbox {
+  background: rgba(255,255,255,0.03); border: 1px solid var(--bdr);
+  border-radius: 9px; padding: 0.75rem; text-align: center;
+}
+[data-theme="light"] .sbox { background: rgba(0,0,0,0.03); }
+.snum {
+  font-family: var(--fd); font-size: 1.35rem; font-weight: 800;
+  color: var(--gold); line-height: 1;
+}
+.slbl { font-size: 0.6rem; color: var(--dim); margin-top: 0.18rem; text-transform: uppercase; letter-spacing: 0.07em; }
+.plinks { display: flex; flex-direction: column; gap: 0.38rem; }
+.plink {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.5rem 0.85rem; border: 1px solid var(--bdr);
+  border-radius: 7px; font-size: 0.78rem; color: var(--mut);
+  transition: all 0.2s; overflow: hidden;
+}
+.plink i { color: var(--gold); width: 13px; text-align: center; flex-shrink: 0; }
+.plink span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.plink:hover { border-color: var(--bdr-h); color: var(--txt); background: var(--gold-dim); }
 
-      /* Active theme defaults → dark */
-      --bg: var(--dark);
-      --bg2: var(--dark-2);
-      --bg3: var(--dark-3);
-      --text: var(--text-dark);
-      --text-muted: var(--text-dark-muted);
-      --text-dim: var(--text-dark-dim);
-      --card-bg: var(--card-bg-dark);
-      --border: var(--border-dark);
-      --border-hover: var(--border-hover-dark);
-    }
+/* =============================================
+   ABOUT
+============================================= */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+.atext { color: var(--mut); line-height: 1.8; margin-bottom: 1rem; font-size: 0.92rem; }
+.atext strong { color: var(--gold); font-weight: 600; }
+.astats { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
 
-    [data-theme="light"] {
-      --bg: var(--light-bg);
-      --bg2: var(--light-surface);
-      --bg3: var(--light-surface2);
-      --text: var(--text-light);
-      --text-muted: var(--text-light-muted);
-      --text-dim: var(--text-light-dim);
-      --card-bg: var(--card-bg-light);
-      --border: var(--border-light);
-      --border-hover: var(--border-hover-light);
-      --shadow: 0 4px 24px rgba(0,0,0,0.08);
-    }
+/* =============================================
+   SYSTEMS CARDS
+============================================= */
+.sys-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 1.1rem;
+}
+.scard {
+  background: var(--card); border: 1px solid var(--bdr);
+  border-radius: 12px; overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: all 0.3s; backdrop-filter: blur(8px);
+}
+.scard:hover { border-color: var(--bdr-h); transform: translateY(-3px); box-shadow: var(--gold-glow); }
+.scard-top {
+  padding: 1.35rem 1.35rem 1rem;
+  border-bottom: 1px solid var(--bdr);
+}
+.scard-hdr { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.6rem; }
+.sname { font-family: var(--fd); font-size: 1.1rem; font-weight: 800; color: var(--txt); transition: color 0.3s; }
+[data-theme="light"] .sname { color: #0f172a; }
+.badge {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  padding: 0.2rem 0.6rem; border-radius: 20px;
+  font-size: 0.58rem; font-weight: 700; letter-spacing: 0.07em;
+  text-transform: uppercase; white-space: nowrap; flex-shrink: 0;
+}
+.badge::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+.live { background: rgba(16,185,129,0.12); color: #10b981; border: 1px solid rgba(16,185,129,0.25); }
+.mvp { background: rgba(245,158,11,0.12); color: #f59e0b; border: 1px solid rgba(245,158,11,0.25); }
+.live::before { animation: blink 1.5s ease-in-out infinite; }
+.sprob { font-size: 0.83rem; color: var(--mut); line-height: 1.5; margin-bottom: 0.8rem; }
+.sfeat { list-style: none; display: flex; flex-direction: column; gap: 0.28rem; }
+.sfeat li { display: flex; align-items: flex-start; gap: 0.4rem; font-size: 0.77rem; color: var(--mut); }
+.sfeat li::before { content: '→'; color: var(--gold); flex-shrink: 0; font-size: 0.73rem; margin-top: 1px; }
+.scard-bot { padding: 1rem 1.35rem; display: flex; flex-direction: column; gap: 0.8rem; flex: 1; justify-content: flex-end; }
+.tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.tag {
+  font-size: 0.6rem; font-weight: 600; padding: 0.16rem 0.48rem;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 4px; color: var(--dim);
+}
+[data-theme="light"] .tag { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.09); }
+.acts { display: flex; gap: 0.38rem; flex-wrap: wrap; }
 
-    /* ═══════════════════════════════════════════
-       RESET & BASE
-    ═══════════════════════════════════════════ */
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior:smooth; font-size:16px; }
-    body {
-      font-family: var(--font-body);
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.65;
-      overflow-x: hidden;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-    a { color:inherit; text-decoration:none; }
-    img { max-width:100%; display:block; }
+/* =============================================
+   CASE STUDIES
+============================================= */
+.cs {
+  display: grid; grid-template-columns: 220px 1fr;
+  background: var(--card); border: 1px solid var(--bdr);
+  border-radius: 12px; overflow: hidden;
+  margin-bottom: 1.5rem; transition: border-color 0.3s;
+}
+.cs:hover { border-color: var(--bdr-h); }
+.cs-side {
+  background: rgba(201,169,97,0.04); border-right: 1px solid var(--bdr);
+  padding: 1.75rem 1.35rem; display: flex; flex-direction: column; gap: 1.1rem;
+}
+[data-theme="light"] .cs-side { background: rgba(201,169,97,0.05); }
+.cs-name { font-family: var(--fd); font-size: 1.3rem; font-weight: 800; color: var(--txt); transition: color 0.3s; }
+[data-theme="light"] .cs-name { color: #0f172a; }
+.cs-score { font-family: var(--fd); font-size: 2rem; font-weight: 800; color: var(--gold); line-height: 1; }
+.cs-sl { font-size: 0.6rem; color: var(--dim); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.15rem; }
+.cs-meta { display: flex; flex-direction: column; gap: 0.55rem; }
+.cml { font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--dim); }
+.cmv { font-size: 0.78rem; color: var(--mut); }
+.cs-body {
+  padding: 1.75rem; display: grid;
+  grid-template-columns: 1fr 1fr; gap: 1.5rem;
+}
+.cbt { font-family: var(--fd); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; }
+.cbx { font-size: 0.84rem; color: var(--mut); line-height: 1.65; }
+.cs-full { grid-column: 1 / -1; }
+.clist { list-style: none; display: flex; flex-direction: column; gap: 0.42rem; }
+.clist li { display: flex; align-items: flex-start; gap: 0.42rem; font-size: 0.82rem; color: var(--mut); }
+.clist li i { margin-top: 2px; flex-shrink: 0; }
 
-    .skip-link {
-      position:absolute; top:-9999px; left:0;
-      background:var(--primary); color:var(--dark);
-      padding:0.5rem 1rem; font-weight:700; z-index:9999;
-      border-radius:0 0 8px 0;
-    }
-    .skip-link:focus { top:0; }
+/* Screenshot */
+.cs-img {
+  grid-column: 1 / -1;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--bdr);
+  background: var(--bg3);
+  position: relative;
+}
+.cs-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+.cs-img-ph {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 0.5rem; color: var(--dim); font-size: 0.76rem;
+  text-align: center; padding: 1rem;
+}
+.cs-img-ph i { font-size: 1.6rem; color: var(--bdr-h); }
 
-    /* noise overlay */
-    body::before {
-      content:'';
-      position:fixed; inset:0;
-      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events:none; z-index:0; opacity:0.35;
-    }
-    [data-theme="light"] body::before { opacity:0.12; }
+/* =============================================
+   TESTIMONIALS
+============================================= */
+.tgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%,260px), 1fr)); gap: 1.1rem; margin-top: 2.5rem; }
+.tcard {
+  background: var(--card); border: 1px solid var(--bdr);
+  border-radius: 12px; padding: 1.35rem; position: relative;
+  transition: all 0.3s;
+}
+.tcard:hover { border-color: var(--bdr-h); }
+.tcard::after {
+  content: '\201C'; position: absolute; top: 0.75rem; right: 1.1rem;
+  font-family: Georgia,serif; font-size: 3rem; color: var(--gold);
+  opacity: 0.2; line-height: 1; pointer-events: none;
+}
+.ttext { font-size: 0.86rem; color: var(--mut); line-height: 1.7; margin-bottom: 1rem; font-style: italic; }
+.tauth { display: flex; align-items: center; gap: 0.7rem; }
+.tav {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--gold-dim); border: 1px solid var(--bdr);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--fd); font-size: 0.72rem; font-weight: 800;
+  color: var(--gold); flex-shrink: 0;
+}
+.tname { font-weight: 600; font-size: 0.82rem; color: var(--txt); }
+.trole { font-size: 0.7rem; color: var(--dim); }
 
-    /* ═══════════════════════════════════════════
-       NAVIGATION
-    ═══════════════════════════════════════════ */
-    .main-nav {
-      position:fixed; top:0; left:0; right:0; z-index:1000;
-      padding:0; transition:all 0.3s ease;
-    }
-    .main-nav.scrolled {
-      background:rgba(11,15,26,0.93);
-      backdrop-filter:blur(20px);
-      -webkit-backdrop-filter:blur(20px);
-      border-bottom:1px solid var(--border);
-      box-shadow:0 4px 32px rgba(0,0,0,0.4);
-    }
-    [data-theme="light"] .main-nav.scrolled {
-      background:rgba(248,250,252,0.95);
-      box-shadow:0 4px 20px rgba(0,0,0,0.08);
-    }
-    .nav-container {
-      max-width:1280px; margin:0 auto;
-      padding:1.1rem 2rem;
-      display:flex; align-items:center; justify-content:space-between;
-    }
-    .nav-logo {
-      font-family:var(--font-display); font-size:1.1rem;
-      font-weight:800; letter-spacing:-0.02em;
-      display:flex; align-items:center; gap:0.4rem;
-    }
-    .logo-text { color:var(--text); transition:color 0.3s; }
-    .logo-accent { color:var(--primary); }
-    .logo-tag {
-      font-size:0.58rem; font-weight:600; letter-spacing:0.12em;
-      text-transform:uppercase; color:var(--text-dim);
-      padding:0.18rem 0.45rem; border:1px solid var(--border);
-      border-radius:4px; margin-left:0.2rem;
-    }
-    .nav-right { display:flex; align-items:center; gap:0.25rem; }
-    .nav-menu { display:flex; list-style:none; gap:0.15rem; align-items:center; }
-    .nav-link {
-      display:block; padding:0.45rem 0.85rem;
-      font-size:0.85rem; font-weight:500;
-      color:var(--text-muted); border-radius:6px;
-      transition:all 0.2s ease;
-    }
-    .nav-link:hover { color:var(--primary); background:var(--primary-dim); }
-    .nav-cta {
-      padding:0.5rem 1.1rem; background:var(--primary);
-      color:var(--dark); border-radius:8px; font-weight:700;
-      font-size:0.85rem; transition:all 0.2s ease; margin-left:0.5rem;
-    }
-    .nav-cta:hover { background:#d4b472; transform:translateY(-1px); box-shadow:var(--shadow-gold); }
+/* =============================================
+   LAB
+============================================= */
+.lab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+.lab-m { font-size: 1.05rem; font-weight: 300; color: var(--mut); line-height: 1.75; margin-bottom: 1.5rem; }
+.lab-m strong { color: var(--gold); font-weight: 600; }
+.focii { display: flex; flex-direction: column; gap: 0.8rem; }
+.focus {
+  display: flex; align-items: flex-start; gap: 0.85rem;
+  padding: 1rem; background: var(--card); border: 1px solid var(--bdr);
+  border-radius: 9px; transition: all 0.25s;
+}
+.focus:hover { border-color: var(--bdr-h); }
+.ficon {
+  width: 36px; height: 36px; border-radius: 7px;
+  background: var(--gold-dim); display: flex; align-items: center;
+  justify-content: center; color: var(--gold); font-size: 0.95rem; flex-shrink: 0;
+}
+.ftitle { font-family: var(--fd); font-size: 0.85rem; font-weight: 700; color: var(--txt); margin-bottom: 0.18rem; transition: color 0.3s; }
+[data-theme="light"] .ftitle { color: #0f172a; }
+.fdesc { font-size: 0.76rem; color: var(--dim); line-height: 1.5; }
+.bcard {
+  background: var(--card); border: 1px solid var(--bdr);
+  border-radius: 12px; padding: 1.5rem; position: sticky; top: 5rem;
+}
+.btitle { font-family: var(--fd); font-size: 0.9rem; font-weight: 700; color: var(--txt); display: flex; align-items: center; gap: 0.45rem; margin-bottom: 1rem; transition: color 0.3s; }
+[data-theme="light"] .btitle { color: #0f172a; }
+.ldot { width: 7px; height: 7px; border-radius: 50%; background: var(--ok); animation: blink 1.5s ease-in-out infinite; }
+.bitem { padding: 0.85rem; border: 1px solid var(--bdr); border-radius: 8px; margin-bottom: 0.6rem; }
+.bname { font-family: var(--fd); font-weight: 700; color: var(--txt); font-size: 0.85rem; margin-bottom: 0.18rem; transition: color 0.3s; }
+[data-theme="light"] .bname { color: #0f172a; }
+.bdesc { font-size: 0.74rem; color: var(--dim); }
+.opento { margin-top: 1.1rem; padding: 1rem; background: rgba(201,169,97,0.06); border: 1px solid var(--bdr); border-radius: 8px; text-align: center; }
+.ot-t { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.38rem; }
+.ot-x { font-size: 0.78rem; color: var(--mut); line-height: 1.6; }
 
-    /* Theme toggle button */
-    .theme-toggle {
-      width:36px; height:36px; border-radius:8px;
-      border:1px solid var(--border); background:var(--primary-dim);
-      color:var(--primary); cursor:pointer;
-      display:flex; align-items:center; justify-content:center;
-      font-size:0.9rem; transition:all 0.25s ease;
-      margin-left:0.35rem;
-    }
-    .theme-toggle:hover {
-      background:var(--primary); color:var(--dark);
-      border-color:var(--primary);
-    }
+/* =============================================
+   SKILLS
+============================================= */
+.sk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%,210px), 1fr)); gap: 1rem; }
+.sk-card { background: var(--card); border: 1px solid var(--bdr); border-radius: 9px; padding: 1.25rem; transition: all 0.25s; }
+.sk-card:hover { border-color: var(--bdr-h); }
+.sk-h { font-family: var(--fd); font-size: 0.82rem; font-weight: 700; color: var(--txt); margin-bottom: 0.85rem; display: flex; align-items: center; gap: 0.5rem; transition: color 0.3s; }
+[data-theme="light"] .sk-h { color: #0f172a; }
+.sk-h i { color: var(--gold); font-size: 0.83rem; }
+.sk-ul { list-style: none; display: flex; flex-direction: column; gap: 0.3rem; }
+.sk-ul li { font-size: 0.77rem; color: var(--mut); padding: 0.26rem 0; border-bottom: 1px solid rgba(255,255,255,0.04); display: flex; align-items: center; gap: 0.42rem; }
+[data-theme="light"] .sk-ul li { border-bottom-color: rgba(0,0,0,0.05); }
+.sk-ul li:last-child { border-bottom: none; }
+.sk-ul li::before { content: '▸'; color: var(--gold); font-size: 0.62rem; flex-shrink: 0; }
 
-    /* Mobile nav */
-    .mobile-toggle {
-      display:none; flex-direction:column; gap:5px;
-      background:none; border:none; cursor:pointer; padding:8px;
-    }
-    .hamburger {
-      width:22px; height:2px; background:var(--text-muted);
-      border-radius:2px; transition:all 0.3s ease;
-    }
-    .mobile-toggle.active .hamburger:nth-child(1) { transform:translateY(7px) rotate(45deg); }
-    .mobile-toggle.active .hamburger:nth-child(2) { opacity:0; }
-    .mobile-toggle.active .hamburger:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
-    .mobile-nav {
-      display:none; position:fixed; top:68px; right:0; bottom:0;
-      width:280px; background:var(--bg2);
-      border-left:1px solid var(--border);
-      padding:2rem 1.5rem; transform:translateX(100%);
-      transition:transform 0.35s cubic-bezier(0.4,0,0.2,1);
-      z-index:999; overflow-y:auto;
-    }
-    .mobile-nav.active { transform:translateX(0); }
-    .mobile-nav-list { list-style:none; display:flex; flex-direction:column; gap:0.5rem; }
-    .mobile-nav-link {
-      display:flex; align-items:center; gap:0.75rem;
-      padding:0.85rem 1rem; color:var(--text-muted);
-      font-weight:500; border-radius:8px; transition:all 0.2s ease;
-    }
-    .mobile-nav-link i { color:var(--primary); width:18px; text-align:center; }
-    .mobile-nav-link:hover { background:var(--primary-dim); color:var(--primary); }
-    .mobile-nav-theme {
-      display:flex; align-items:center; gap:0.75rem;
-      padding:0.85rem 1rem; color:var(--text-muted);
-      font-weight:500; border-radius:8px; cursor:pointer;
-      border:none; background:none; width:100%; text-align:left;
-      font-family:var(--font-body); font-size:1rem;
-      transition:all 0.2s ease; margin-top:0.5rem;
-      border-top:1px solid var(--border); padding-top:1rem;
-    }
-    .mobile-nav-theme i { color:var(--primary); width:18px; text-align:center; }
-    .mobile-nav-theme:hover { background:var(--primary-dim); color:var(--primary); }
-    .mobile-overlay {
-      display:none; position:fixed; inset:0;
-      background:rgba(0,0,0,0.55); z-index:998;
-    }
-    .mobile-overlay.active { display:block; }
+/* =============================================
+   CERTS
+============================================= */
+.cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%,230px), 1fr)); gap: 1.1rem; }
+.cert { background: var(--card); border: 1px solid var(--bdr); border-radius: 12px; overflow: hidden; transition: all 0.3s; }
+.cert:hover { border-color: var(--bdr-h); transform: translateY(-3px); }
+.cert-img { height: 140px; background: var(--bg3); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.cert-img img { width: 100%; height: 100%; object-fit: contain; padding: 0.4rem; }
+.cert-body { padding: 1rem; }
+.cert-n { font-family: var(--fd); font-size: 0.85rem; font-weight: 700; color: var(--txt); margin-bottom: 0.18rem; transition: color 0.3s; }
+[data-theme="light"] .cert-n { color: #0f172a; }
+.cert-org { font-size: 0.74rem; color: var(--gold); margin-bottom: 0.12rem; }
+.cert-yr { font-size: 0.68rem; color: var(--dim); }
 
-    /* ═══════════════════════════════════════════
-       HERO
-    ═══════════════════════════════════════════ */
-    .hero {
-      min-height:100vh; display:flex; align-items:center;
-      position:relative; overflow:hidden;
-      padding:8rem 2rem 5rem;
-    }
-    .hero-orb {
-      position:absolute; border-radius:50%;
-      filter:blur(80px); pointer-events:none;
-    }
-    .hero-orb-1 {
-      width:600px; height:600px;
-      background:radial-gradient(circle, rgba(201,169,97,0.13) 0%, transparent 70%);
-      top:-100px; right:-150px;
-      animation:orbFloat 12s ease-in-out infinite;
-    }
-    .hero-orb-2 {
-      width:400px; height:400px;
-      background:radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%);
-      bottom:0; left:-100px;
-      animation:orbFloat 16s ease-in-out infinite reverse;
-    }
-    @keyframes orbFloat {
-      0%,100%{transform:translate(0,0);}
-      50%{transform:translate(20px,-30px);}
-    }
-    .hero::after {
-      content:''; position:absolute; inset:0;
-      background-image:
-        linear-gradient(rgba(201,169,97,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(201,169,97,0.03) 1px, transparent 1px);
-      background-size:60px 60px; pointer-events:none;
-    }
-    [data-theme="light"] .hero::after {
-      background-image:
-        linear-gradient(rgba(201,169,97,0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(201,169,97,0.06) 1px, transparent 1px);
-    }
-    .hero-container {
-      max-width:1280px; margin:0 auto; width:100%;
-      position:relative; z-index:1;
-      display:grid; grid-template-columns:1fr 1fr;
-      gap:4rem; align-items:center;
-    }
-    .hero-eyebrow {
-      display:inline-flex; align-items:center; gap:0.5rem;
-      font-size:0.75rem; font-weight:600; letter-spacing:0.14em;
-      text-transform:uppercase; color:var(--primary); margin-bottom:1.5rem;
-    }
-    .hero-eyebrow::before {
-      content:''; display:inline-block;
-      width:24px; height:1px; background:var(--primary);
-    }
-    .hero-headline {
-      font-family:var(--font-display);
-      font-size:clamp(2.5rem,5vw,4rem);
-      font-weight:800; line-height:1.08;
-      letter-spacing:-0.03em; color:var(--text);
-      margin-bottom:1.5rem;
-      transition:color 0.3s;
-    }
-    [data-theme="light"] .hero-headline { color:#0f172a; }
-    .hero-headline .highlight {
-      color:var(--primary); position:relative;
-      display:inline-block;
-    }
-    .hero-headline .highlight::after {
-      content:''; position:absolute;
-      bottom:-4px; left:0; right:0; height:3px;
-      background:linear-gradient(90deg, var(--primary), transparent);
-    }
-    .hero-sub {
-      font-size:1.1rem; color:var(--text-muted);
-      max-width:480px; margin-bottom:2rem; font-weight:300;
-    }
-    .hero-trust {
-      display:flex; align-items:center; gap:1rem;
-      padding:0.7rem 1.15rem;
-      background:rgba(201,169,97,0.06);
-      border:1px solid var(--border); border-radius:8px;
-      font-size:0.78rem; font-weight:500; color:var(--text-muted);
-      margin-bottom:2.5rem; width:fit-content; flex-wrap:wrap;
-    }
-    [data-theme="light"] .hero-trust { background:rgba(201,169,97,0.08); }
-    .trust-dot { color:var(--primary); animation:blink 1.5s ease-in-out infinite; }
-    .trust-sep { color:var(--border); }
-    .hero-ctas { display:flex; gap:1rem; flex-wrap:wrap; }
+/* =============================================
+   CONTACT
+============================================= */
+.con-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 2rem; align-items: start; }
+.con-h { font-family: var(--fd); font-size: 1.25rem; font-weight: 800; color: var(--txt); margin-bottom: 0.38rem; transition: color 0.3s; }
+[data-theme="light"] .con-h { color: #0f172a; }
+.con-sub { font-size: 0.83rem; color: var(--mut); margin-bottom: 1.5rem; }
+.con-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.con-item {
+  display: flex; align-items: center; gap: 0.85rem;
+  padding: 0.8rem 1rem; background: var(--card); border: 1px solid var(--bdr);
+  border-radius: 9px; transition: all 0.2s;
+}
+.con-item:hover { border-color: var(--bdr-h); }
+.cicon { width: 32px; height: 32px; background: var(--gold-dim); border-radius: 7px; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 0.8rem; flex-shrink: 0; }
+.clbl { font-size: 0.62rem; color: var(--dim); text-transform: uppercase; letter-spacing: 0.08em; }
+.cval { font-size: 0.8rem; color: var(--mut); word-break: break-all; }
+.cform { background: var(--card); border: 1px solid var(--bdr); border-radius: 12px; padding: 1.5rem; }
+.cform-h { font-family: var(--fd); font-size: 0.9rem; font-weight: 700; color: var(--txt); margin-bottom: 1.1rem; transition: color 0.3s; }
+[data-theme="light"] .cform-h { color: #0f172a; }
+.fg { margin-bottom: 0.75rem; }
+.fi, .fta {
+  width: 100%; padding: 0.68rem 0.85rem;
+  background: rgba(255,255,255,0.04); border: 1px solid var(--bdr);
+  border-radius: 7px; color: var(--txt); font-family: var(--fb); font-size: 0.86rem;
+  transition: all 0.2s; appearance: none; -webkit-appearance: none;
+}
+[data-theme="light"] .fi, [data-theme="light"] .fta { background: rgba(0,0,0,0.03); }
+.fi:focus, .fta:focus { outline: none; border-color: var(--gold); background: rgba(201,169,97,0.04); }
+.fi::placeholder, .fta::placeholder { color: var(--dim); }
+.fta { min-height: 110px; resize: vertical; }
+.fst { padding: 0.6rem 0.85rem; border-radius: 7px; font-size: 0.81rem; margin-top: 0.6rem; display: none; }
+.fst.ok { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.25); color: #10b981; display: block; }
+.fst.err { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.25); color: #ef4444; display: block; }
+.btn-sub {
+  width: 100%; padding: 0.8rem; background: var(--gold); color: var(--d1);
+  border: none; border-radius: 8px; font-family: var(--fb); font-weight: 700;
+  font-size: 0.88rem; cursor: pointer; transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center; gap: 0.42rem;
+}
+.btn-sub:hover { background: #d4b472; box-shadow: var(--gold-glow); }
+.btn-sub:disabled { opacity: 0.6; cursor: not-allowed; }
 
-    /* ═══════════════════════════════════════════
-       BUTTONS
-    ═══════════════════════════════════════════ */
-    .btn-primary {
-      display:inline-flex; align-items:center; gap:0.5rem;
-      padding:0.85rem 1.75rem; background:var(--primary);
-      color:var(--dark); font-family:var(--font-body);
-      font-weight:700; font-size:0.95rem; border-radius:10px;
-      border:none; cursor:pointer; transition:all 0.25s ease;
-    }
-    .btn-primary:hover { background:#d4b472; transform:translateY(-2px); box-shadow:var(--shadow-gold); }
-    .btn-secondary {
-      display:inline-flex; align-items:center; gap:0.5rem;
-      padding:0.85rem 1.75rem; background:transparent;
-      color:var(--text); font-family:var(--font-body);
-      font-weight:600; font-size:0.95rem; border-radius:10px;
-      border:1px solid rgba(255,255,255,0.15); cursor:pointer;
-      transition:all 0.25s ease;
-    }
-    [data-theme="light"] .btn-secondary { border-color:rgba(30,41,59,0.2); }
-    .btn-secondary:hover { border-color:var(--primary); color:var(--primary); background:var(--primary-dim); }
+/* =============================================
+   FOOTER
+============================================= */
+footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: 2rem 1rem; }
+.foot { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.1rem; }
+.fbrand { font-family: var(--fd); font-weight: 800; color: var(--txt); font-size: 0.9rem; transition: color 0.3s; }
+[data-theme="light"] .fbrand { color: #0f172a; }
+.fbrand span { color: var(--gold); }
+.ftagline { font-size: 0.68rem; color: var(--dim); margin-top: 0.12rem; }
+.flinks { display: flex; gap: 0.75rem; }
+.flink { width: 34px; height: 34px; border: 1px solid var(--bdr); border-radius: 7px; display: flex; align-items: center; justify-content: center; color: var(--dim); font-size: 0.8rem; transition: all 0.2s; }
+.flink:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+.fcopy { font-size: 0.68rem; color: var(--dim); text-align: right; }
 
-    /* ═══════════════════════════════════════════
-       HERO CARD
-    ═══════════════════════════════════════════ */
-    .hero-card {
-      background:var(--card-bg); border:1px solid var(--border);
-      border-radius:20px; padding:2.5rem;
-      backdrop-filter:blur(20px); position:relative; overflow:hidden;
-    }
-    .hero-card::before {
-      content:''; position:absolute; top:0; left:0; right:0; height:2px;
-      background:linear-gradient(90deg, transparent, var(--primary), transparent);
-    }
-    .profile-ring {
-      width:110px; height:110px; border-radius:50%;
-      border:2px solid var(--primary); padding:4px;
-      margin:0 auto 1.5rem; position:relative;
-    }
-    .profile-ring::before {
-      content:''; position:absolute; inset:-6px; border-radius:50%;
-      border:1px solid rgba(201,169,97,0.2);
-      animation:pulse-ring 2.5s ease-in-out infinite;
-    }
-    @keyframes pulse-ring {
-      0%,100%{opacity:0.3;transform:scale(1);}
-      50%{opacity:0.8;transform:scale(1.04);}
-    }
-    .profile-img {
-      width:100%; height:100%; object-fit:cover;
-      border-radius:50%; background:var(--bg3);
-    }
-    /* Fallback initials avatar when image is missing */
-    .profile-img-fallback {
-      width:100%; height:100%; border-radius:50%;
-      background:linear-gradient(135deg, var(--dark-3), var(--dark-4));
-      display:flex; align-items:center; justify-content:center;
-      font-family:var(--font-display); font-size:2rem;
-      font-weight:800; color:var(--primary);
-    }
-    .hero-card-name {
-      font-family:var(--font-display); font-size:1.35rem;
-      font-weight:800; text-align:center; color:var(--text);
-      margin-bottom:0.25rem; transition:color 0.3s;
-    }
-    [data-theme="light"] .hero-card-name { color:#0f172a; }
-    .hero-card-role {
-      text-align:center; color:var(--primary);
-      font-size:0.82rem; font-weight:500; letter-spacing:0.06em;
-      text-transform:uppercase; margin-bottom:1.5rem;
-    }
-    .hero-stat-grid {
-      display:grid; grid-template-columns:1fr 1fr;
-      gap:0.75rem; margin-bottom:1.5rem;
-    }
-    .hero-stat {
-      background:rgba(255,255,255,0.03); border:1px solid var(--border);
-      border-radius:10px; padding:1rem; text-align:center;
-    }
-    [data-theme="light"] .hero-stat { background:rgba(0,0,0,0.03); }
-    .hero-stat-num {
-      font-family:var(--font-display); font-size:1.7rem;
-      font-weight:800; color:var(--primary); line-height:1;
-    }
-    .hero-stat-label {
-      font-size:0.68rem; color:var(--text-dim); margin-top:0.25rem;
-      text-transform:uppercase; letter-spacing:0.08em;
-    }
-    .hero-links { display:flex; flex-direction:column; gap:0.5rem; }
-    .hero-link {
-      display:flex; align-items:center; gap:0.75rem;
-      padding:0.6rem 1rem; border:1px solid var(--border);
-      border-radius:8px; font-size:0.83rem; color:var(--text-muted);
-      transition:all 0.2s ease;
-    }
-    .hero-link i { color:var(--primary); width:16px; text-align:center; }
-    .hero-link:hover { border-color:var(--border-hover); color:var(--text); background:var(--primary-dim); }
+/* =============================================
+   SCROLL TOP
+============================================= */
+.stbtn { position: fixed; bottom: 1.25rem; right: 1.25rem; width: 38px; height: 38px; border-radius: 9px; background: var(--gold); color: var(--d1); border: none; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transform: translateY(8px); transition: all 0.3s; z-index: 990; }
+.stbtn.vis { opacity: 1; pointer-events: all; transform: translateY(0); }
+.stbtn:hover { background: #d4b472; }
 
-    /* ═══════════════════════════════════════════
-       SECTION SHARED
-    ═══════════════════════════════════════════ */
-    .section { padding:6rem 2rem; position:relative; }
-    .section-alt { background:var(--bg2); }
-    .container { max-width:1280px; margin:0 auto; }
-    .section-label {
-      display:inline-flex; align-items:center; gap:0.5rem;
-      font-size:0.7rem; font-weight:600; letter-spacing:0.14em;
-      text-transform:uppercase; color:var(--primary); margin-bottom:1rem;
-    }
-    .section-label::before {
-      content:''; display:inline-block; width:20px; height:1px; background:var(--primary);
-    }
-    .section-title {
-      font-family:var(--font-display);
-      font-size:clamp(2rem,4vw,3rem);
-      font-weight:800; letter-spacing:-0.025em;
-      color:var(--text); margin-bottom:0.75rem;
-      transition:color 0.3s;
-    }
-    [data-theme="light"] .section-title { color:#0f172a; }
-    .section-sub {
-      color:var(--text-muted); font-size:1.05rem;
-      max-width:560px; margin-bottom:3.5rem; font-weight:300;
-    }
-    .gold-divider {
-      height:1px;
-      background:linear-gradient(90deg, transparent, var(--primary), transparent);
-    }
+/* =============================================
+   ANIMATIONS
+============================================= */
+.fu { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.fu.vis { opacity: 1; transform: translateY(0); }
+.d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.3s; }
 
-    /* ═══════════════════════════════════════════
-       ABOUT
-    ═══════════════════════════════════════════ */
-    .about-grid {
-      display:grid; grid-template-columns:1fr 1fr; gap:2.5rem;
-    }
-    .about-text {
-      color:var(--text-muted); line-height:1.8;
-      margin-bottom:1.25rem; font-size:0.95rem;
-    }
-    .about-text strong { color:var(--primary); font-weight:600; }
-    .about-stats {
-      display:grid; grid-template-columns:1fr 1fr; gap:1rem;
-    }
-    .about-links {
-      margin-top:1.5rem; display:flex; gap:0.75rem; flex-wrap:wrap;
-    }
+/* =============================================
+   RESPONSIVE — MOBILE BREAKPOINTS
+============================================= */
 
-    /* ═══════════════════════════════════════════
-       SYSTEMS
-    ═══════════════════════════════════════════ */
-    .systems-grid {
-      display:grid; grid-template-columns:repeat(auto-fill, minmax(340px,1fr));
-      gap:1.5rem;
-    }
-    .system-card {
-      background:var(--card-bg); border:1px solid var(--border);
-      border-radius:var(--radius); overflow:hidden;
-      display:flex; flex-direction:column;
-      transition:all 0.3s ease; backdrop-filter:blur(10px);
-    }
-    .system-card:hover { border-color:var(--border-hover); transform:translateY(-4px); box-shadow:var(--shadow-gold); }
-    .system-card-top {
-      padding:1.75rem 1.75rem 1.25rem;
-      border-bottom:1px solid var(--border);
-    }
-    .system-header {
-      display:flex; align-items:flex-start;
-      justify-content:space-between; gap:1rem; margin-bottom:0.75rem;
-    }
-    .system-name {
-      font-family:var(--font-display); font-size:1.25rem;
-      font-weight:800; color:var(--text); transition:color 0.3s;
-    }
-    [data-theme="light"] .system-name { color:#0f172a; }
-    .badge {
-      display:inline-flex; align-items:center; gap:0.35rem;
-      padding:0.25rem 0.75rem; border-radius:20px;
-      font-size:0.62rem; font-weight:700; letter-spacing:0.08em;
-      text-transform:uppercase; white-space:nowrap; flex-shrink:0;
-    }
-    .badge::before { content:''; width:6px; height:6px; border-radius:50%; background:currentColor; }
-    .badge-live { background:rgba(16,185,129,0.12); color:#10b981; border:1px solid rgba(16,185,129,0.25); }
-    .badge-mvp { background:rgba(245,158,11,0.12); color:#f59e0b; border:1px solid rgba(245,158,11,0.25); }
-    .badge-live::before { animation:blink 1.5s ease-in-out infinite; }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
-    .system-problem { font-size:0.88rem; color:var(--text-muted); line-height:1.55; margin-bottom:1rem; }
-    .system-features { list-style:none; display:flex; flex-direction:column; gap:0.35rem; }
-    .system-features li {
-      display:flex; align-items:flex-start; gap:0.5rem;
-      font-size:0.81rem; color:var(--text-muted);
-    }
-    .system-features li::before { content:'→'; color:var(--primary); flex-shrink:0; font-size:0.78rem; margin-top:1px; }
-    .system-card-bottom {
-      padding:1.25rem 1.75rem; display:flex;
-      flex-direction:column; gap:1rem; flex:1; justify-content:flex-end;
-    }
-    .tech-stack { display:flex; flex-wrap:wrap; gap:0.4rem; }
-    .tech-tag {
-      font-size:0.65rem; font-weight:600; padding:0.2rem 0.55rem;
-      background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);
-      border-radius:4px; color:var(--text-dim); letter-spacing:0.04em;
-    }
-    [data-theme="light"] .tech-tag { background:rgba(0,0,0,0.04); border-color:rgba(0,0,0,0.1); }
-    .system-actions { display:flex; gap:0.5rem; flex-wrap:wrap; }
-    .btn-action {
-      display:inline-flex; align-items:center; gap:0.4rem;
-      padding:0.48rem 0.9rem; border-radius:7px; font-size:0.78rem;
-      font-weight:600; transition:all 0.2s ease;
-      border:none; cursor:pointer; font-family:var(--font-body);
-    }
-    .btn-demo { background:var(--primary); color:var(--dark); }
-    .btn-demo:hover { background:#d4b472; }
-    .btn-case { background:transparent; color:var(--text-muted); border:1px solid var(--border); }
-    .btn-case:hover { border-color:var(--primary); color:var(--primary); background:var(--primary-dim); }
-    .btn-github { background:transparent; color:var(--text-dim); border:1px solid var(--border); padding:0.48rem 0.75rem; }
-    .btn-github:hover { color:var(--text); border-color:rgba(255,255,255,0.2); }
-    [data-theme="light"] .btn-github:hover { border-color:rgba(0,0,0,0.2); }
+/* Hide desktop nav links, show burger on mobile */
+@media (max-width: 860px) {
+  .nav-links { display: none; }
+  .burger { display: flex; }
+  .drawer { display: block; } /* block so JS can toggle, starts off-screen */
+}
 
-    /* ═══════════════════════════════════════════
-       CASE STUDIES
-    ═══════════════════════════════════════════ */
-    .case-study {
-      display:grid; grid-template-columns:1fr 2fr; gap:0;
-      background:var(--card-bg); border:1px solid var(--border);
-      border-radius:var(--radius); overflow:hidden;
-      margin-bottom:2rem; transition:border-color 0.3s;
-      backdrop-filter:blur(8px);
-    }
-    .case-study:hover { border-color:var(--border-hover); }
-    .case-study-sidebar {
-      background:rgba(201,169,97,0.04); border-right:1px solid var(--border);
-      padding:2.5rem 2rem; display:flex; flex-direction:column; gap:1.5rem;
-    }
-    [data-theme="light"] .case-study-sidebar { background:rgba(201,169,97,0.05); }
-    .case-study-name {
-      font-family:var(--font-display); font-size:1.55rem;
-      font-weight:800; color:var(--text); transition:color 0.3s;
-    }
-    [data-theme="light"] .case-study-name { color:#0f172a; }
-    .case-meta { display:flex; flex-direction:column; gap:0.75rem; }
-    .case-meta-item { display:flex; flex-direction:column; gap:0.2rem; }
-    .case-meta-label { font-size:0.62rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-dim); }
-    .case-meta-val { font-size:0.83rem; color:var(--text-muted); }
-    .case-score { font-family:var(--font-display); font-size:2.4rem; font-weight:800; color:var(--primary); line-height:1; }
-    .case-score-label { font-size:0.68rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.08em; margin-top:0.2rem; }
-    .case-study-body {
-      padding:2.5rem; display:grid;
-      grid-template-columns:1fr 1fr; gap:2rem;
-    }
-    .case-block-title {
-      font-family:var(--font-display); font-size:0.72rem;
-      font-weight:700; letter-spacing:0.12em; text-transform:uppercase;
-      color:var(--primary); margin-bottom:0.75rem;
-    }
-    .case-block-text { font-size:0.88rem; color:var(--text-muted); line-height:1.65; }
-    .case-block-full { grid-column:1 / -1; }
-    .case-impact-list { list-style:none; display:flex; flex-direction:column; gap:0.5rem; }
-    .case-impact-list li { display:flex; align-items:flex-start; gap:0.5rem; font-size:0.86rem; color:var(--text-muted); }
-    .case-impact-list li i { margin-top:2px; flex-shrink:0; }
-    /* Screenshot placeholder — shows a gradient until real images are added */
-    .case-screenshot {
-      grid-column:1 / -1; aspect-ratio:16/9;
-      background:var(--bg3); border:1px solid var(--border);
-      border-radius:8px; overflow:hidden;
-      position:relative; display:flex; align-items:center; justify-content:center;
-    }
-    .case-screenshot img { width:100%; height:100%; object-fit:cover; display:block; }
-    .screenshot-placeholder {
-      display:flex; flex-direction:column; align-items:center;
-      justify-content:center; gap:0.75rem; color:var(--text-dim);
-      font-size:0.8rem; padding:2rem;
-    }
-    .screenshot-placeholder i { font-size:2rem; color:var(--border-hover); }
+/* Stack hero, about, lab, contact at tablet */
+@media (max-width: 700px) {
+  .hero { padding: calc(60px + 1.75rem) 1rem 2.5rem; }
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .hero-h { font-size: clamp(1.9rem, 7vw, 2.6rem); }
+  .trust { font-size: 0.68rem; }
 
-    /* ═══════════════════════════════════════════
-       TESTIMONIAL
-    ═══════════════════════════════════════════ */
-    .testimonial-section { margin-top:4rem; }
-    .testimonial-grid {
-      display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
-      gap:1.5rem;
-    }
-    .testimonial-card {
-      background:var(--card-bg); border:1px solid var(--border);
-      border-radius:var(--radius); padding:1.75rem;
-      position:relative; transition:all 0.3s ease;
-      backdrop-filter:blur(8px);
-    }
-    .testimonial-card:hover { border-color:var(--border-hover); }
-    .testimonial-card::before {
-      content:'\201C'; position:absolute; top:1rem; right:1.5rem;
-      font-family:Georgia, serif; font-size:4rem; color:var(--primary);
-      opacity:0.25; line-height:1;
-    }
-    .testimonial-text {
-      font-size:0.92rem; color:var(--text-muted);
-      line-height:1.7; margin-bottom:1.25rem; font-style:italic;
-    }
-    .testimonial-author { display:flex; align-items:center; gap:0.85rem; }
-    .author-avatar {
-      width:40px; height:40px; border-radius:50%;
-      background:var(--primary-dim); border:1px solid var(--border);
-      display:flex; align-items:center; justify-content:center;
-      font-family:var(--font-display); font-size:0.85rem;
-      font-weight:800; color:var(--primary); flex-shrink:0;
-    }
-    .author-name { font-weight:600; font-size:0.88rem; color:var(--text); }
-    .author-role { font-size:0.75rem; color:var(--text-dim); }
+  .about-grid { grid-template-columns: 1fr; gap: 1.75rem; }
 
-    /* ═══════════════════════════════════════════
-       LAB SECTION
-    ═══════════════════════════════════════════ */
-    .lab-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; }
-    .lab-mission { font-size:1.15rem; font-weight:300; color:var(--text-muted); line-height:1.7; margin-bottom:2rem; }
-    .lab-mission strong { color:var(--primary); font-weight:600; }
-    .focus-areas { display:flex; flex-direction:column; gap:1rem; }
-    .focus-area {
-      display:flex; align-items:flex-start; gap:1rem;
-      padding:1.25rem; background:var(--card-bg);
-      border:1px solid var(--border); border-radius:var(--radius-sm);
-      transition:all 0.25s ease;
-    }
-    .focus-area:hover { border-color:var(--border-hover); }
-    .focus-icon {
-      width:40px; height:40px; border-radius:8px;
-      background:var(--primary-dim); display:flex;
-      align-items:center; justify-content:center;
-      color:var(--primary); font-size:1.1rem; flex-shrink:0;
-    }
-    .focus-title { font-family:var(--font-display); font-size:0.93rem; font-weight:700; color:var(--text); margin-bottom:0.25rem; transition:color 0.3s; }
-    [data-theme="light"] .focus-title { color:#0f172a; }
-    .focus-desc { font-size:0.8rem; color:var(--text-dim); }
-    .building-card {
-      background:var(--card-bg); border:1px solid var(--border);
-      border-radius:var(--radius); padding:2rem;
-      position:sticky; top:6rem;
-    }
-    .building-title {
-      font-family:var(--font-display); font-size:1rem;
-      font-weight:700; color:var(--text); display:flex;
-      align-items:center; gap:0.5rem; margin-bottom:1.25rem;
-      transition:color 0.3s;
-    }
-    [data-theme="light"] .building-title { color:#0f172a; }
-    .live-dot { width:8px; height:8px; border-radius:50%; background:var(--success); animation:blink 1.5s ease-in-out infinite; }
-    .building-item { padding:1rem; border:1px solid var(--border); border-radius:8px; margin-bottom:0.75rem; }
-    .building-item-name { font-family:var(--font-display); font-weight:700; color:var(--text); font-size:0.93rem; margin-bottom:0.25rem; transition:color 0.3s; }
-    [data-theme="light"] .building-item-name { color:#0f172a; }
-    .building-item-desc { font-size:0.78rem; color:var(--text-dim); }
-    .open-to {
-      margin-top:1.5rem; padding:1.25rem;
-      background:rgba(201,169,97,0.06); border:1px solid var(--border);
-      border-radius:8px; text-align:center;
-    }
-    .open-to-title { font-size:0.68rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--primary); margin-bottom:0.5rem; }
-    .open-to-text { font-size:0.83rem; color:var(--text-muted); }
+  .cs { grid-template-columns: 1fr; }
+  .cs-side { border-right: none; border-bottom: 1px solid var(--bdr); padding: 1.35rem; }
+  .cs-body { grid-template-columns: 1fr; padding: 1.35rem; gap: 1.1rem; }
+  .cs-full { grid-column: auto; }
 
-    /* ═══════════════════════════════════════════
-       SKILLS
-    ═══════════════════════════════════════════ */
-    .skills-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(240px,1fr)); gap:1.25rem; }
-    .skill-card {
-      background:var(--card-bg); border:1px solid var(--border);
-      border-radius:var(--radius-sm); padding:1.5rem;
-      transition:all 0.25s ease;
-    }
-    .skill-card:hover { border-color:var(--border-hover); }
-    .skill-card-title {
-      font-family:var(--font-display); font-size:0.88rem;
-      font-weight:700; color:var(--text); margin-bottom:1rem;
-      display:flex; align-items:center; gap:0.6rem; transition:color 0.3s;
-    }
-    [data-theme="light"] .skill-card-title { color:#0f172a; }
-    .skill-card-title i { color:var(--primary); }
-    .skill-list { list-style:none; display:flex; flex-direction:column; gap:0.4rem; }
-    .skill-list li {
-      font-size:0.81rem; color:var(--text-muted); padding:0.3rem 0;
-      border-bottom:1px solid rgba(255,255,255,0.04);
-      display:flex; align-items:center; gap:0.5rem;
-    }
-    [data-theme="light"] .skill-list li { border-bottom-color:rgba(0,0,0,0.05); }
-    .skill-list li:last-child { border-bottom:none; }
-    .skill-list li::before { content:'▸'; color:var(--primary); font-size:0.68rem; }
+  .lab-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .bcard { position: static; }
 
-    /* ═══════════════════════════════════════════
-       CERTIFICATIONS
-    ═══════════════════════════════════════════ */
-    .cert-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); gap:1.5rem; }
-    .cert-card {
-      background:var(--card-bg); border:1px solid var(--border);
-      border-radius:var(--radius); overflow:hidden;
-      transition:all 0.3s ease; backdrop-filter:blur(8px);
-    }
-    .cert-card:hover { border-color:var(--border-hover); transform:translateY(-3px); box-shadow:var(--shadow); }
-    .cert-img-wrap {
-      height:160px; overflow:hidden; background:var(--bg3);
-      display:flex; align-items:center; justify-content:center;
-    }
-    .cert-img-wrap img { width:100%; height:100%; object-fit:contain; padding:0.5rem; }
-    .cert-body { padding:1.25rem; }
-    .cert-name { font-family:var(--font-display); font-size:0.93rem; font-weight:700; color:var(--text); margin-bottom:0.25rem; transition:color 0.3s; }
-    [data-theme="light"] .cert-name { color:#0f172a; }
-    .cert-org { font-size:0.78rem; color:var(--primary); margin-bottom:0.15rem; }
-    .cert-year { font-size:0.73rem; color:var(--text-dim); }
+  .con-grid { grid-template-columns: 1fr; gap: 1.75rem; }
 
-    /* ═══════════════════════════════════════════
-       CONTACT
-    ═══════════════════════════════════════════ */
-    .contact-grid { display:grid; grid-template-columns:1fr 1.2fr; gap:3rem; align-items:start; }
-    .contact-info-title { font-family:var(--font-display); font-size:1.45rem; font-weight:800; color:var(--text); margin-bottom:0.5rem; transition:color 0.3s; }
-    [data-theme="light"] .contact-info-title { color:#0f172a; }
-    .contact-info-sub { font-size:0.88rem; color:var(--text-muted); margin-bottom:2rem; }
-    .contact-items { display:flex; flex-direction:column; gap:1rem; }
-    .contact-item {
-      display:flex; align-items:center; gap:1rem;
-      padding:0.9rem 1.15rem; background:var(--card-bg);
-      border:1px solid var(--border); border-radius:10px;
-      transition:all 0.2s ease;
-    }
-    .contact-item:hover { border-color:var(--border-hover); }
-    .contact-icon {
-      width:36px; height:36px; background:var(--primary-dim);
-      border-radius:8px; display:flex; align-items:center;
-      justify-content:center; color:var(--primary); font-size:0.88rem; flex-shrink:0;
-    }
-    .contact-label { font-size:0.67rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.08em; }
-    .contact-val { font-size:0.85rem; color:var(--text-muted); }
-    .contact-form {
-      background:var(--card-bg); border:1px solid var(--border);
-      border-radius:var(--radius); padding:2rem;
-    }
-    .form-title { font-family:var(--font-display); font-size:1rem; font-weight:700; color:var(--text); margin-bottom:1.5rem; transition:color 0.3s; }
-    [data-theme="light"] .form-title { color:#0f172a; }
-    .form-group { margin-bottom:1rem; }
-    .form-input, .form-textarea {
-      width:100%; padding:0.78rem 1rem;
-      background:rgba(255,255,255,0.04); border:1px solid var(--border);
-      border-radius:8px; color:var(--text); font-family:var(--font-body);
-      font-size:0.9rem; transition:all 0.2s ease;
-    }
-    [data-theme="light"] .form-input,
-    [data-theme="light"] .form-textarea {
-      background:rgba(0,0,0,0.03);
-    }
-    .form-input:focus, .form-textarea:focus {
-      outline:none; border-color:var(--primary);
-      background:rgba(201,169,97,0.04);
-    }
-    .form-input::placeholder, .form-textarea::placeholder { color:var(--text-dim); }
-    .form-textarea { min-height:130px; resize:vertical; }
-    .form-status {
-      padding:0.75rem 1rem; border-radius:8px; font-size:0.85rem;
-      margin-top:0.75rem; display:none;
-    }
-    .form-status.success {
-      background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.25);
-      color:#10b981; display:block;
-    }
-    .form-status.error {
-      background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.25);
-      color:#ef4444; display:block;
-    }
-    .btn-submit {
-      width:100%; padding:0.9rem; background:var(--primary); color:var(--dark);
-      border:none; border-radius:8px; font-family:var(--font-body);
-      font-weight:700; font-size:0.95rem; cursor:pointer;
-      transition:all 0.2s ease; display:flex; align-items:center;
-      justify-content:center; gap:0.5rem;
-    }
-    .btn-submit:hover { background:#d4b472; box-shadow:var(--shadow-gold); }
-    .btn-submit:disabled { opacity:0.6; cursor:not-allowed; }
+  .foot { flex-direction: column; text-align: center; align-items: center; }
+  .fcopy { text-align: center; }
+}
 
-    /* ═══════════════════════════════════════════
-       FOOTER
-    ═══════════════════════════════════════════ */
-    footer {
-      background:var(--bg2); border-top:1px solid var(--border);
-      padding:2.5rem 2rem;
-    }
-    .footer-inner {
-      max-width:1280px; margin:0 auto;
-      display:flex; align-items:center;
-      justify-content:space-between; flex-wrap:wrap; gap:1.5rem;
-    }
-    .footer-brand { font-family:var(--font-display); font-weight:800; color:var(--text); font-size:1rem; transition:color 0.3s; }
-    [data-theme="light"] .footer-brand { color:#0f172a; }
-    .footer-brand span { color:var(--primary); }
-    .footer-tagline { font-size:0.76rem; color:var(--text-dim); margin-top:0.2rem; }
-    .footer-links-row { display:flex; gap:1rem; }
-    .footer-icon-link {
-      width:38px; height:38px; border:1px solid var(--border);
-      border-radius:8px; display:flex; align-items:center;
-      justify-content:center; color:var(--text-dim); font-size:0.88rem;
-      transition:all 0.2s ease;
-    }
-    .footer-icon-link:hover { border-color:var(--primary); color:var(--primary); background:var(--primary-dim); }
-    .footer-copy { font-size:0.76rem; color:var(--text-dim); text-align:right; }
+/* Tight mobile — make 2-col grids single col where needed */
+@media (max-width: 480px) {
+  .section { padding: 3.5rem 1rem; }
+  .sgrid { grid-template-columns: 1fr 1fr; } /* keep 2 col for stats */
+  .astats { grid-template-columns: 1fr 1fr; }
+  .hero-btns { gap: 0.6rem; }
+  .hero-btns .btn { padding: 0.68rem 1.1rem; font-size: 0.83rem; }
+  .sys-grid { grid-template-columns: 1fr; }
+  .tgrid { grid-template-columns: 1fr; }
+}
 
-    /* ═══════════════════════════════════════════
-       SCROLL TOP
-    ═══════════════════════════════════════════ */
-    .scroll-top {
-      position:fixed; bottom:2rem; right:2rem;
-      width:42px; height:42px; border-radius:10px;
-      background:var(--primary); color:var(--dark);
-      border:none; cursor:pointer; font-size:0.88rem;
-      display:flex; align-items:center; justify-content:center;
-      opacity:0; pointer-events:none; transform:translateY(10px);
-      transition:all 0.3s ease; z-index:990;
-    }
-    .scroll-top.visible { opacity:1; pointer-events:all; transform:translateY(0); }
-    .scroll-top:hover { background:#d4b472; box-shadow:var(--shadow-gold); }
-
-    /* ═══════════════════════════════════════════
-       ANIMATIONS
-    ═══════════════════════════════════════════ */
-    .fade-up {
-      opacity:0; transform:translateY(24px);
-      transition:opacity 0.7s ease, transform 0.7s ease;
-    }
-    .fade-up.visible { opacity:1; transform:translateY(0); }
-    .fade-up-d1 { transition-delay:0.1s; }
-    .fade-up-d2 { transition-delay:0.2s; }
-    .fade-up-d3 { transition-delay:0.3s; }
-
-    /* ═══════════════════════════════════════════
-       RESPONSIVE
-    ═══════════════════════════════════════════ */
-    @media (max-width:1024px) {
-      .hero-container { grid-template-columns:1fr; }
-      .hero-card { max-width:420px; margin:0 auto; }
-      .lab-grid { grid-template-columns:1fr; gap:2.5rem; }
-      .building-card { position:static; }
-    }
-    @media (max-width:768px) {
-      .nav-menu { display:none; }
-      .mobile-toggle { display:flex; }
-      .mobile-nav { display:block; }
-      .hero { padding:7rem 1.5rem 4rem; }
-      .hero-headline { font-size:2.2rem; }
-      .case-study { grid-template-columns:1fr; }
-      .case-study-sidebar { border-right:none; border-bottom:1px solid var(--border); padding:1.75rem; }
-      .case-study-body { grid-template-columns:1fr; padding:1.75rem; gap:1.5rem; }
-      .case-block-full { grid-column:auto; }
-      .contact-grid { grid-template-columns:1fr; }
-      .about-grid { grid-template-columns:1fr; }
-      .footer-inner { flex-direction:column; text-align:center; }
-      .footer-copy { text-align:center; }
-      .footer-links-row { justify-content:center; }
-      .theme-toggle-label { display:none; }
-    }
-    @media (max-width:480px) {
-      .systems-grid { grid-template-columns:1fr; }
-      .hero-stat-grid { grid-template-columns:1fr 1fr; }
-      .about-stats { grid-template-columns:1fr 1fr; }
-      .hero-trust { font-size:0.72rem; gap:0.6rem; }
-    }
-  </style>
+@media (max-width: 360px) {
+  .sk-grid { grid-template-columns: 1fr; }
+  .cert-grid { grid-template-columns: 1fr; }
+  .sgrid { grid-template-columns: 1fr 1fr; }
+}
+</style>
 </head>
-
 <body>
-  <a href="#main" class="skip-link">Skip to content</a>
 
-  <!-- ═══════════════════════════════════════════
-       NAVIGATION
-  ═══════════════════════════════════════════ -->
-  <nav class="main-nav" id="mainNav">
-    <div class="nav-container">
-      <a href="#home" class="nav-logo">
-        <span class="logo-text">Joseph</span><span class="logo-accent">Kamanja</span>
-        <span class="logo-tag">Systems Lab</span>
-      </a>
-      <div class="nav-right">
-        <ul class="nav-menu">
-          <li><a href="#home" class="nav-link">Home</a></li>
-          <li><a href="#about" class="nav-link">About</a></li>
-          <li><a href="#systems" class="nav-link">Systems</a></li>
-          <li><a href="#case-studies" class="nav-link">Case Studies</a></li>
-          <li><a href="#skills" class="nav-link">Skills</a></li>
-          <li><a href="#certifications" class="nav-link">Certs</a></li>
-          <li><a href="#contact" class="nav-cta">Work With Me</a></li>
-        </ul>
-        <!-- Dark/Light toggle -->
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode" title="Toggle theme">
-          <i class="fas fa-sun" id="themeIcon"></i>
-        </button>
-        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu" aria-expanded="false">
-          <span class="hamburger"></span>
-          <span class="hamburger"></span>
-          <span class="hamburger"></span>
-        </button>
-      </div>
-    </div>
-  </nav>
-
-  <div class="mobile-overlay" id="mobileOverlay"></div>
-  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
-    <ul class="mobile-nav-list">
-      <li><a href="#home" class="mobile-nav-link"><i class="fas fa-home"></i>Home</a></li>
-      <li><a href="#about" class="mobile-nav-link"><i class="fas fa-user"></i>About</a></li>
-      <li><a href="#systems" class="mobile-nav-link"><i class="fas fa-cubes"></i>Systems</a></li>
-      <li><a href="#case-studies" class="mobile-nav-link"><i class="fas fa-file-alt"></i>Case Studies</a></li>
-      <li><a href="#skills" class="mobile-nav-link"><i class="fas fa-code"></i>Skills</a></li>
-      <li><a href="#certifications" class="mobile-nav-link"><i class="fas fa-certificate"></i>Certifications</a></li>
-      <li><a href="#contact" class="mobile-nav-link"><i class="fas fa-envelope"></i>Work With Me</a></li>
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#home" class="logo">
+      <span class="logo-w">Joseph</span><span class="logo-g">Kamanja</span>
+      <span class="logo-pill">Systems Lab</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#systems">Systems</a></li>
+      <li><a href="#case-studies">Case Studies</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#certifications">Certs</a></li>
+      <li><a href="#contact" class="nav-cta">Work With Me</a></li>
     </ul>
-    <button class="mobile-nav-theme" id="mobileThemeToggle" aria-label="Toggle theme">
-      <i class="fas fa-sun" id="mobileThemeIcon"></i>
-      <span id="mobileThemeLabel">Switch to light mode</span>
-    </button>
-  </nav>
-
-  <main id="main">
-
-  <!-- ═══════════════════════════════════════════
-       HERO
-  ═══════════════════════════════════════════ -->
-  <section class="hero" id="home">
-    <div class="hero-orb hero-orb-1"></div>
-    <div class="hero-orb hero-orb-2"></div>
-    <div class="hero-container">
-      <div class="hero-left">
-        <div class="hero-eyebrow">Joseph Kamanja · Nairobi, Kenya</div>
-        <h1 class="hero-headline">
-          I build real-world systems that solve
-          <span class="highlight">African problems</span>
-        </h1>
-        <p class="hero-sub">
-          Full-stack developer shipping production AI systems across healthcare, education, and civic infrastructure — not demos, real users.
-        </p>
-        <div class="hero-trust">
-          <span class="trust-dot">●</span>
-          <span>4+ systems built</span>
-          <span class="trust-sep">|</span>
-          <span>Real users</span>
-          <span class="trust-sep">|</span>
-          <span>Production-ready</span>
-          <span class="trust-sep">|</span>
-          <span>Africa-deployed</span>
-        </div>
-        <div class="hero-ctas">
-          <a href="#systems" class="btn-primary"><i class="fas fa-cubes"></i> View Systems</a>
-          <a href="#contact" class="btn-secondary"><i class="fas fa-paper-plane"></i> Work With Me</a>
-        </div>
-      </div>
-
-      <div class="hero-right">
-        <div class="hero-card">
-          <div class="profile-ring">
-            <img src="images/profile.jpg" alt="Joseph Kamanja" class="profile-img"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="profile-img-fallback" style="display:none;">JK</div>
-          </div>
-          <div class="hero-card-name">Joseph Kamanja</div>
-          <div class="hero-card-role">Systems Builder · Full-Stack Developer</div>
-          <div class="hero-stat-grid">
-            <div class="hero-stat"><div class="hero-stat-num">4+</div><div class="hero-stat-label">Systems Built</div></div>
-            <div class="hero-stat"><div class="hero-stat-num">3</div><div class="hero-stat-label">Platforms Live</div></div>
-            <div class="hero-stat"><div class="hero-stat-num">10/10</div><div class="hero-stat-label">GoldenEcho Score</div></div>
-            <div class="hero-stat"><div class="hero-stat-num">95%</div><div class="hero-stat-label">CyberShujaa Top</div></div>
-          </div>
-          <div class="hero-links">
-            <a href="https://github.com/josmiles" target="_blank" rel="noopener" class="hero-link">
-              <i class="fab fa-github"></i> github.com/josmiles
-            </a>
-            <a href="https://www.linkedin.com/in/jkamanja" target="_blank" rel="noopener" class="hero-link">
-              <i class="fab fa-linkedin"></i> linkedin.com/in/jkamanja
-            </a>
-            <a href="mailto:josephkamanja433@gmail.com" class="hero-link">
-              <i class="fas fa-envelope"></i> josephkamanja433@gmail.com
-            </a>
-          </div>
-        </div>
-      </div>
+    <div class="nav-right">
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
+        <i class="fas fa-sun" id="themeIco"></i>
+      </button>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+        <span class="bun"></span><span class="bun"></span><span class="bun"></span>
+      </button>
     </div>
-  </section>
+  </div>
+</nav>
 
-  <div class="gold-divider"></div>
-
-  <!-- ═══════════════════════════════════════════
-       ABOUT
-  ═══════════════════════════════════════════ -->
-  <section class="section section-alt" id="about">
-    <div class="container">
-      <div class="section-label">About Me</div>
-      <h2 class="section-title">Builder by nature,<br>African by purpose</h2>
-      <p class="section-sub">I don't build projects — I build systems. Every line of code is pointed at a real problem that real people in Africa face every day.</p>
-      <div class="about-grid">
-        <div>
-          <p class="about-text">
-            I'm a recent graduate with training in cybersecurity, data analysis, and full-stack development. I completed an intensive Cyber Security Analyst program at CyberShujaa, achieving <strong>95% performance</strong>. But rather than stop at theory, I went further — building and deploying real systems.
-          </p>
-          <p class="about-text">
-            In the last few months I've shipped a full-stack AI nutrition platform, a digital queue management system for Kenyan service centers, an AI-powered LMS aligned to Kenya's CBC curriculum, and an AI companionship platform for elderly users — all deployed and production-ready.
-          </p>
-          <p class="about-text">
-            I'm currently seeking internships, collaborations, and partnerships where I can apply a systems-thinking approach to problems that matter.
-          </p>
-          <div class="about-links">
-            <a href="https://www.linkedin.com/in/jkamanja" target="_blank" rel="noopener" class="btn-secondary" style="font-size:0.85rem;padding:0.65rem 1.25rem;"><i class="fab fa-linkedin"></i> LinkedIn</a>
-            <a href="https://github.com/josmiles" target="_blank" rel="noopener" class="btn-secondary" style="font-size:0.85rem;padding:0.65rem 1.25rem;"><i class="fab fa-github"></i> GitHub</a>
-            <a href="cv/Joseph_Kamanja_CV.pdf" download class="btn-primary" style="font-size:0.85rem;padding:0.65rem 1.25rem;"><i class="fas fa-download"></i> Download CV</a>
-          </div>
-        </div>
-        <div>
-          <div class="about-stats">
-            <div class="hero-stat" style="padding:1.5rem;"><div class="hero-stat-num">4+</div><div class="hero-stat-label">Systems Live</div></div>
-            <div class="hero-stat" style="padding:1.5rem;"><div class="hero-stat-num">4</div><div class="hero-stat-label">Certifications</div></div>
-            <div class="hero-stat" style="padding:1.5rem;"><div class="hero-stat-num">21+</div><div class="hero-stat-label">Training Modules</div></div>
-            <div class="hero-stat" style="padding:1.5rem;"><div class="hero-stat-num">95%</div><div class="hero-stat-label">Top Performance</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="gold-divider"></div>
-
-  <!-- ═══════════════════════════════════════════
-       SYSTEMS
-  ═══════════════════════════════════════════ -->
-  <section class="section" id="systems">
-    <div class="container">
-      <div class="section-label">Systems I've Built</div>
-      <h2 class="section-title">Production-grade systems.<br>African problems.</h2>
-      <p class="section-sub">Not demos. Not class projects. Deployed systems with real architecture, real users, and real impact.</p>
-      <div class="systems-grid">
-
-        <div class="system-card fade-up">
-          <div class="system-card-top">
-            <div class="system-header">
-              <div class="system-name">HealthAI</div>
-              <span class="badge badge-live">Live</span>
-            </div>
-            <p class="system-problem">Affordable AI nutrition coaching for Africans without access to registered dietitians.</p>
-            <ul class="system-features">
-              <li>AI nutrition chat powered by Groq Llama 3.3 70B</li>
-              <li>Food photo analysis via Groq Llama 4 Scout Vision</li>
-              <li>Cross-platform: web + Android app + admin dashboard</li>
-            </ul>
-          </div>
-          <div class="system-card-bottom">
-            <div class="tech-stack">
-              <span class="tech-tag">Next.js 14</span><span class="tech-tag">React Native</span><span class="tech-tag">Firebase</span><span class="tech-tag">Groq AI</span><span class="tech-tag">Expo</span><span class="tech-tag">Vercel</span>
-            </div>
-            <div class="system-actions">
-              <a href="https://healthai-nutrition-os.vercel.app" target="_blank" rel="noopener" class="btn-action btn-demo"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-              <a href="#case-study-healthai" class="btn-action btn-case"><i class="fas fa-file-alt"></i> Case Study</a>
-              <a href="https://github.com/josmiles/-healthai-nutrition-os" target="_blank" rel="noopener" class="btn-action btn-github" aria-label="HealthAI GitHub"><i class="fab fa-github"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="system-card fade-up fade-up-d1">
-          <div class="system-card-top">
-            <div class="system-header">
-              <div class="system-name">SmartQueue</div>
-              <span class="badge badge-live">Live</span>
-            </div>
-            <p class="system-problem">Ending physical queues in Kenyan hospitals, banks, and government offices with digital flow management.</p>
-            <ul class="system-features">
-              <li>Real-time queue tracking via WebSocket</li>
-              <li>SMS/WhatsApp alerts via Africa's Talking + Twilio</li>
-              <li>AI wait-time prediction using EMA learning model</li>
-            </ul>
-          </div>
-          <div class="system-card-bottom">
-            <div class="tech-stack">
-              <span class="tech-tag">Node.js 20</span><span class="tech-tag">Express</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">Redis</span><span class="tech-tag">WebSocket</span><span class="tech-tag">Africa's Talking</span>
-            </div>
-            <div class="system-actions">
-              <a href="https://smartqueue-ke.netlify.app" target="_blank" rel="noopener" class="btn-action btn-demo"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-              <a href="#case-study-smartqueue" class="btn-action btn-case"><i class="fas fa-file-alt"></i> Case Study</a>
-              <a href="https://github.com/josmiles/Smartqueue-" target="_blank" rel="noopener" class="btn-action btn-github" aria-label="SmartQueue GitHub"><i class="fab fa-github"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="system-card fade-up fade-up-d2">
-          <div class="system-card-top">
-            <div class="system-header">
-              <div class="system-name">StMartin EDU</div>
-              <span class="badge badge-mvp">MVP</span>
-            </div>
-            <p class="system-problem">Closing the digital learning gap in Kenya with an AI assistant built around the CBC curriculum.</p>
-            <ul class="system-features">
-              <li>Grade-adaptive AI tutor across 6 subjects, 13 grade levels</li>
-              <li>30+ CBC topics with teacher + admin dashboards</li>
-              <li>3 user roles: student, teacher, admin</li>
-            </ul>
-          </div>
-          <div class="system-card-bottom">
-            <div class="tech-stack">
-              <span class="tech-tag">React</span><span class="tech-tag">Node.js</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">Groq AI</span><span class="tech-tag">Render</span><span class="tech-tag">Vercel</span>
-            </div>
-            <div class="system-actions">
-              <a href="https://stmartin-edu.vercel.app" target="_blank" rel="noopener" class="btn-action btn-demo"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-              <a href="#case-study-stmartin" class="btn-action btn-case"><i class="fas fa-file-alt"></i> Case Study</a>
-              <a href="https://github.com/josmiles/stmartin-edu" target="_blank" rel="noopener" class="btn-action btn-github" aria-label="StMartin EDU GitHub"><i class="fab fa-github"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="system-card fade-up fade-up-d3">
-          <div class="system-card-top">
-            <div class="system-header">
-              <div class="system-name">GoldenEcho</div>
-              <span class="badge badge-live">Live</span>
-            </div>
-            <p class="system-problem">Giving elderly users a voice — an AI companionship platform that preserves life stories through conversation.</p>
-            <ul class="system-features">
-              <li>Ellie — AI companion with voice input via Groq Whisper</li>
-              <li>16 web pages + 15 mobile screens, full feature parity</li>
-              <li>Multilingual (6 languages), Stripe payments, PDF memoirs</li>
-            </ul>
-          </div>
-          <div class="system-card-bottom">
-            <div class="tech-stack">
-              <span class="tech-tag">React Native</span><span class="tech-tag">Express</span><span class="tech-tag">MongoDB</span><span class="tech-tag">Groq Whisper</span><span class="tech-tag">Stripe</span><span class="tech-tag">Cloudinary</span>
-            </div>
-            <div class="system-actions">
-              <a href="https://golden-echo-2-0.vercel.app" target="_blank" rel="noopener" class="btn-action btn-demo"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-              <a href="#case-study-goldenecho" class="btn-action btn-case"><i class="fas fa-file-alt"></i> Case Study</a>
-              <a href="https://github.com/josmiles/GoldenEcho-2.0" target="_blank" rel="noopener" class="btn-action btn-github" aria-label="GoldenEcho GitHub"><i class="fab fa-github"></i></a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <div class="gold-divider"></div>
-
-  <!-- ═══════════════════════════════════════════
-       CASE STUDIES
-  ═══════════════════════════════════════════ -->
-  <section class="section section-alt" id="case-studies">
-    <div class="container">
-      <div class="section-label">Case Studies</div>
-      <h2 class="section-title">Architecture & Impact</h2>
-      <p class="section-sub">The thinking behind the building. Each system started with a real problem and was engineered to a production standard.</p>
-
-      <!-- HealthAI -->
-      <div class="case-study fade-up" id="case-study-healthai">
-        <div class="case-study-sidebar">
-          <div class="case-study-name">HealthAI</div>
-          <div><div class="case-score">Live</div><div class="case-score-label">Production Status</div></div>
-          <div class="case-meta">
-            <div class="case-meta-item"><div class="case-meta-label">Platform</div><div class="case-meta-val">Web + Android + Admin</div></div>
-            <div class="case-meta-item"><div class="case-meta-label">Region</div><div class="case-meta-val">africa-south1 (Firebase)</div></div>
-            <div class="case-meta-item"><div class="case-meta-label">AI Models</div><div class="case-meta-val">Llama 3.3 70B + Llama 4 Scout 17B</div></div>
-            <div class="case-meta-item"><div class="case-meta-label">Released</div><div class="case-meta-val">March 2026</div></div>
-          </div>
-          <a href="https://healthai-nutrition-os.vercel.app" target="_blank" rel="noopener" class="btn-action btn-demo" style="justify-content:center;"><i class="fas fa-external-link-alt"></i> Open Live App</a>
-        </div>
-        <div class="case-study-body">
-          <div>
-            <div class="case-block-title">The Problem</div>
-            <p class="case-block-text">Registered dietitians in Kenya are expensive and rare. Most people have no access to personalised nutrition advice, leading to diet-related illness that is largely preventable. Generic apps don't adapt to local foods or individual health profiles.</p>
-          </div>
-          <div>
-            <div class="case-block-title">The Solution</div>
-            <p class="case-block-text">HealthAI is a full-stack nutrition coaching system powered by large language models. Users build a health profile (BMI, BMR, TDEE, macros), log food via chat or photo scan, and receive personalised guidance. Available on web, Android, and through a secured admin dashboard.</p>
-          </div>
-          <div class="case-block-full">
-            <div class="case-block-title">Architecture</div>
-            <p class="case-block-text">Next.js 14 App Router frontend deployed on Vercel. Firebase Firestore (africa-south1) handles real-time data: food logs, chat history, weight tracking, streaks, and water intake across nested subcollections. Authentication via Firebase Auth. AI chat routed server-side through Groq's API (Llama 3.3 70B), with food photo analysis via Groq Vision (Llama 4 Scout 17B). React Native + Expo SDK 52 mobile app built via EAS cloud build. Admin dashboard protected by Firebase JWT custom claims.</p>
-          </div>
-          <div>
-            <div class="case-block-title">Impact</div>
-            <ul class="case-impact-list">
-              <li><i class="fas fa-check-circle" style="color:var(--success)"></i> Three platforms live simultaneously: web, Android, admin</li>
-              <li><i class="fas fa-check-circle" style="color:var(--success)"></i> Africa-South1 data residency — low-latency for Kenyan users</li>
-              <li><i class="fas fa-check-circle" style="color:var(--success)"></i> Real-time Firestore sync across web and mobile</li>
-              <li><i class="fas fa-check-circle" style="color:var(--success)"></i> Full streak, hydration, and calorie tracking in production</li>
-            </ul>
-          </div>
-          <div>
-            <div class="case-block-title">Next Milestones</div>
-            <ul class="case-impact-list">
-              <li><i class="fas fa-arrow-right" style="color:var(--primary)"></i> Nutritionix API for accurate food DB</li>
-              <li><i class="fas fa-arrow-right" style="color:var(--primary)"></i> Stripe Pro subscription tier</li>
-              <li><i class="fas fa-arrow-right" style="color:var(--primary)"></i> iOS build via EAS cloud</li>
-              <li><i class="fas fa-arrow-right" style="color:var(--primary)"></i> Push notifications + weekly email reports</li>
-            </ul>
-          </div>
-          <div class="case-screenshot">
-            <img src="assets/healthai.png" alt="HealthAI platform screenshot"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="screenshot-placeholder">
-              <i class="fas fa-desktop"></i>
-              <span>Add <code>assets/healthai.png</code> — browser screenshot of your live app</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SmartQueue -->
-      <div class="case-study fade-up" id="case-study-smartqueue">
-        <div class="case-study-sidebar">
-          <div class="case-study-name">SmartQueue</div>
-          <div><div class="case-score">Live</div><div class="case-score-label">Production Status</div></div>
-          <div class="case-meta">
-            <div class="case-meta-item"><div class="case-meta-label">Platform</div><div class="case-meta-val">Web App + REST API</div></div>
-            <div class="case-meta-item"><div class="case-meta-label">Target Market</div><div class="case-meta-val">Kenya & African service centers</div></div>
-            <div class="case-meta-item"><div class="case-meta-label">Database</div><div class="case-meta-val">PostgreSQL 15 + Redis 7</div></div>
-            <div class="case-meta-item"><div class="case-meta-label">Notifications</div><div class="case-meta-val">Africa's Talking + Twilio</div></div>
-          </div>
-          <a href="https://smartqueue-ke.netlify.app" target="_blank" rel="noopener" class="btn-action btn-demo" style="justify-content:center;"><i class="fas fa-external-link-alt"></i> Open Live App</a>
-        </div>
-        <div class="case-study-body">
-          <div>
-            <div class="case-block-title">The Problem</div>
-            <p class="case-block-text">Physical queues are a daily reality in Kenya — at government offices, hospitals, banks, and universities. People wait hours with no visibility into their position or estimated wait time, wasting productive time at scale.</p>
-          </div>
-          <div>
-            <div class="case-block-title">The Solution</div>
-            <p class="case-block-text">SmartQueue lets customers join queues remotely and receive a numbered ticket instantly. Real-time position tracking via WebSocket means no page refreshing. SMS/WhatsApp alerts notify when their turn approaches. Staff manage flow through a browser-based dashboard — no native app required.</p>
-          </div>
-          <div class="case-block-full">
-            <div class="case-block-title">Architecture</div>
-            <p class="case-block-text">Node.js 20 + Express backend on Render handles REST API and a WebSocket server for live queue state. PostgreSQL 15 provides normalised persistent storage across 10 core tables. Redis 7 caches real-time queue positions for instant retrieval. Africa's Talking and Twilio provide an SMS/WhatsApp/email abstraction layer. An EMA (Exponential Moving Average) model learns from actual service times to predict wait times dynamically. Public display screens connect via WebSocket to show the NOW SERVING number at each counter.</p>
-          </div>
-          <div>
-            <div class="case-block-title">Impact</div>
-            <ul class="case-impact-list">
-              <li><i class="fas fa-check-circle" style="color:var(--success)"></i> Live API on Render, customer UI on Netlify</li>
-              <li><i class="fas fa-check-circle" style="color:var(--success)"></i> No app install required — browser-first for both sides</li>
-              <li><i class="fas fa-check-circle" style="color:var(--success)"></i> AI wait time model adapts to real service patterns</li>
-              <li><i class="fas fa-check-circle" style="color:var(--success)"></i> Display screen mode for public counters via WebSocket</li>
-            </ul>
-          </div>
-          <div>
-            <div class="case-block-title">System Scope</div>
-            <ul class="case-impact-list">
-              <li><i class="fas fa-arrow-right" style="color:var(--primary)"></i> Analytics dashboard: hourly stats + wait-time trends</li>
-              <li><i class="fas fa-arrow-right" style="color:var(--primary)"></i> Multi-location support via UUID routing</li>
-              <li><i class="fas fa-arrow-right" style="color:var(--primary)"></i> Security hardening: rate limiting, CORS, JWT auth</li>
-            </ul>
-          </div>
-          <div class="case-screenshot">
-            <img src="assets/smartqueue.png" alt="SmartQueue platform screenshot"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="screenshot-placeholder">
-              <i class="fas fa-desktop"></i>
-              <span>Add <code>assets/smartqueue.png</code> — browser screenshot of your live app</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- StMartin EDU -->
-      <div class="case-study fade-up" id="case-study-stmartin">
-        <div class="case-study-sidebar">
-          <div class="case-study-name">StMartin EDU</div>
-          <div><div class="case-score">8.5/10</div><div class="case-score-label">System Rating</div></div>
-          <div class="case-meta">
-            <div class="case-meta-item"><div class="case-meta-label">Grade Levels</div><div class="case-meta-val">PP1 through Grade 9 (13 levels)</div></div>
-            <div class="case-meta-item"><div class="case-meta-label">Subjects</div><div class="case-meta-val">6 CBC-aligned subjects</div></div>
-            <div class="case-meta-item"><div class="case-meta-label">User Roles</div><div class="case-meta-val">Student, Teacher, Admin</div></div>
-          </div>
-          <a href="https://stmartin-edu.vercel.app" target="_blank" rel="noopener" class="btn-action btn-demo" style="justify-content:center;"><i class="fas fa-external-link-alt"></i> Open Live App</a>
-        </div>
-        <div class="case-study-body">
-          <div>
-            <div class="case-block-title">The Problem</div>
-            <p class="case-block-text">Kenya's 2017 CBC curriculum restructured how students learn — but affordable, curriculum-aligned digital tools remain scarce for most schools. Students lack on-demand academic support outside school hours.</p>
-          </div>
-          <div>
-            <div class="case-block-title">The Solution</div>
-            <p class="case-block-text">StMartin EDU is a full Learning Management System with an AI tutor that adapts responses to the student's grade level. Covering 30+ CBC topics across 6 subjects and 13 grade levels, it gives students, teachers, and admins separate dashboards with full CRUD control.</p>
-          </div>
-          <div class="case-block-full">
-            <div class="case-block-title">Architecture</div>
-            <p class="case-block-text">React frontend deployed to Vercel. Node.js + Express REST API backend on Render. PostgreSQL database with CBC-aligned schema. Groq AI powers the learning assistant — responses are calibrated to the selected grade level before each API call. Teacher dashboard allows topic assignment and student progress tracking. Admin panel provides full CRUD across users, classes, and topics.</p>
-          </div>
-          <div>
-            <div class="case-block-title">Impact</div>
-            <ul class="case-impact-list">
-              <li><i class="fas fa-check-circle" style="color:var(--success)"></i> 13 grade levels fully supported (PP1–Grade 9)</li>
-              <li><i class="fas fa-check-circle" style="color:var(--success)"></i> AI adapts explanation complexity per grade</li>
-              <li><i class="fas fa-check-circle" style="color:var(--success)"></i> 3-role permission system: student / teacher / admin</li>
-              <li><i class="fas fa-check-circle" style="color:var(--success)"></i> Rated production-ready at 8.5/10</li>
-            </ul>
-          </div>
-          <div>
-            <div class="case-block-title">Roadmap</div>
-            <ul class="case-impact-list">
-              <li><i class="fas fa-arrow-right" style="color:var(--primary)"></i> Security hardening to reach 10/10</li>
-              <li><i class="fas fa-arrow-right" style="color:var(--primary)"></i> Assessment and quiz module</li>
-              <li><i class="fas fa-arrow-right" style="color:var(--primary)"></i> Parent progress reports</li>
-            </ul>
-          </div>
-          <div class="case-screenshot">
-            <img src="assets/stmartin.png" alt="StMartin EDU platform screenshot"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="screenshot-placeholder">
-              <i class="fas fa-desktop"></i>
-              <span>Add <code>assets/stmartin.png</code> — browser screenshot of your live app</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- GoldenEcho -->
-      <div class="case-study fade-up" id="case-study-goldenecho">
-        <div class="case-study-sidebar">
-          <div class="case-study-name">GoldenEcho</div>
-          <div><div class="case-score">10/10</div><div class="case-score-label">Final Score · Built in 1 Day</div></div>
-          <div class="case-meta">
-            <div class="case-meta-item"><div class="case-meta-label">Scale</div><div class="case-meta-val">16 web pages · 15 mobile screens</div></div>
-            <div class="case-meta-item"><div class="case-meta-label">Languages</div><div class="case-meta-val">6 languages supported</div></div>
-            <div class="case-meta-item"><div class="case-meta-label">Integrations</div><div class="case-meta-val">7 API integrations</div></div>
-          </div>
-          <a href="https://golden-echo-2-0.vercel.app" target="_blank" rel="noopener" class="btn-action btn-demo" style="justify-content:center;"><i class="fas fa-external-link-alt"></i> Open Live App</a>
-        </div>
-        <div class="case-study-body">
-          <div>
-            <div class="case-block-title">The Problem</div>
-            <p class="case-block-text">Elderly people carry irreplaceable life stories that disappear with them. Loneliness among the elderly is a global health crisis. Existing tech products are not built for this audience — too complex, too cold, and ignore voice as a primary interaction mode.</p>
-          </div>
-          <div>
-            <div class="case-block-title">The Solution</div>
-            <p class="case-block-text">GoldenEcho is an AI companionship and storytelling platform designed around simplicity and warmth. "Ellie" helps users record stories via voice or text, generates a community feed, preserves a memory timeline, and enables PDF memoir export. Available on web and Android with full feature parity.</p>
-          </div>
-          <div class="case-block-full">
-            <div class="case-block-title">Architecture</div>
-            <p class="case-block-text">React frontend on Vercel (16 pages). Express.js backend on Render (12 routes). MongoDB for story and user data. Groq Whisper for voice-to-text transcription. Groq LLM for Ellie's conversational AI. Cloudinary for photo uploads. Stripe for Pro subscription payments. Resend for transactional email. 6-language localisation built in. 7-layer backend security. Android APK distributed via Expo EAS. 24/7 uptime monitoring via UptimeRobot. Built and deployed in one day — scored 10/10.</p>
-          </div>
-          <div>
-            <div class="case-block-title">Impact</div>
-            <ul class="case-impact-list">
-              <li><i class="fas fa-check-circle" style="color:var(--success)"></i> Perfect 10/10 score — full feature completion</li>
-              <li><i class="fas fa-check-circle" style="color:var(--success)"></i> Web + Android simultaneously shipped</li>
-              <li><i class="fas fa-check-circle" style="color:var(--success)"></i> Voice input, multilingual, payments — all live</li>
-              <li><i class="fas fa-check-circle" style="color:var(--success)"></i> 7-layer backend security, 24/7 monitoring</li>
-            </ul>
-          </div>
-          <div>
-            <div class="case-block-title">Key Features</div>
-            <ul class="case-impact-list">
-              <li><i class="fas fa-arrow-right" style="color:var(--primary)"></i> Memory Timeline + "On This Day" feature</li>
-              <li><i class="fas fa-arrow-right" style="color:var(--primary)"></i> Community feed with hearts/reactions</li>
-              <li><i class="fas fa-arrow-right" style="color:var(--primary)"></i> PDF memoir export — life stories as a book</li>
-              <li><i class="fas fa-arrow-right" style="color:var(--primary)"></i> Stripe-powered Pro tier</li>
-            </ul>
-          </div>
-          <div class="case-screenshot">
-            <img src="assets/goldenecho.png" alt="GoldenEcho platform screenshot"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="screenshot-placeholder">
-              <i class="fas fa-desktop"></i>
-              <span>Add <code>assets/goldenecho.png</code> — browser screenshot of your live app</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ═══ TESTIMONIALS ═══ -->
-      <div class="testimonial-section fade-up">
-        <div class="section-label" style="margin-bottom:1.5rem;">What people say</div>
-        <div class="testimonial-grid">
-          <div class="testimonial-card">
-            <p class="testimonial-text">"GoldenEcho is one of the most complete submissions I've reviewed — 16 web pages, 15 mobile screens, voice input, payments, multilingual support, all shipped in a single day. The architecture decisions were sound and the execution was exceptional."</p>
-            <div class="testimonial-author">
-              <div class="author-avatar">R</div>
-              <div>
-                <div class="author-name">Reviewer</div>
-                <div class="author-role">GoldenEcho Assessment · 10/10</div>
-              </div>
-            </div>
-          </div>
-          <div class="testimonial-card">
-            <p class="testimonial-text">"StMartin EDU demonstrates strong full-stack architecture and shows a clear understanding of the CBC curriculum requirements. The grade-adaptive AI prompting is a particularly thoughtful implementation detail."</p>
-            <div class="testimonial-author">
-              <div class="author-avatar">R</div>
-              <div>
-                <div class="author-name">Reviewer</div>
-                <div class="author-role">StMartin EDU Assessment · 8.5/10</div>
-              </div>
-            </div>
-          </div>
-          <div class="testimonial-card">
-            <p class="testimonial-text">"Achieved 95% in our intensive Cyber Security Analyst programme — consistently demonstrated strong analytical thinking, attention to detail, and the ability to translate security theory into practical assessments."</p>
-            <div class="testimonial-author">
-              <div class="author-avatar">CS</div>
-              <div>
-                <div class="author-name">CyberShujaa</div>
-                <div class="author-role">Cyber Security Analyst Programme · 2025</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <div class="gold-divider"></div>
-
-  <!-- ═══════════════════════════════════════════
-       SYSTEMS LAB
-  ═══════════════════════════════════════════ -->
-  <section class="section" id="lab">
-    <div class="container">
-      <div class="section-label">Systems Lab</div>
-      <h2 class="section-title">Why I build systems</h2>
-      <div class="lab-grid">
-        <div>
-          <p class="lab-mission">
-            Africa is not waiting for solutions to be imported. The continent's problems are <strong>local</strong>, its context is <strong>unique</strong>, and its builders need to rise to meet them. I build systems because technology should close gaps, not widen them.
-          </p>
-          <div class="focus-areas">
-            <div class="focus-area">
-              <div class="focus-icon"><i class="fas fa-heartbeat"></i></div>
-              <div><div class="focus-title">Healthcare Access</div><div class="focus-desc">AI-powered tools that bring expert-level health guidance to people who can't afford specialists.</div></div>
-            </div>
-            <div class="focus-area">
-              <div class="focus-icon"><i class="fas fa-graduation-cap"></i></div>
-              <div><div class="focus-title">Education Infrastructure</div><div class="focus-desc">Curriculum-aligned learning systems built specifically for Kenyan and African students.</div></div>
-            </div>
-            <div class="focus-area">
-              <div class="focus-icon"><i class="fas fa-bolt"></i></div>
-              <div><div class="focus-title">Civic Efficiency</div><div class="focus-desc">Eliminating wasted time at service centers, queues, and bureaucratic touchpoints.</div></div>
-            </div>
-            <div class="focus-area">
-              <div class="focus-icon"><i class="fas fa-leaf"></i></div>
-              <div><div class="focus-title">Climate & Environment</div><div class="focus-desc">Building awareness and tools around sustainable practices for communities under climate pressure.</div></div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div class="building-card">
-            <div class="building-title"><span class="live-dot"></span> Currently Building</div>
-            <div class="building-item">
-              <div class="building-item-name">HealthAI v2</div>
-              <div class="building-item-desc">Adding Nutritionix food database, Stripe Pro tier, iOS build, and push notifications.</div>
-            </div>
-            <div class="building-item">
-              <div class="building-item-name">StMartin EDU v2</div>
-              <div class="building-item-desc">Security hardening, assessment module, and quiz features to push the system to a 10/10 rating.</div>
-            </div>
-            <div class="open-to">
-              <div class="open-to-title">Open To</div>
-              <div class="open-to-text">Internships · Collaborations · Partnerships<br>
-                <span style="color:var(--primary);font-weight:600;">Nairobi-based or remote</span>
-              </div>
-            </div>
-            <div style="margin-top:1.25rem;">
-              <a href="https://github.com/josmiles" target="_blank" rel="noopener" class="btn-secondary" style="width:100%;justify-content:center;font-size:0.85rem;">
-                <i class="fab fa-github"></i> View All Repos on GitHub
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="gold-divider"></div>
-
-  <!-- ═══════════════════════════════════════════
-       SKILLS
-  ═══════════════════════════════════════════ -->
-  <section class="section section-alt" id="skills">
-    <div class="container">
-      <div class="section-label">Technical Skills</div>
-      <h2 class="section-title">The toolkit</h2>
-      <p class="section-sub">Skills acquired through real production systems — not just tutorials.</p>
-      <div class="skills-grid">
-        <div class="skill-card fade-up">
-          <div class="skill-card-title"><i class="fas fa-layer-group"></i> Frontend</div>
-          <ul class="skill-list">
-            <li>React / Next.js 14 (App Router)</li>
-            <li>React Native + Expo SDK 52</li>
-            <li>TypeScript</li>
-            <li>Tailwind CSS</li>
-            <li>HTML / CSS / JavaScript</li>
-          </ul>
-        </div>
-        <div class="skill-card fade-up fade-up-d1">
-          <div class="skill-card-title"><i class="fas fa-server"></i> Backend</div>
-          <ul class="skill-list">
-            <li>Node.js 20 + Express.js</li>
-            <li>REST API design</li>
-            <li>WebSocket (ws)</li>
-            <li>Firebase Admin SDK</li>
-            <li>JWT authentication</li>
-          </ul>
-        </div>
-        <div class="skill-card fade-up fade-up-d2">
-          <div class="skill-card-title"><i class="fas fa-database"></i> Data & Storage</div>
-          <ul class="skill-list">
-            <li>PostgreSQL 15</li>
-            <li>Firebase Firestore (real-time)</li>
-            <li>MongoDB</li>
-            <li>Redis 7 (caching)</li>
-            <li>Cloudinary (media)</li>
-          </ul>
-        </div>
-        <div class="skill-card fade-up fade-up-d3">
-          <div class="skill-card-title"><i class="fas fa-brain"></i> AI & Integrations</div>
-          <ul class="skill-list">
-            <li>Groq (Llama 3.3 70B, Llama 4 Scout)</li>
-            <li>Groq Whisper (voice-to-text)</li>
-            <li>Africa's Talking (SMS/WhatsApp)</li>
-            <li>Stripe Payments</li>
-            <li>Resend (transactional email)</li>
-          </ul>
-        </div>
-        <div class="skill-card fade-up">
-          <div class="skill-card-title"><i class="fas fa-cloud"></i> Deployment & DevOps</div>
-          <ul class="skill-list">
-            <li>Vercel (auto-deploy CI/CD)</li>
-            <li>Render (backend services)</li>
-            <li>Netlify</li>
-            <li>Expo EAS (Android APK builds)</li>
-            <li>Firebase Hosting + Auth</li>
-          </ul>
-        </div>
-        <div class="skill-card fade-up fade-up-d1">
-          <div class="skill-card-title"><i class="fas fa-shield-alt"></i> Security</div>
-          <ul class="skill-list">
-            <li>Penetration testing (Metasploit, Burp Suite)</li>
-            <li>Vulnerability assessment</li>
-            <li>Network security & Wireshark</li>
-            <li>Threat detection + Incident response</li>
-            <li>Linux systems (Nmap, Ffuf)</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="gold-divider"></div>
-
-  <!-- ═══════════════════════════════════════════
-       CERTIFICATIONS
-  ═══════════════════════════════════════════ -->
-  <section class="section" id="certifications">
-    <div class="container">
-      <div class="section-label">Certifications</div>
-      <h2 class="section-title">Formal credentials</h2>
-      <div class="cert-grid">
-        <div class="cert-card fade-up">
-          <div class="cert-img-wrap">
-            <img src="https://www.michaelpage.com.cn/sites/michaelpage.com.cn/files/legacy/cybersecurity_analyst.jpeg" alt="Cyber Security Analyst certification" loading="lazy">
-          </div>
-          <div class="cert-body">
-            <div class="cert-name">Cyber Security Analyst</div>
-            <div class="cert-org"><i class="fas fa-shield-alt"></i> Cyber Shujaa</div>
-            <div class="cert-year">2025 · 95% Achievement</div>
-          </div>
-        </div>
-        <div class="cert-card fade-up fade-up-d1">
-          <div class="cert-img-wrap">
-            <img src="https://savanna.alxafrica.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBekhzTEE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--d0f1a992ee5c3e20e9c10e0ddb3ea402e67841dd/107-ent-110-introduction-to-venture-creation-certificate-joseph-kamanja.png" alt="ALX Pathway Foundations certification" loading="lazy">
-          </div>
-          <div class="cert-body">
-            <div class="cert-name">Pathway Foundations</div>
-            <div class="cert-org"><i class="fas fa-building"></i> ALX Africa</div>
-            <div class="cert-year">2025</div>
-          </div>
-        </div>
-        <div class="cert-card fade-up fade-up-d2">
-          <div class="cert-img-wrap">
-            <img src="https://savanna.alxafrica.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBM0Z5TWc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--c4e212eb1e1c207416ea2c95b48d83001f5edda7/140-alx-aice-ai-career-essentials-2-0-certificate-joseph-kamanja.png" alt="ALX AI Career Essentials certification" loading="lazy">
-          </div>
-          <div class="cert-body">
-            <div class="cert-name">AI Career Essentials</div>
-            <div class="cert-org"><i class="fas fa-building"></i> ALX Africa</div>
-            <div class="cert-year">2025</div>
-          </div>
-        </div>
-        <div class="cert-card fade-up fade-up-d3">
-          <div class="cert-img-wrap">
-            <img src="https://savanna.alxafrica.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNU1sTXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--c56e542d1312245235ee7b43b963f3585d4326a4/72-virtual-assistant-certificate-joseph-kamanja.png" alt="ALX Virtual Assistant certification" loading="lazy">
-          </div>
-          <div class="cert-body">
-            <div class="cert-name">Virtual Assistant Skills</div>
-            <div class="cert-org"><i class="fas fa-building"></i> ALX Africa</div>
-            <div class="cert-year">2025</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="gold-divider"></div>
-
-  <!-- ═══════════════════════════════════════════
-       CONTACT — Proper form with Formspree
-  ═══════════════════════════════════════════ -->
-  <section class="section section-alt" id="contact">
-    <div class="container">
-      <div class="section-label">Contact</div>
-      <h2 class="section-title">Let's build something</h2>
-      <p class="section-sub">Open to internships, collaborations, freelance projects, and partnerships. Based in Nairobi — remote-friendly.</p>
-      <div class="contact-grid">
-        <div>
-          <div class="contact-info-title">Get in touch</div>
-          <div class="contact-info-sub">I respond within 24 hours.</div>
-          <div class="contact-items">
-            <a href="mailto:josephkamanja433@gmail.com" class="contact-item">
-              <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-              <div><div class="contact-label">Email</div><div class="contact-val">josephkamanja433@gmail.com</div></div>
-            </a>
-            <a href="tel:+254741952216" class="contact-item">
-              <div class="contact-icon"><i class="fas fa-phone"></i></div>
-              <div><div class="contact-label">Phone</div><div class="contact-val">+254 741 952 216</div></div>
-            </a>
-            <div class="contact-item">
-              <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-              <div><div class="contact-label">Location</div><div class="contact-val">Nairobi, Kenya · Remote-friendly</div></div>
-            </div>
-            <a href="https://www.linkedin.com/in/jkamanja" target="_blank" rel="noopener" class="contact-item">
-              <div class="contact-icon"><i class="fab fa-linkedin"></i></div>
-              <div><div class="contact-label">LinkedIn</div><div class="contact-val">linkedin.com/in/jkamanja</div></div>
-            </a>
-            <a href="https://wa.me/254741952216" target="_blank" rel="noopener" class="contact-item">
-              <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
-              <div><div class="contact-label">WhatsApp</div><div class="contact-val">+254 741 952 216</div></div>
-            </a>
-          </div>
-        </div>
-        <div class="contact-form">
-          <div class="form-title">Send a message</div>
-          <!--
-            IMPORTANT: Replace YOUR_FORM_ID below with your actual Formspree endpoint.
-            Sign up free at https://formspree.io — takes 2 minutes.
-            Your endpoint will look like: https://formspree.io/f/abcdefgh
-          -->
-          <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
-            <input type="hidden" name="_subject" value="Portfolio contact from Joseph Kamanja site">
-            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-            <div class="form-group">
-              <input type="text" name="name" placeholder="Your name" required class="form-input" aria-label="Your name" autocomplete="name">
-            </div>
-            <div class="form-group">
-              <input type="email" name="email" placeholder="Your email" required class="form-input" aria-label="Your email" autocomplete="email">
-            </div>
-            <div class="form-group">
-              <input type="text" name="subject" placeholder="Subject (e.g. Internship opportunity)" class="form-input" aria-label="Subject">
-            </div>
-            <div class="form-group">
-              <textarea name="message" placeholder="Tell me about the opportunity or project..." required class="form-textarea" aria-label="Message"></textarea>
-            </div>
-            <button type="submit" class="btn-submit" id="submitBtn">
-              <i class="fas fa-paper-plane"></i> Send Message
-            </button>
-            <div class="form-status" id="formStatus"></div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  </main>
-
-  <!-- ═══════════════════════════════════════════
-       FOOTER
-  ═══════════════════════════════════════════ -->
-  <footer>
-    <div class="footer-inner">
-      <div>
-        <div class="footer-brand">Joseph<span>Kamanja</span> · Systems Lab</div>
-        <div class="footer-tagline">Building real-world systems for African problems · Nairobi, Kenya</div>
-      </div>
-      <div class="footer-links-row">
-        <a href="https://github.com/josmiles" target="_blank" rel="noopener" class="footer-icon-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
-        <a href="https://www.linkedin.com/in/jkamanja" target="_blank" rel="noopener" class="footer-icon-link" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-        <a href="https://wa.me/254741952216" target="_blank" rel="noopener" class="footer-icon-link" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-        <a href="mailto:josephkamanja433@gmail.com" class="footer-icon-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
-      </div>
-      <div class="footer-copy">
-        &copy; 2026 Joseph Kamanja Kiarie<br>
-        <span style="color:var(--text-dim);">All rights reserved</span>
-      </div>
-    </div>
-  </footer>
-
-  <button class="scroll-top" id="scrollTop" aria-label="Back to top">
-    <i class="fas fa-arrow-up"></i>
+<!-- MOBILE DRAWER -->
+<div class="overlay" id="overlay"></div>
+<nav class="drawer" id="drawer" aria-label="Mobile navigation">
+  <ul>
+    <li><a href="#home"><i class="fas fa-home"></i>Home</a></li>
+    <li><a href="#about"><i class="fas fa-user"></i>About</a></li>
+    <li><a href="#systems"><i class="fas fa-cubes"></i>Systems</a></li>
+    <li><a href="#case-studies"><i class="fas fa-file-alt"></i>Case Studies</a></li>
+    <li><a href="#skills"><i class="fas fa-code"></i>Skills</a></li>
+    <li><a href="#certifications"><i class="fas fa-certificate"></i>Certifications</a></li>
+    <li><a href="#contact"><i class="fas fa-envelope"></i>Work With Me</a></li>
+  </ul>
+  <div class="drawer-div"></div>
+  <button class="drawer-theme" id="drawerTheme">
+    <i class="fas fa-sun" id="drawerThemeIco"></i>
+    <span id="drawerThemeLbl">Switch to light mode</span>
   </button>
+</nav>
 
-  <!-- ═══════════════════════════════════════════
-       JAVASCRIPT
-  ═══════════════════════════════════════════ -->
-  <script>
-    // ─── Theme toggle ───────────────────────────
-    const html = document.documentElement;
-    const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
-    const mobileThemeToggle = document.getElementById('mobileThemeToggle');
-    const mobileThemeIcon = document.getElementById('mobileThemeIcon');
-    const mobileThemeLabel = document.getElementById('mobileThemeLabel');
+<main id="main">
 
-    function applyTheme(theme) {
-      html.setAttribute('data-theme', theme);
-      localStorage.setItem('jk-theme', theme);
-      const isDark = theme === 'dark';
-      // desktop icon
-      themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
-      themeToggle.title = isDark ? 'Switch to light mode' : 'Switch to dark mode';
-      // mobile icon + label
-      mobileThemeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
-      mobileThemeLabel.textContent = isDark ? 'Switch to light mode' : 'Switch to dark mode';
-    }
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow">Joseph Kamanja · Nairobi, Kenya</div>
+      <h1 class="hero-h">I build real-world systems that solve <span class="hl">African problems</span></h1>
+      <p class="hero-sub">Full-stack developer shipping production AI systems across healthcare, education, and civic infrastructure — not demos, real users.</p>
+      <div class="trust">
+        <span class="tdot">●</span>
+        <span>4+ systems</span>
+        <span class="tsep">|</span>
+        <span>Real users</span>
+        <span class="tsep">|</span>
+        <span>Production-ready</span>
+        <span class="tsep">|</span>
+        <span>Africa-deployed</span>
+      </div>
+      <div class="hero-btns">
+        <a href="#systems" class="btn btn-gold"><i class="fas fa-cubes"></i>View Systems</a>
+        <a href="#contact" class="btn btn-outline"><i class="fas fa-paper-plane"></i>Work With Me</a>
+      </div>
+    </div>
+    <div>
+      <div class="pcard">
+        <div class="pring">
+          <img src="images/profile.jpg" alt="Joseph Kamanja" class="pimg"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="pfb" style="display:none">JK</div>
+        </div>
+        <div class="pname">Joseph Kamanja</div>
+        <div class="prole">Systems Builder · Full-Stack Developer</div>
+        <div class="sgrid">
+          <div class="sbox"><div class="snum">4+</div><div class="slbl">Systems</div></div>
+          <div class="sbox"><div class="snum">3</div><div class="slbl">Live Platforms</div></div>
+          <div class="sbox"><div class="snum">10/10</div><div class="slbl">GoldenEcho</div></div>
+          <div class="sbox"><div class="snum">95%</div><div class="slbl">CyberShujaa</div></div>
+        </div>
+        <div class="plinks">
+          <a href="https://github.com/josmiles" target="_blank" rel="noopener" class="plink">
+            <i class="fab fa-github"></i><span>github.com/josmiles</span>
+          </a>
+          <a href="https://www.linkedin.com/in/jkamanja" target="_blank" rel="noopener" class="plink">
+            <i class="fab fa-linkedin"></i><span>linkedin.com/in/jkamanja</span>
+          </a>
+          <a href="mailto:josephkamanja433@gmail.com" class="plink">
+            <i class="fas fa-envelope"></i><span>josephkamanja433@gmail.com</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    function toggleTheme() {
-      const current = html.getAttribute('data-theme') || 'dark';
-      applyTheme(current === 'dark' ? 'light' : 'dark');
-    }
+<div class="divider"></div>
 
-    // Load saved or system preference
-    const savedTheme = localStorage.getItem('jk-theme') ||
-      (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-    applyTheme(savedTheme);
+<!-- ABOUT -->
+<section class="section section-alt" id="about">
+  <div class="wrap">
+    <div class="lbl">About Me</div>
+    <h2 class="sec-h">Builder by nature, African by purpose</h2>
+    <p class="sec-sub">Every line of code is pointed at a real problem that real people in Africa face every day.</p>
+    <div class="about-grid">
+      <div>
+        <p class="atext">I'm a recent graduate with training in cybersecurity, data analysis, and full-stack development. I completed an intensive Cyber Security Analyst programme at CyberShujaa achieving <strong>95% performance</strong>, then went further and shipped four production systems.</p>
+        <p class="atext">In recent months I've shipped a full-stack AI nutrition platform, a digital queue management system for Kenya, an AI-powered LMS aligned to the CBC curriculum, and an AI companionship platform — all deployed, production-ready.</p>
+        <p class="atext" style="margin-bottom:1.5rem">Seeking internships, collaborations, and partnerships where systems-thinking meets real impact.</p>
+        <div style="display:flex;gap:0.65rem;flex-wrap:wrap">
+          <a href="https://www.linkedin.com/in/jkamanja" target="_blank" rel="noopener" class="btn btn-outline btn-sm"><i class="fab fa-linkedin"></i>LinkedIn</a>
+          <a href="https://github.com/josmiles" target="_blank" rel="noopener" class="btn btn-outline btn-sm"><i class="fab fa-github"></i>GitHub</a>
+          <a href="cv/Joseph_Kamanja_CV.pdf" download class="btn btn-gold btn-sm"><i class="fas fa-download"></i>Download CV</a>
+        </div>
+      </div>
+      <div class="astats">
+        <div class="sbox" style="padding:1.25rem"><div class="snum">4+</div><div class="slbl">Systems Live</div></div>
+        <div class="sbox" style="padding:1.25rem"><div class="snum">4</div><div class="slbl">Certifications</div></div>
+        <div class="sbox" style="padding:1.25rem"><div class="snum">21+</div><div class="slbl">Training Modules</div></div>
+        <div class="sbox" style="padding:1.25rem"><div class="snum">95%</div><div class="slbl">Top Performance</div></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    themeToggle.addEventListener('click', toggleTheme);
-    mobileThemeToggle.addEventListener('click', () => { toggleTheme(); closeMobileNav(); });
+<div class="divider"></div>
 
-    // ─── Scroll behaviour ────────────────────────
-    const nav = document.getElementById('mainNav');
-    const scrollTopBtn = document.getElementById('scrollTop');
+<!-- SYSTEMS -->
+<section class="section" id="systems">
+  <div class="wrap">
+    <div class="lbl">Systems I've Built</div>
+    <h2 class="sec-h">Production-grade systems. African problems.</h2>
+    <p class="sec-sub">Not demos. Not class projects. Deployed systems with real architecture, real users, and real impact.</p>
+    <div class="sys-grid">
 
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 60);
-      scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
-    }, { passive: true });
+      <div class="scard fu">
+        <div class="scard-top">
+          <div class="scard-hdr"><div class="sname">HealthAI</div><span class="badge live">Live</span></div>
+          <p class="sprob">Affordable AI nutrition coaching for Africans without access to registered dietitians.</p>
+          <ul class="sfeat">
+            <li>AI nutrition chat — Groq Llama 3.3 70B</li>
+            <li>Food photo analysis — Groq Llama 4 Scout Vision</li>
+            <li>Web + Android + admin dashboard</li>
+          </ul>
+        </div>
+        <div class="scard-bot">
+          <div class="tags"><span class="tag">Next.js 14</span><span class="tag">React Native</span><span class="tag">Firebase</span><span class="tag">Groq AI</span><span class="tag">Expo</span><span class="tag">Vercel</span></div>
+          <div class="acts">
+            <a href="https://healthai-nutrition-os.vercel.app" target="_blank" rel="noopener" class="act act-gold"><i class="fas fa-external-link-alt"></i>Live Demo</a>
+            <a href="#cs-healthai" class="act act-out"><i class="fas fa-file-alt"></i>Case Study</a>
+            <a href="https://github.com/josmiles/-healthai-nutrition-os" target="_blank" rel="noopener" class="act act-gh" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+      </div>
 
-    scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+      <div class="scard fu d1">
+        <div class="scard-top">
+          <div class="scard-hdr"><div class="sname">SmartQueue</div><span class="badge live">Live</span></div>
+          <p class="sprob">Ending physical queues in Kenyan hospitals, banks, and government offices.</p>
+          <ul class="sfeat">
+            <li>Real-time queue tracking via WebSocket</li>
+            <li>SMS/WhatsApp alerts — Africa's Talking + Twilio</li>
+            <li>AI wait-time prediction using EMA model</li>
+          </ul>
+        </div>
+        <div class="scard-bot">
+          <div class="tags"><span class="tag">Node.js 20</span><span class="tag">Express</span><span class="tag">PostgreSQL</span><span class="tag">Redis</span><span class="tag">WebSocket</span><span class="tag">Africa's Talking</span></div>
+          <div class="acts">
+            <a href="https://smartqueue-ke.netlify.app" target="_blank" rel="noopener" class="act act-gold"><i class="fas fa-external-link-alt"></i>Live Demo</a>
+            <a href="#cs-smartqueue" class="act act-out"><i class="fas fa-file-alt"></i>Case Study</a>
+            <a href="https://github.com/josmiles/Smartqueue-" target="_blank" rel="noopener" class="act act-gh" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+      </div>
 
-    // ─── Smooth scroll ───────────────────────────
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        const target = document.querySelector(a.getAttribute('href'));
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          closeMobileNav();
-        }
-      });
-    });
+      <div class="scard fu d2">
+        <div class="scard-top">
+          <div class="scard-hdr"><div class="sname">StMartin EDU</div><span class="badge mvp">MVP</span></div>
+          <p class="sprob">Closing the digital learning gap with an AI tutor built around Kenya's CBC curriculum.</p>
+          <ul class="sfeat">
+            <li>Grade-adaptive AI — 6 subjects, 13 grade levels</li>
+            <li>30+ CBC topics, teacher + admin dashboards</li>
+            <li>3 user roles: student, teacher, admin</li>
+          </ul>
+        </div>
+        <div class="scard-bot">
+          <div class="tags"><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">PostgreSQL</span><span class="tag">Groq AI</span><span class="tag">Render</span><span class="tag">Vercel</span></div>
+          <div class="acts">
+            <a href="https://stmartin-edu.vercel.app" target="_blank" rel="noopener" class="act act-gold"><i class="fas fa-external-link-alt"></i>Live Demo</a>
+            <a href="#cs-stmartin" class="act act-out"><i class="fas fa-file-alt"></i>Case Study</a>
+            <a href="https://github.com/josmiles/stmartin-edu" target="_blank" rel="noopener" class="act act-gh" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+      </div>
 
-    // ─── Mobile nav ──────────────────────────────
-    const mobileToggle = document.getElementById('mobileToggle');
-    const mobileNav = document.getElementById('mobileNav');
-    const mobileOverlay = document.getElementById('mobileOverlay');
+      <div class="scard fu d3">
+        <div class="scard-top">
+          <div class="scard-hdr"><div class="sname">GoldenEcho</div><span class="badge live">Live</span></div>
+          <p class="sprob">AI companionship platform preserving elderly life stories through voice conversation.</p>
+          <ul class="sfeat">
+            <li>Ellie — AI companion with Groq Whisper voice input</li>
+            <li>16 web pages + 15 mobile screens</li>
+            <li>6 languages, Stripe payments, PDF memoir export</li>
+          </ul>
+        </div>
+        <div class="scard-bot">
+          <div class="tags"><span class="tag">React Native</span><span class="tag">Express</span><span class="tag">MongoDB</span><span class="tag">Groq Whisper</span><span class="tag">Stripe</span><span class="tag">Cloudinary</span></div>
+          <div class="acts">
+            <a href="https://golden-echo-2-0.vercel.app" target="_blank" rel="noopener" class="act act-gold"><i class="fas fa-external-link-alt"></i>Live Demo</a>
+            <a href="#cs-goldenecho" class="act act-out"><i class="fas fa-file-alt"></i>Case Study</a>
+            <a href="https://github.com/josmiles/GoldenEcho-2.0" target="_blank" rel="noopener" class="act act-gh" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+      </div>
 
-    function closeMobileNav() {
-      mobileToggle.classList.remove('active');
-      mobileNav.classList.remove('active');
-      mobileOverlay.classList.remove('active');
-      mobileToggle.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    }
+    </div>
+  </div>
+</section>
 
-    mobileToggle.addEventListener('click', () => {
-      const isOpen = mobileNav.classList.toggle('active');
-      mobileToggle.classList.toggle('active', isOpen);
-      mobileOverlay.classList.toggle('active', isOpen);
-      mobileToggle.setAttribute('aria-expanded', isOpen.toString());
-      document.body.style.overflow = isOpen ? 'hidden' : '';
-    });
+<div class="divider"></div>
 
-    mobileOverlay.addEventListener('click', closeMobileNav);
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMobileNav(); });
+<!-- CASE STUDIES -->
+<section class="section section-alt" id="case-studies">
+  <div class="wrap">
+    <div class="lbl">Case Studies</div>
+    <h2 class="sec-h">Architecture & Impact</h2>
+    <p class="sec-sub">The thinking behind the building — each system engineered to production standard.</p>
 
-    // ─── Intersection observer animations ────────
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    <!-- HealthAI -->
+    <div class="cs fu" id="cs-healthai">
+      <div class="cs-side">
+        <div class="cs-name">HealthAI</div>
+        <div><div class="cs-score">Live</div><div class="cs-sl">Production Status</div></div>
+        <div class="cs-meta">
+          <div><div class="cml">Platform</div><div class="cmv">Web + Android + Admin</div></div>
+          <div><div class="cml">Region</div><div class="cmv">africa-south1 (Firebase)</div></div>
+          <div><div class="cml">AI Models</div><div class="cmv">Llama 3.3 70B + Llama 4 Scout</div></div>
+          <div><div class="cml">Released</div><div class="cmv">March 2026</div></div>
+        </div>
+        <a href="https://healthai-nutrition-os.vercel.app" target="_blank" rel="noopener" class="act act-gold" style="justify-content:center"><i class="fas fa-external-link-alt"></i>Open Live App</a>
+      </div>
+      <div class="cs-body">
+        <div><div class="cbt">The Problem</div><p class="cbx">Registered dietitians in Kenya are expensive and rare. Most people have no access to personalised nutrition advice, leading to preventable diet-related illness.</p></div>
+        <div><div class="cbt">The Solution</div><p class="cbx">Full-stack nutrition coaching powered by LLMs. Users build a health profile, log food via chat or photo, and get personalised guidance across web, Android, and an admin dashboard.</p></div>
+        <div class="cs-full"><div class="cbt">Architecture</div><p class="cbx">Next.js 14 on Vercel. Firebase Firestore (africa-south1) for food logs, chat history, streaks, and hydration data. Groq Llama 3.3 70B for AI chat; Llama 4 Scout 17B for food photo analysis. React Native + Expo SDK 52 via EAS cloud. Admin dashboard protected by Firebase JWT custom claims.</p></div>
+        <div>
+          <div class="cbt">Impact</div>
+          <ul class="clist">
+            <li><i class="fas fa-check-circle" style="color:var(--ok)"></i>Three live platforms: web, Android, admin</li>
+            <li><i class="fas fa-check-circle" style="color:var(--ok)"></i>Africa-South1 data residency</li>
+            <li><i class="fas fa-check-circle" style="color:var(--ok)"></i>Real-time Firestore sync across platforms</li>
+          </ul>
+        </div>
+        <div>
+          <div class="cbt">Next Milestones</div>
+          <ul class="clist">
+            <li><i class="fas fa-arrow-right" style="color:var(--gold)"></i>Nutritionix food database</li>
+            <li><i class="fas fa-arrow-right" style="color:var(--gold)"></i>Stripe Pro tier + iOS build</li>
+          </ul>
+        </div>
+        <!-- ✅ CHANGE 1: HealthAI image — was a long base64 string, now uses asset file -->
+        <div class="cs-img cs-full">
+          <img src="assets/healthai.png" alt="HealthAI nutrition dashboard">
+        </div>
+      </div>
+    </div>
 
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    <!-- SmartQueue -->
+    <div class="cs fu" id="cs-smartqueue">
+      <div class="cs-side">
+        <div class="cs-name">SmartQueue</div>
+        <div><div class="cs-score">Live</div><div class="cs-sl">Production Status</div></div>
+        <div class="cs-meta">
+          <div><div class="cml">Platform</div><div class="cmv">Web App + REST API</div></div>
+          <div><div class="cml">Target</div><div class="cmv">Kenya & African service centres</div></div>
+          <div><div class="cml">Database</div><div class="cmv">PostgreSQL 15 + Redis 7</div></div>
+          <div><div class="cml">Notifications</div><div class="cmv">Africa's Talking + Twilio</div></div>
+        </div>
+        <a href="https://smartqueue-ke.netlify.app" target="_blank" rel="noopener" class="act act-gold" style="justify-content:center"><i class="fas fa-external-link-alt"></i>Open Live App</a>
+      </div>
+      <div class="cs-body">
+        <div><div class="cbt">The Problem</div><p class="cbx">Physical queues waste hours daily across Kenyan government offices, hospitals, and banks — with no visibility into position or wait time.</p></div>
+        <div><div class="cbt">The Solution</div><p class="cbx">Join queues remotely, get a numbered ticket, track position in real-time via WebSocket, receive SMS/WhatsApp alerts. Browser-first — no app install needed.</p></div>
+        <div class="cs-full"><div class="cbt">Architecture</div><p class="cbx">Node.js 20 + Express on Render. WebSocket server for live queue state. PostgreSQL 15 across 10 core tables. Redis 7 caches queue positions. Africa's Talking + Twilio for notifications. EMA model learns from service times to predict wait dynamically.</p></div>
+        <div>
+          <div class="cbt">Impact</div>
+          <ul class="clist">
+            <li><i class="fas fa-check-circle" style="color:var(--ok)"></i>Live API on Render, UI on Netlify</li>
+            <li><i class="fas fa-check-circle" style="color:var(--ok)"></i>No app install required</li>
+            <li><i class="fas fa-check-circle" style="color:var(--ok)"></i>AI wait-time adapts to real patterns</li>
+          </ul>
+        </div>
+        <div>
+          <div class="cbt">System Scope</div>
+          <ul class="clist">
+            <li><i class="fas fa-arrow-right" style="color:var(--gold)"></i>Analytics: hourly stats + trends</li>
+            <li><i class="fas fa-arrow-right" style="color:var(--gold)"></i>Rate limiting, CORS, JWT auth</li>
+          </ul>
+        </div>
+        <!-- ✅ CHANGE 2: SmartQueue image — was a long base64 string, now uses asset file -->
+        <div class="cs-img cs-full">
+          <img src="assets/smartqueue.png" alt="SmartQueue digital queue management">
+        </div>
+      </div>
+    </div>
 
-    // ─── Contact form (Formspree AJAX) ───────────
-    const contactForm = document.getElementById('contactForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const formStatus = document.getElementById('formStatus');
+    <!-- StMartin -->
+    <div class="cs fu" id="cs-stmartin">
+      <div class="cs-side">
+        <div class="cs-name">StMartin EDU</div>
+        <div><div class="cs-score">8.5/10</div><div class="cs-sl">System Rating</div></div>
+        <div class="cs-meta">
+          <div><div class="cml">Grade Levels</div><div class="cmv">PP1 – Grade 9 (13 levels)</div></div>
+          <div><div class="cml">Subjects</div><div class="cmv">6 CBC-aligned subjects</div></div>
+          <div><div class="cml">User Roles</div><div class="cmv">Student, Teacher, Admin</div></div>
+        </div>
+        <a href="https://stmartin-edu.vercel.app" target="_blank" rel="noopener" class="act act-gold" style="justify-content:center"><i class="fas fa-external-link-alt"></i>Open Live App</a>
+      </div>
+      <div class="cs-body">
+        <div><div class="cbt">The Problem</div><p class="cbx">Kenya's CBC curriculum restructured learning but affordable, curriculum-aligned digital tools remain scarce for most schools.</p></div>
+        <div><div class="cbt">The Solution</div><p class="cbx">A full LMS with an AI tutor that adapts to the student's grade. 30+ CBC topics, 6 subjects, 13 grade levels, and separate dashboards for all three user roles.</p></div>
+        <div class="cs-full"><div class="cbt">Architecture</div><p class="cbx">React on Vercel. Node.js + Express REST API on Render. PostgreSQL with CBC-aligned schema. Groq AI responses calibrated per grade before each API call. Teacher dashboard for topic assignment and progress. Admin panel for full CRUD across users and topics.</p></div>
+        <div>
+          <div class="cbt">Impact</div>
+          <ul class="clist">
+            <li><i class="fas fa-check-circle" style="color:var(--ok)"></i>13 grade levels fully supported</li>
+            <li><i class="fas fa-check-circle" style="color:var(--ok)"></i>AI adapts explanation per grade</li>
+            <li><i class="fas fa-check-circle" style="color:var(--ok)"></i>Rated production-ready 8.5/10</li>
+          </ul>
+        </div>
+        <div>
+          <div class="cbt">Roadmap</div>
+          <ul class="clist">
+            <li><i class="fas fa-arrow-right" style="color:var(--gold)"></i>Security hardening → 10/10</li>
+            <li><i class="fas fa-arrow-right" style="color:var(--gold)"></i>Assessment and quiz module</li>
+          </ul>
+        </div>
+        <!-- ✅ CHANGE 3: StMartin image — was a long base64 string, now uses asset file -->
+        <div class="cs-img cs-full">
+          <img src="assets/stmartin.png" alt="StMartin EDU learning management system">
+        </div>
+      </div>
+    </div>
 
-    if (contactForm) {
-      contactForm.addEventListener('submit', async e => {
-        e.preventDefault();
+    <!-- GoldenEcho -->
+    <div class="cs fu" id="cs-goldenecho">
+      <div class="cs-side">
+        <div class="cs-name">GoldenEcho</div>
+        <div><div class="cs-score">10/10</div><div class="cs-sl">Built in 1 Day</div></div>
+        <div class="cs-meta">
+          <div><div class="cml">Scale</div><div class="cmv">16 web + 15 mobile screens</div></div>
+          <div><div class="cml">Languages</div><div class="cmv">6 languages</div></div>
+          <div><div class="cml">Integrations</div><div class="cmv">7 API integrations</div></div>
+        </div>
+        <a href="https://golden-echo-2-0.vercel.app" target="_blank" rel="noopener" class="act act-gold" style="justify-content:center"><i class="fas fa-external-link-alt"></i>Open Live App</a>
+      </div>
+      <div class="cs-body">
+        <div><div class="cbt">The Problem</div><p class="cbx">Elderly people carry irreplaceable life stories that disappear with them. Loneliness among the elderly is a global crisis. Existing tech is too complex and ignores voice interaction.</p></div>
+        <div><div class="cbt">The Solution</div><p class="cbx">"Ellie" — an AI companion for recording stories via voice or text, community feeds, memory timelines, and PDF memoir exports. Web and Android with full feature parity.</p></div>
+        <div class="cs-full"><div class="cbt">Architecture</div><p class="cbx">React on Vercel (16 pages). Express on Render (12 routes). MongoDB for story + user data. Groq Whisper voice-to-text. Groq LLM for Ellie's AI. Cloudinary for photos. Stripe Pro subscriptions. Resend transactional email. 6-language localisation. 7-layer backend security. Android via Expo EAS. Built and deployed in one day — 10/10.</p></div>
+        <div>
+          <div class="cbt">Impact</div>
+          <ul class="clist">
+            <li><i class="fas fa-check-circle" style="color:var(--ok)"></i>Perfect 10/10 score</li>
+            <li><i class="fas fa-check-circle" style="color:var(--ok)"></i>Web + Android simultaneously</li>
+            <li><i class="fas fa-check-circle" style="color:var(--ok)"></i>Voice, multilingual, payments all live</li>
+          </ul>
+        </div>
+        <div>
+          <div class="cbt">Key Features</div>
+          <ul class="clist">
+            <li><i class="fas fa-arrow-right" style="color:var(--gold)"></i>Memory Timeline + "On This Day"</li>
+            <li><i class="fas fa-arrow-right" style="color:var(--gold)"></i>PDF memoir export</li>
+            <li><i class="fas fa-arrow-right" style="color:var(--gold)"></i>Community feed with reactions</li>
+          </ul>
+        </div>
+        <!-- ✅ CHANGE 4: GoldenEcho — was a placeholder div, now uses asset file -->
+        <div class="cs-img cs-full">
+          <img src="assets/goldenecho.png" alt="GoldenEcho AI companion platform">
+        </div>
+      </div>
+    </div>
 
-        // Client-side validation
-        const name = contactForm.querySelector('[name="name"]').value.trim();
-        const email = contactForm.querySelector('[name="email"]').value.trim();
-        const message = contactForm.querySelector('[name="message"]').value.trim();
+    <!-- TESTIMONIALS -->
+    <div class="lbl" style="margin-top:3rem">What people say</div>
+    <div class="tgrid">
+      <div class="tcard fu"><p class="ttext">"GoldenEcho is one of the most complete submissions I've reviewed — 16 web pages, 15 mobile screens, voice input, payments, multilingual, all shipped in a single day. The architecture was sound and the execution exceptional."</p><div class="tauth"><div class="tav">R</div><div><div class="tname">Reviewer</div><div class="trole">GoldenEcho Assessment · 10/10</div></div></div></div>
+      <div class="tcard fu d1"><p class="ttext">"StMartin EDU demonstrates strong full-stack architecture and clear understanding of CBC requirements. The grade-adaptive AI prompting is a particularly thoughtful detail."</p><div class="tauth"><div class="tav">R</div><div><div class="tname">Reviewer</div><div class="trole">StMartin EDU Assessment · 8.5/10</div></div></div></div>
+      <div class="tcard fu d2"><p class="ttext">"Achieved 95% in our intensive Cyber Security Analyst programme — consistently demonstrated strong analytical thinking and the ability to translate security theory into practice."</p><div class="tauth"><div class="tav">CS</div><div><div class="tname">CyberShujaa</div><div class="trole">Cyber Security Analyst · 2025</div></div></div></div>
+    </div>
 
-        if (!name || !email || !message) {
-          formStatus.className = 'form-status error';
-          formStatus.textContent = 'Please fill in all required fields.';
-          return;
-        }
+  </div>
+</section>
 
-        const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRe.test(email)) {
-          formStatus.className = 'form-status error';
-          formStatus.textContent = 'Please enter a valid email address.';
-          return;
-        }
+<div class="divider"></div>
 
-        // Check if Formspree ID has been set
-        const action = contactForm.getAttribute('action');
-        if (action.includes('YOUR_FORM_ID')) {
-          // Fallback: open mailto if Formspree not yet configured
-          const subject = encodeURIComponent('Portfolio contact');
-          const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
-          window.location.href = `mailto:josephkamanja433@gmail.com?subject=${subject}&body=${body}`;
-          return;
-        }
+<!-- LAB -->
+<section class="section" id="lab">
+  <div class="wrap">
+    <div class="lbl">Systems Lab</div>
+    <h2 class="sec-h">Why I build systems</h2>
+    <div class="lab-grid">
+      <div>
+        <p class="lab-m">Africa is not waiting for solutions to be imported. The continent's problems are <strong>local</strong>, its context is <strong>unique</strong>, and its builders need to rise to meet them.</p>
+        <div class="focii">
+          <div class="focus"><div class="ficon"><i class="fas fa-heartbeat"></i></div><div><div class="ftitle">Healthcare Access</div><div class="fdesc">AI tools bringing expert health guidance to people who can't afford specialists.</div></div></div>
+          <div class="focus"><div class="ficon"><i class="fas fa-graduation-cap"></i></div><div><div class="ftitle">Education Infrastructure</div><div class="fdesc">Curriculum-aligned learning systems built specifically for Kenyan students.</div></div></div>
+          <div class="focus"><div class="ficon"><i class="fas fa-bolt"></i></div><div><div class="ftitle">Civic Efficiency</div><div class="fdesc">Eliminating wasted time at service centres and bureaucratic touchpoints.</div></div></div>
+          <div class="focus"><div class="ficon"><i class="fas fa-leaf"></i></div><div><div class="ftitle">Climate & Environment</div><div class="fdesc">Tools for communities under climate pressure.</div></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="bcard">
+          <div class="btitle"><span class="ldot"></span>Currently Building</div>
+          <div class="bitem"><div class="bname">HealthAI v2</div><div class="bdesc">Nutritionix food database, Stripe Pro tier, iOS build, push notifications.</div></div>
+          <div class="bitem"><div class="bname">StMartin EDU v2</div><div class="bdesc">Security hardening, assessment module, quiz features → 10/10 rating.</div></div>
+          <div class="opento">
+            <div class="ot-t">Open To</div>
+            <div class="ot-x">Internships · Collaborations · Partnerships<br><span style="color:var(--gold);font-weight:600">Nairobi-based or remote</span></div>
+          </div>
+          <div style="margin-top:1rem">
+            <a href="https://github.com/josmiles" target="_blank" rel="noopener" class="btn btn-outline btn-sm" style="width:100%;justify-content:center"><i class="fab fa-github"></i>View All Repos</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        // Submit via Formspree
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-        formStatus.className = 'form-status';
+<div class="divider"></div>
 
-        try {
-          const data = new FormData(contactForm);
-          const res = await fetch(action, {
-            method: 'POST',
-            body: data,
-            headers: { Accept: 'application/json' }
-          });
+<!-- SKILLS -->
+<section class="section section-alt" id="skills">
+  <div class="wrap">
+    <div class="lbl">Technical Skills</div>
+    <h2 class="sec-h">The toolkit</h2>
+    <p class="sec-sub">Skills acquired through real production systems — not just tutorials.</p>
+    <div class="sk-grid">
+      <div class="sk-card fu"><div class="sk-h"><i class="fas fa-layer-group"></i>Frontend</div><ul class="sk-ul"><li>React / Next.js 14</li><li>React Native + Expo SDK 52</li><li>TypeScript</li><li>Tailwind CSS</li><li>HTML / CSS / JavaScript</li></ul></div>
+      <div class="sk-card fu d1"><div class="sk-h"><i class="fas fa-server"></i>Backend</div><ul class="sk-ul"><li>Node.js 20 + Express.js</li><li>REST API design</li><li>WebSocket (ws)</li><li>Firebase Admin SDK</li><li>JWT authentication</li></ul></div>
+      <div class="sk-card fu d2"><div class="sk-h"><i class="fas fa-database"></i>Data & Storage</div><ul class="sk-ul"><li>PostgreSQL 15</li><li>Firebase Firestore</li><li>MongoDB</li><li>Redis 7</li><li>Cloudinary</li></ul></div>
+      <div class="sk-card fu d3"><div class="sk-h"><i class="fas fa-brain"></i>AI & Integrations</div><ul class="sk-ul"><li>Groq (Llama 3.3 70B, Llama 4)</li><li>Groq Whisper (voice-to-text)</li><li>Africa's Talking (SMS/WhatsApp)</li><li>Stripe Payments</li><li>Resend (email)</li></ul></div>
+      <div class="sk-card fu"><div class="sk-h"><i class="fas fa-cloud"></i>Deployment</div><ul class="sk-ul"><li>Vercel (CI/CD)</li><li>Render (backend)</li><li>Netlify</li><li>Expo EAS (Android)</li><li>Firebase Hosting</li></ul></div>
+      <div class="sk-card fu d1"><div class="sk-h"><i class="fas fa-shield-alt"></i>Security</div><ul class="sk-ul"><li>Penetration testing</li><li>Metasploit / Burp Suite</li><li>Network security & Wireshark</li><li>Threat detection + IR</li><li>Linux (Nmap, Ffuf)</li></ul></div>
+    </div>
+  </div>
+</section>
 
-          if (res.ok) {
-            formStatus.className = 'form-status success';
-            formStatus.innerHTML = '<i class="fas fa-check-circle"></i> Message sent! I\'ll respond within 24 hours.';
-            contactForm.reset();
-          } else {
-            throw new Error('Server error');
-          }
-        } catch {
-          formStatus.className = 'form-status error';
-          formStatus.innerHTML = 'Something went wrong. <a href="mailto:josephkamanja433@gmail.com" style="color:inherit;text-decoration:underline;">Email me directly</a> instead.';
-        } finally {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
-        }
-      });
-    }
-  </script>
+<div class="divider"></div>
+
+<!-- CERTIFICATIONS -->
+<section class="section" id="certifications">
+  <div class="wrap">
+    <div class="lbl">Certifications</div>
+    <h2 class="sec-h">Formal credentials</h2>
+    <div class="cert-grid">
+      <div class="cert fu"><div class="cert-img"><img src="https://www.michaelpage.com.cn/sites/michaelpage.com.cn/files/legacy/cybersecurity_analyst.jpeg" alt="Cyber Security Analyst" loading="lazy"></div><div class="cert-body"><div class="cert-n">Cyber Security Analyst</div><div class="cert-org"><i class="fas fa-shield-alt"></i> Cyber Shujaa</div><div class="cert-yr">2025 · 95% Achievement</div></div></div>
+      <div class="cert fu d1"><div class="cert-img"><img src="https://savanna.alxafrica.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBekhzTEE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--d0f1a992ee5c3e20e9c10e0ddb3ea402e67841dd/107-ent-110-introduction-to-venture-creation-certificate-joseph-kamanja.png" alt="Pathway Foundations" loading="lazy"></div><div class="cert-body"><div class="cert-n">Pathway Foundations</div><div class="cert-org"><i class="fas fa-building"></i> ALX Africa</div><div class="cert-yr">2025</div></div></div>
+      <div class="cert fu d2"><div class="cert-img"><img src="https://savanna.alxafrica.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBM0Z5TWc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--c4e212eb1e1c207416ea2c95b48d83001f5edda7/140-alx-aice-ai-career-essentials-2-0-certificate-joseph-kamanja.png" alt="AI Career Essentials" loading="lazy"></div><div class="cert-body"><div class="cert-n">AI Career Essentials</div><div class="cert-org"><i class="fas fa-building"></i> ALX Africa</div><div class="cert-yr">2025</div></div></div>
+      <div class="cert fu d3"><div class="cert-img"><img src="https://savanna.alxafrica.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNU1sTXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--c56e542d1312245235ee7b43b963f3585d4326a4/72-virtual-assistant-certificate-joseph-kamanja.png" alt="Virtual Assistant" loading="lazy"></div><div class="cert-body"><div class="cert-n">Virtual Assistant Skills</div><div class="cert-org"><i class="fas fa-building"></i> ALX Africa</div><div class="cert-yr">2025</div></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section class="section section-alt" id="contact">
+  <div class="wrap">
+    <div class="lbl">Contact</div>
+    <h2 class="sec-h">Let's build something</h2>
+    <p class="sec-sub">Open to internships, collaborations, and partnerships. Based in Nairobi — remote-friendly.</p>
+    <div class="con-grid">
+      <div>
+        <div class="con-h">Get in touch</div>
+        <div class="con-sub">I respond within 24 hours.</div>
+        <div class="con-list">
+          <a href="mailto:josephkamanja433@gmail.com" class="con-item"><div class="cicon"><i class="fas fa-envelope"></i></div><div><div class="clbl">Email</div><div class="cval">josephkamanja433@gmail.com</div></div></a>
+          <a href="tel:+254741952216" class="con-item"><div class="cicon"><i class="fas fa-phone"></i></div><div><div class="clbl">Phone</div><div class="cval">+254 741 952 216</div></div></a>
+          <div class="con-item"><div class="cicon"><i class="fas fa-map-marker-alt"></i></div><div><div class="clbl">Location</div><div class="cval">Nairobi, Kenya · Remote-friendly</div></div></div>
+          <a href="https://www.linkedin.com/in/jkamanja" target="_blank" rel="noopener" class="con-item"><div class="cicon"><i class="fab fa-linkedin"></i></div><div><div class="clbl">LinkedIn</div><div class="cval">linkedin.com/in/jkamanja</div></div></a>
+          <a href="https://wa.me/254741952216" target="_blank" rel="noopener" class="con-item"><div class="cicon"><i class="fab fa-whatsapp"></i></div><div><div class="clbl">WhatsApp</div><div class="cval">+254 741 952 216</div></div></a>
+        </div>
+      </div>
+      <div class="cform">
+        <div class="cform-h">Send a message</div>
+        <form id="cf" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+          <input type="hidden" name="_subject" value="Portfolio contact — Joseph Kamanja">
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+          <div class="fg"><input type="text" name="name" placeholder="Your name" required class="fi" autocomplete="name"></div>
+          <div class="fg"><input type="email" name="email" placeholder="Your email" required class="fi" autocomplete="email"></div>
+          <div class="fg"><input type="text" name="subject" placeholder="Subject" class="fi"></div>
+          <div class="fg"><textarea name="message" placeholder="Tell me about the opportunity..." required class="fta"></textarea></div>
+          <button type="submit" class="btn-sub" id="sb"><i class="fas fa-paper-plane"></i>Send Message</button>
+          <div class="fst" id="fs"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="foot">
+    <div>
+      <div class="fbrand">Joseph<span>Kamanja</span> · Systems Lab</div>
+      <div class="ftagline">Building real-world systems for African problems · Nairobi, Kenya</div>
+    </div>
+    <div class="flinks">
+      <a href="https://github.com/josmiles" target="_blank" rel="noopener" class="flink" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/jkamanja" target="_blank" rel="noopener" class="flink" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="https://wa.me/254741952216" target="_blank" rel="noopener" class="flink" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <a href="mailto:josephkamanja433@gmail.com" class="flink" aria-label="Email"><i class="fas fa-envelope"></i></a>
+    </div>
+    <div class="fcopy">&copy; 2026 Joseph Kamanja Kiarie<br><span style="color:var(--dim)">All rights reserved</span></div>
+  </div>
+</footer>
+
+<button class="stbtn" id="stbtn" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+<script>
+// Theme
+const H=document.documentElement,tBtn=document.getElementById('themeBtn'),tIco=document.getElementById('themeIco'),dBtn=document.getElementById('drawerTheme'),dIco=document.getElementById('drawerThemeIco'),dLbl=document.getElementById('drawerThemeLbl');
+function setTheme(t){H.setAttribute('data-theme',t);localStorage.setItem('jk-t',t);const d=t==='dark';tIco.className=d?'fas fa-sun':'fas fa-moon';tBtn.title=d?'Light mode':'Dark mode';dIco.className=d?'fas fa-sun':'fas fa-moon';dLbl.textContent=d?'Switch to light mode':'Switch to dark mode';}
+function toggleTheme(){setTheme(H.getAttribute('data-theme')==='dark'?'light':'dark');}
+setTheme(localStorage.getItem('jk-t')||(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark'));
+tBtn.addEventListener('click',toggleTheme);
+dBtn.addEventListener('click',()=>{toggleTheme();closeDrawer();});
+
+// Scroll
+const nav=document.getElementById('nav'),stbtn=document.getElementById('stbtn');
+window.addEventListener('scroll',()=>{nav.classList.toggle('stuck',scrollY>50);stbtn.classList.toggle('vis',scrollY>400);},{passive:true});
+stbtn.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});closeDrawer();}}));
+
+// Drawer
+const burger=document.getElementById('burger'),drawer=document.getElementById('drawer'),overlay=document.getElementById('overlay');
+function closeDrawer(){burger.classList.remove('on');drawer.classList.remove('open');overlay.classList.remove('open');burger.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+burger.addEventListener('click',()=>{const o=drawer.classList.toggle('open');burger.classList.toggle('on',o);overlay.classList.toggle('open',o);burger.setAttribute('aria-expanded',String(o));document.body.style.overflow=o?'hidden':'';});
+overlay.addEventListener('click',closeDrawer);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer();});
+
+// Intersection observer
+const obs=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);}});},{threshold:0.07,rootMargin:'0px 0px -20px 0px'});
+document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
+
+// Contact form
+const cf=document.getElementById('cf'),sb=document.getElementById('sb'),fs=document.getElementById('fs');
+cf&&cf.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const n=cf.querySelector('[name="name"]').value.trim(),em=cf.querySelector('[name="email"]').value.trim(),msg=cf.querySelector('[name="message"]').value.trim();
+  if(!n||!em||!msg){fs.className='fst err';fs.textContent='Please fill in all required fields.';return;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){fs.className='fst err';fs.textContent='Please enter a valid email address.';return;}
+  const act=cf.getAttribute('action');
+  if(act.includes('YOUR_FORM_ID')){location.href=`mailto:josephkamanja433@gmail.com?subject=${encodeURIComponent('Portfolio contact')}&body=${encodeURIComponent('Name: '+n+'\nEmail: '+em+'\n\n'+msg)}`;return;}
+  sb.disabled=true;sb.innerHTML='<i class="fas fa-spinner fa-spin"></i> Sending...';fs.className='fst';
+  try{const r=await fetch(act,{method:'POST',body:new FormData(cf),headers:{Accept:'application/json'}});if(r.ok){fs.className='fst ok';fs.innerHTML='<i class="fas fa-check-circle"></i> Sent! I\'ll respond within 24 hours.';cf.reset();}else throw 0;}
+  catch{fs.className='fst err';fs.innerHTML='Something went wrong. <a href="mailto:josephkamanja433@gmail.com" style="color:inherit;text-decoration:underline">Email me directly</a>';}
+  finally{sb.disabled=false;sb.innerHTML='<i class="fas fa-paper-plane"></i> Send Message';}
+});
+</script>
 </body>
 </html>
