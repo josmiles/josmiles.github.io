@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Joseph Kamanja | Systems Builder · Nairobi, Kenya</title>
-<meta name="description" content="Full-stack developer building production AI systems for African markets. HealthAI, SmartQueue, GoldenEcho, StMartin EDU.">
+<meta name="description" content="Full-stack developer building production AI systems for African markets. HealthAI, SmartQueue, GoldenEcho, StMartin EDU, Pasture AI.">
 <meta property="og:title" content="Joseph Kamanja — Systems Builder">
 <meta property="og:description" content="I build real-world systems that solve African problems.">
 <meta property="og:type" content="website">
@@ -25,7 +25,6 @@
   --d1: #0b0f1a; --d2: #111827; --d3: #1e293b; --d4: #263045;
   --l1: #f8fafc; --l2: #ffffff; --l3: #f1f5f9;
   --ok: #10b981; --warn: #f59e0b;
-  /* theme vars */
   --bg: #0b0f1a; --bg2: #111827; --bg3: #1e293b;
   --txt: #e2e8f0; --mut: #94a3b8; --dim: #64748b;
   --card: rgba(17,24,39,0.9);
@@ -59,7 +58,7 @@ img { display: block; max-width: 100%; height: auto; }
 button { font-family: var(--fb); cursor: pointer; }
 
 /* =============================================
-   NAVIGATION  — fixed, always legible
+   NAVIGATION
 ============================================= */
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
@@ -82,7 +81,6 @@ button { font-family: var(--fb); cursor: pointer; }
   display: flex; align-items: center; justify-content: space-between;
   gap: 0.5rem;
 }
-/* Logo */
 .logo {
   font-family: var(--fd); font-weight: 800;
   font-size: clamp(0.9rem, 2.5vw, 1.05rem);
@@ -98,7 +96,6 @@ button { font-family: var(--fb); cursor: pointer; }
   border-radius: 3px; margin-left: 0.15rem;
   white-space: nowrap;
 }
-/* Desktop links — hidden on small screens */
 .nav-links {
   display: flex; list-style: none; gap: 0.1rem; align-items: center;
 }
@@ -114,7 +111,6 @@ button { font-family: var(--fb); cursor: pointer; }
   border-radius: 7px !important; font-weight: 700 !important;
 }
 .nav-cta:hover { background: #d4b472 !important; }
-/* Right side of nav — theme + burger always visible */
 .nav-right { display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0; }
 .theme-btn {
   width: 36px; height: 36px; border-radius: 8px;
@@ -124,7 +120,6 @@ button { font-family: var(--fb); cursor: pointer; }
   transition: all 0.2s; flex-shrink: 0;
 }
 .theme-btn:hover { background: var(--gold); color: var(--d1); border-color: var(--gold); }
-/* Burger — visible only on mobile */
 .burger {
   display: none;
   flex-direction: column; gap: 5px;
@@ -140,7 +135,7 @@ button { font-family: var(--fb); cursor: pointer; }
    MOBILE DRAWER
 ============================================= */
 .drawer {
-  display: none; /* JS shows/hides */
+  display: none;
   position: fixed; top: 60px; right: 0; bottom: 0;
   width: min(280px, 88vw);
   background: var(--bg2); border-left: 1px solid var(--bdr);
@@ -196,7 +191,6 @@ button { font-family: var(--fb); cursor: pointer; }
 .btn-outline:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
 .btn-sm { padding: 0.55rem 1rem; font-size: 0.8rem; }
 
-/* action buttons in system cards */
 .act {
   display: inline-flex; align-items: center; gap: 0.35rem;
   padding: 0.38rem 0.75rem; border-radius: 6px;
@@ -246,7 +240,6 @@ button { font-family: var(--fb); cursor: pointer; }
   display: flex; align-items: center;
   position: relative; overflow: hidden;
 }
-/* grid bg */
 .hero::before {
   content: ''; position: absolute; inset: 0; pointer-events: none;
   background-image:
@@ -254,7 +247,6 @@ button { font-family: var(--fb); cursor: pointer; }
     linear-gradient(90deg, rgba(201,169,97,0.03) 1px, transparent 1px);
   background-size: 52px 52px;
 }
-/* glow orbs */
 .orb {
   position: absolute; border-radius: 50%;
   filter: blur(70px); pointer-events: none;
@@ -312,7 +304,6 @@ button { font-family: var(--fb); cursor: pointer; }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
 .hero-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; }
 
-/* PROFILE CARD */
 .pcard {
   background: var(--card); border: 1px solid var(--bdr);
   border-radius: 18px; padding: 1.75rem;
@@ -465,8 +456,6 @@ button { font-family: var(--fb); cursor: pointer; }
 .clist { list-style: none; display: flex; flex-direction: column; gap: 0.42rem; }
 .clist li { display: flex; align-items: flex-start; gap: 0.42rem; font-size: 0.82rem; color: var(--mut); }
 .clist li i { margin-top: 2px; flex-shrink: 0; }
-
-/* Screenshot */
 .cs-img {
   grid-column: 1 / -1;
   width: 100%;
@@ -657,53 +646,38 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: 2rem
 .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.3s; }
 
 /* =============================================
-   RESPONSIVE — MOBILE BREAKPOINTS
+   RESPONSIVE
 ============================================= */
-
-/* Hide desktop nav links, show burger on mobile */
 @media (max-width: 860px) {
   .nav-links { display: none; }
   .burger { display: flex; }
-  .drawer { display: block; } /* block so JS can toggle, starts off-screen */
+  .drawer { display: block; }
 }
-
-/* Stack hero, about, lab, contact at tablet */
 @media (max-width: 700px) {
   .hero { padding: calc(60px + 1.75rem) 1rem 2.5rem; }
-  .hero-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
+  .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
   .hero-h { font-size: clamp(1.9rem, 7vw, 2.6rem); }
   .trust { font-size: 0.68rem; }
-
   .about-grid { grid-template-columns: 1fr; gap: 1.75rem; }
-
   .cs { grid-template-columns: 1fr; }
   .cs-side { border-right: none; border-bottom: 1px solid var(--bdr); padding: 1.35rem; }
   .cs-body { grid-template-columns: 1fr; padding: 1.35rem; gap: 1.1rem; }
   .cs-full { grid-column: auto; }
-
   .lab-grid { grid-template-columns: 1fr; gap: 2rem; }
   .bcard { position: static; }
-
   .con-grid { grid-template-columns: 1fr; gap: 1.75rem; }
-
   .foot { flex-direction: column; text-align: center; align-items: center; }
   .fcopy { text-align: center; }
 }
-
-/* Tight mobile — make 2-col grids single col where needed */
 @media (max-width: 480px) {
   .section { padding: 3.5rem 1rem; }
-  .sgrid { grid-template-columns: 1fr 1fr; } /* keep 2 col for stats */
+  .sgrid { grid-template-columns: 1fr 1fr; }
   .astats { grid-template-columns: 1fr 1fr; }
   .hero-btns { gap: 0.6rem; }
   .hero-btns .btn { padding: 0.68rem 1.1rem; font-size: 0.83rem; }
   .sys-grid { grid-template-columns: 1fr; }
   .tgrid { grid-template-columns: 1fr; }
 }
-
 @media (max-width: 360px) {
   .sk-grid { grid-template-columns: 1fr; }
   .cert-grid { grid-template-columns: 1fr; }
@@ -769,10 +743,10 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: 2rem
     <div>
       <div class="eyebrow">Joseph Kamanja · Nairobi, Kenya</div>
       <h1 class="hero-h">I build real-world systems that solve <span class="hl">African problems</span></h1>
-      <p class="hero-sub">Full-stack developer shipping production AI systems across healthcare, education, and civic infrastructure — not demos, real users.</p>
+      <p class="hero-sub">Full-stack developer shipping production AI systems across healthcare, education, civic infrastructure, and climate — not demos, real users.</p>
       <div class="trust">
         <span class="tdot">●</span>
-        <span>4+ systems</span>
+        <span>5+ systems</span>
         <span class="tsep">|</span>
         <span>Real users</span>
         <span class="tsep">|</span>
@@ -795,8 +769,8 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: 2rem
         <div class="pname">Joseph Kamanja</div>
         <div class="prole">Systems Builder · Full-Stack Developer</div>
         <div class="sgrid">
-          <div class="sbox"><div class="snum">4+</div><div class="slbl">Systems</div></div>
-          <div class="sbox"><div class="snum">3</div><div class="slbl">Live Platforms</div></div>
+          <div class="sbox"><div class="snum">5+</div><div class="slbl">Systems</div></div>
+          <div class="sbox"><div class="snum">4</div><div class="slbl">Live Platforms</div></div>
           <div class="sbox"><div class="snum">10/10</div><div class="slbl">GoldenEcho</div></div>
           <div class="sbox"><div class="snum">95%</div><div class="slbl">CyberShujaa</div></div>
         </div>
@@ -826,8 +800,8 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: 2rem
     <p class="sec-sub">Every line of code is pointed at a real problem that real people in Africa face every day.</p>
     <div class="about-grid">
       <div>
-        <p class="atext">I'm a recent graduate with training in cybersecurity, data analysis, and full-stack development. I completed an intensive Cyber Security Analyst programme at CyberShujaa achieving <strong>95% performance</strong>, then went further and shipped four production systems.</p>
-        <p class="atext">In recent months I've shipped a full-stack AI nutrition platform, a digital queue management system for Kenya, an AI-powered LMS aligned to the CBC curriculum, and an AI companionship platform — all deployed, production-ready.</p>
+        <p class="atext">I'm a recent graduate with training in cybersecurity, data analysis, and full-stack development. I completed an intensive Cyber Security Analyst programme at CyberShujaa achieving <strong>95% performance</strong>, then went further and shipped five production systems.</p>
+        <p class="atext">In recent months I've shipped a full-stack AI nutrition platform, a digital queue management system for Kenya, an AI-powered LMS aligned to the CBC curriculum, an AI companionship platform, and a satellite-powered grazing intelligence tool for Kenyan pastoralists — all deployed, production-ready.</p>
         <p class="atext" style="margin-bottom:1.5rem">Seeking internships, collaborations, and partnerships where systems-thinking meets real impact.</p>
         <div style="display:flex;gap:0.65rem;flex-wrap:wrap">
           <a href="https://www.linkedin.com/in/jkamanja" target="_blank" rel="noopener" class="btn btn-outline btn-sm"><i class="fab fa-linkedin"></i>LinkedIn</a>
@@ -836,7 +810,7 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: 2rem
         </div>
       </div>
       <div class="astats">
-        <div class="sbox" style="padding:1.25rem"><div class="snum">4+</div><div class="slbl">Systems Live</div></div>
+        <div class="sbox" style="padding:1.25rem"><div class="snum">5+</div><div class="slbl">Systems Live</div></div>
         <div class="sbox" style="padding:1.25rem"><div class="snum">4</div><div class="slbl">Certifications</div></div>
         <div class="sbox" style="padding:1.25rem"><div class="snum">21+</div><div class="slbl">Training Modules</div></div>
         <div class="sbox" style="padding:1.25rem"><div class="snum">95%</div><div class="slbl">Top Performance</div></div>
@@ -935,6 +909,27 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: 2rem
         </div>
       </div>
 
+      <!-- PASTURE AI — NEW -->
+      <div class="scard fu">
+        <div class="scard-top">
+          <div class="scard-hdr"><div class="sname">Pasture AI</div><span class="badge live">Live</span></div>
+          <p class="sprob">Satellite-powered grazing intelligence for Kenyan pastoralists — real-time NDVI data from Sentinel-2 to guide livestock movement.</p>
+          <ul class="sfeat">
+            <li>Live NDVI via Google Earth Engine</li>
+            <li>6 arid counties — Marsabit, Isiolo, Turkana, Wajir, Garissa</li>
+            <li>Interactive map with colour-coded grazing zones</li>
+          </ul>
+        </div>
+        <div class="scard-bot">
+          <div class="tags"><span class="tag">FastAPI</span><span class="tag">Python 3.14</span><span class="tag">React</span><span class="tag">Vite</span><span class="tag">Leaflet</span><span class="tag">Google Earth Engine</span><span class="tag">Render</span><span class="tag">Vercel</span></div>
+          <div class="acts">
+            <a href="https://pasture-ai-one.vercel.app" target="_blank" rel="noopener" class="act act-gold"><i class="fas fa-external-link-alt"></i>Live Demo</a>
+            <a href="#cs-pastureai" class="act act-out"><i class="fas fa-file-alt"></i>Case Study</a>
+            <a href="https://github.com/josmiles/pasture-ai" target="_blank" rel="noopener" class="act act-gh" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -980,7 +975,6 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: 2rem
             <li><i class="fas fa-arrow-right" style="color:var(--gold)"></i>Stripe Pro tier + iOS build</li>
           </ul>
         </div>
-        <!-- ✅ CHANGE 1: HealthAI image — was a long base64 string, now uses asset file -->
         <div class="cs-img cs-full">
           <img src="assets/healthai.png" alt="HealthAI nutrition dashboard">
         </div>
@@ -1019,7 +1013,6 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: 2rem
             <li><i class="fas fa-arrow-right" style="color:var(--gold)"></i>Rate limiting, CORS, JWT auth</li>
           </ul>
         </div>
-        <!-- ✅ CHANGE 2: SmartQueue image — was a long base64 string, now uses asset file -->
         <div class="cs-img cs-full">
           <img src="assets/smartqueue.png" alt="SmartQueue digital queue management">
         </div>
@@ -1057,7 +1050,6 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: 2rem
             <li><i class="fas fa-arrow-right" style="color:var(--gold)"></i>Assessment and quiz module</li>
           </ul>
         </div>
-        <!-- ✅ CHANGE 3: StMartin image — was a long base64 string, now uses asset file -->
         <div class="cs-img cs-full">
           <img src="assets/stmartin.png" alt="StMartin EDU learning management system">
         </div>
@@ -1096,9 +1088,48 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: 2rem
             <li><i class="fas fa-arrow-right" style="color:var(--gold)"></i>Community feed with reactions</li>
           </ul>
         </div>
-        <!-- ✅ CHANGE 4: GoldenEcho — was a placeholder div, now uses asset file -->
         <div class="cs-img cs-full">
           <img src="assets/goldenecho.png" alt="GoldenEcho AI companion platform">
+        </div>
+      </div>
+    </div>
+
+    <!-- PASTURE AI — NEW -->
+    <div class="cs fu" id="cs-pastureai">
+      <div class="cs-side">
+        <div class="cs-name">Pasture AI</div>
+        <div><div class="cs-score">Live</div><div class="cs-sl">Production Status</div></div>
+        <div class="cs-meta">
+          <div><div class="cml">Platform</div><div class="cmv">Web + Mobile Responsive</div></div>
+          <div><div class="cml">Coverage</div><div class="cmv">6 Kenyan arid counties</div></div>
+          <div><div class="cml">Satellite Data</div><div class="cmv">Sentinel-2 via Google Earth Engine</div></div>
+          <div><div class="cml">Released</div><div class="cmv">April 2026</div></div>
+        </div>
+        <a href="https://pasture-ai-one.vercel.app" target="_blank" rel="noopener" class="act act-gold" style="justify-content:center"><i class="fas fa-external-link-alt"></i>Open Live App</a>
+      </div>
+      <div class="cs-body">
+        <div><div class="cbt">The Problem</div><p class="cbx">Pastoralists in Kenya's arid counties — Marsabit, Isiolo, Turkana, Wajir, and Garissa — lose entire herds due to poor grazing decisions. There are no affordable, real-time tools showing where pasture conditions are healthy versus stressed.</p></div>
+        <div><div class="cbt">The Solution</div><p class="cbx">A web platform fetching Sentinel-2 satellite NDVI data via Google Earth Engine and displaying grazing zones on an interactive map — colour-coded by condition: High (&gt;0.5), Medium (0.2–0.5), and Low/Stressed (&lt;0.2).</p></div>
+        <div class="cs-full"><div class="cbt">Architecture</div><p class="cbx">Python 3.14 + FastAPI backend on Render with Google Earth Engine integration, API key auth (X-API-Key header), rate limiting via slowapi, and CORS locked to the Vercel domain. React + Vite + TypeScript frontend on Vercel with React-Leaflet for interactive mapping, CartoCDN dark tiles (free, no auth), and a fully responsive mobile layout with hamburger menu and FAB. UptimeRobot pings /health every 5 minutes to prevent Render free-tier spin-down.</p></div>
+        <div>
+          <div class="cbt">Impact</div>
+          <ul class="clist">
+            <li><i class="fas fa-check-circle" style="color:var(--ok)"></i>Live NDVI data for 6 Kenyan arid counties</li>
+            <li><i class="fas fa-check-circle" style="color:var(--ok)"></i>Mobile-responsive — works on any device</li>
+            <li><i class="fas fa-check-circle" style="color:var(--ok)"></i>Secured with API key auth + rate limiting</li>
+          </ul>
+        </div>
+        <div>
+          <div class="cbt">Roadmap</div>
+          <ul class="clist">
+            <li><i class="fas fa-arrow-right" style="color:var(--gold)"></i>Historical NDVI time slider</li>
+            <li><i class="fas fa-arrow-right" style="color:var(--gold)"></i>SMS alerts via Africa's Talking</li>
+            <li><i class="fas fa-arrow-right" style="color:var(--gold)"></i>ML-based predictive grazing forecasts</li>
+            <li><i class="fas fa-arrow-right" style="color:var(--gold)"></i>PWA + offline-first mobile support</li>
+          </ul>
+        </div>
+        <div class="cs-img cs-full">
+          <img src="assets/pastureai.png" alt="Pasture AI grazing intelligence platform">
         </div>
       </div>
     </div>
@@ -1128,12 +1159,13 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: 2rem
           <div class="focus"><div class="ficon"><i class="fas fa-heartbeat"></i></div><div><div class="ftitle">Healthcare Access</div><div class="fdesc">AI tools bringing expert health guidance to people who can't afford specialists.</div></div></div>
           <div class="focus"><div class="ficon"><i class="fas fa-graduation-cap"></i></div><div><div class="ftitle">Education Infrastructure</div><div class="fdesc">Curriculum-aligned learning systems built specifically for Kenyan students.</div></div></div>
           <div class="focus"><div class="ficon"><i class="fas fa-bolt"></i></div><div><div class="ftitle">Civic Efficiency</div><div class="fdesc">Eliminating wasted time at service centres and bureaucratic touchpoints.</div></div></div>
-          <div class="focus"><div class="ficon"><i class="fas fa-leaf"></i></div><div><div class="ftitle">Climate & Environment</div><div class="fdesc">Tools for communities under climate pressure.</div></div></div>
+          <div class="focus"><div class="ficon"><i class="fas fa-leaf"></i></div><div><div class="ftitle">Climate & Environment</div><div class="fdesc">Satellite-powered tools for pastoralist communities under climate pressure.</div></div></div>
         </div>
       </div>
       <div>
         <div class="bcard">
           <div class="btitle"><span class="ldot"></span>Currently Building</div>
+          <div class="bitem"><div class="bname">Pasture AI v2</div><div class="bdesc">Historical NDVI time slider, SMS alerts via Africa's Talking, ML grazing forecasts, PWA offline support.</div></div>
           <div class="bitem"><div class="bname">HealthAI v2</div><div class="bdesc">Nutritionix food database, Stripe Pro tier, iOS build, push notifications.</div></div>
           <div class="bitem"><div class="bname">StMartin EDU v2</div><div class="bdesc">Security hardening, assessment module, quiz features → 10/10 rating.</div></div>
           <div class="opento">
@@ -1159,9 +1191,9 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: 2rem
     <p class="sec-sub">Skills acquired through real production systems — not just tutorials.</p>
     <div class="sk-grid">
       <div class="sk-card fu"><div class="sk-h"><i class="fas fa-layer-group"></i>Frontend</div><ul class="sk-ul"><li>React / Next.js 14</li><li>React Native + Expo SDK 52</li><li>TypeScript</li><li>Tailwind CSS</li><li>HTML / CSS / JavaScript</li></ul></div>
-      <div class="sk-card fu d1"><div class="sk-h"><i class="fas fa-server"></i>Backend</div><ul class="sk-ul"><li>Node.js 20 + Express.js</li><li>REST API design</li><li>WebSocket (ws)</li><li>Firebase Admin SDK</li><li>JWT authentication</li></ul></div>
+      <div class="sk-card fu d1"><div class="sk-h"><i class="fas fa-server"></i>Backend</div><ul class="sk-ul"><li>Node.js 20 + Express.js</li><li>Python 3.14 + FastAPI</li><li>REST API design</li><li>WebSocket (ws)</li><li>JWT authentication</li></ul></div>
       <div class="sk-card fu d2"><div class="sk-h"><i class="fas fa-database"></i>Data & Storage</div><ul class="sk-ul"><li>PostgreSQL 15</li><li>Firebase Firestore</li><li>MongoDB</li><li>Redis 7</li><li>Cloudinary</li></ul></div>
-      <div class="sk-card fu d3"><div class="sk-h"><i class="fas fa-brain"></i>AI & Integrations</div><ul class="sk-ul"><li>Groq (Llama 3.3 70B, Llama 4)</li><li>Groq Whisper (voice-to-text)</li><li>Africa's Talking (SMS/WhatsApp)</li><li>Stripe Payments</li><li>Resend (email)</li></ul></div>
+      <div class="sk-card fu d3"><div class="sk-h"><i class="fas fa-brain"></i>AI & Integrations</div><ul class="sk-ul"><li>Groq (Llama 3.3 70B, Llama 4)</li><li>Groq Whisper (voice-to-text)</li><li>Google Earth Engine (NDVI)</li><li>Africa's Talking (SMS/WhatsApp)</li><li>Stripe Payments</li></ul></div>
       <div class="sk-card fu"><div class="sk-h"><i class="fas fa-cloud"></i>Deployment</div><ul class="sk-ul"><li>Vercel (CI/CD)</li><li>Render (backend)</li><li>Netlify</li><li>Expo EAS (Android)</li><li>Firebase Hosting</li></ul></div>
       <div class="sk-card fu d1"><div class="sk-h"><i class="fas fa-shield-alt"></i>Security</div><ul class="sk-ul"><li>Penetration testing</li><li>Metasploit / Burp Suite</li><li>Network security & Wireshark</li><li>Threat detection + IR</li><li>Linux (Nmap, Ffuf)</li></ul></div>
     </div>
@@ -1242,7 +1274,6 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: 2rem
 <button class="stbtn" id="stbtn" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
 
 <script>
-// Theme
 const H=document.documentElement,tBtn=document.getElementById('themeBtn'),tIco=document.getElementById('themeIco'),dBtn=document.getElementById('drawerTheme'),dIco=document.getElementById('drawerThemeIco'),dLbl=document.getElementById('drawerThemeLbl');
 function setTheme(t){H.setAttribute('data-theme',t);localStorage.setItem('jk-t',t);const d=t==='dark';tIco.className=d?'fas fa-sun':'fas fa-moon';tBtn.title=d?'Light mode':'Dark mode';dIco.className=d?'fas fa-sun':'fas fa-moon';dLbl.textContent=d?'Switch to light mode':'Switch to dark mode';}
 function toggleTheme(){setTheme(H.getAttribute('data-theme')==='dark'?'light':'dark');}
@@ -1250,26 +1281,21 @@ setTheme(localStorage.getItem('jk-t')||(matchMedia('(prefers-color-scheme:light)
 tBtn.addEventListener('click',toggleTheme);
 dBtn.addEventListener('click',()=>{toggleTheme();closeDrawer();});
 
-// Scroll
 const nav=document.getElementById('nav'),stbtn=document.getElementById('stbtn');
 window.addEventListener('scroll',()=>{nav.classList.toggle('stuck',scrollY>50);stbtn.classList.toggle('vis',scrollY>400);},{passive:true});
 stbtn.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
 
-// Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});closeDrawer();}}));
 
-// Drawer
 const burger=document.getElementById('burger'),drawer=document.getElementById('drawer'),overlay=document.getElementById('overlay');
 function closeDrawer(){burger.classList.remove('on');drawer.classList.remove('open');overlay.classList.remove('open');burger.setAttribute('aria-expanded','false');document.body.style.overflow='';}
 burger.addEventListener('click',()=>{const o=drawer.classList.toggle('open');burger.classList.toggle('on',o);overlay.classList.toggle('open',o);burger.setAttribute('aria-expanded',String(o));document.body.style.overflow=o?'hidden':'';});
 overlay.addEventListener('click',closeDrawer);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer();});
 
-// Intersection observer
 const obs=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);}});},{threshold:0.07,rootMargin:'0px 0px -20px 0px'});
 document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
 
-// Contact form
 const cf=document.getElementById('cf'),sb=document.getElementById('sb'),fs=document.getElementById('fs');
 cf&&cf.addEventListener('submit',async e=>{
   e.preventDefault();
