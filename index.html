@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Joseph Kamanja | Systems Builder · Nairobi, Kenya</title>
-<meta name="description" content="Full-stack developer building production AI systems for African markets. HealthAI, SmartQueue, GoldenEcho, StMartin EDU, Pasture AI.">
+<meta name="description" content="Full-stack developer building production AI systems for African markets. HealthAI, SmartQueue, GoldenEcho, StMartin EDU, Pasture AI, Pamoja, BrightKnight.">
 <meta property="og:title" content="Joseph Kamanja — Systems Builder">
 <meta property="og:description" content="I build real-world systems that solve African problems.">
 <meta property="og:type" content="website">
@@ -566,13 +566,40 @@ button { font-family: var(--fb); cursor: pointer; }
 .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%,230px), 1fr)); gap: 1.1rem; }
 .cert { background: var(--card); border: 1px solid var(--bdr); border-radius: 12px; overflow: hidden; transition: all 0.3s; }
 .cert:hover { border-color: var(--bdr-h); transform: translateY(-3px); }
-.cert-img { height: 140px; background: var(--bg3); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.cert-img {
+  height: 140px; background: var(--bg3);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; position: relative;
+}
 .cert-img img { width: 100%; height: 100%; object-fit: contain; padding: 0.4rem; }
+/* Clickable cert image overlay */
+.cert-img-link {
+  display: block; width: 100%; height: 100%; position: relative;
+}
+.cert-img-link::after {
+  content: '\f35d';
+  font-family: 'Font Awesome 6 Free'; font-weight: 900;
+  position: absolute; bottom: 0.4rem; right: 0.5rem;
+  font-size: 0.7rem; color: var(--gold);
+  background: rgba(11,15,26,0.75);
+  padding: 0.2rem 0.35rem; border-radius: 4px;
+  opacity: 0; transition: opacity 0.2s;
+}
+.cert:hover .cert-img-link::after { opacity: 1; }
 .cert-body { padding: 1rem; }
 .cert-n { font-family: var(--fd); font-size: 0.85rem; font-weight: 700; color: var(--txt); margin-bottom: 0.18rem; transition: color 0.3s; }
 [data-theme="light"] .cert-n { color: #0f172a; }
 .cert-org { font-size: 0.74rem; color: var(--gold); margin-bottom: 0.12rem; }
 .cert-yr { font-size: 0.68rem; color: var(--dim); }
+.cert-view {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  margin-top: 0.55rem;
+  font-size: 0.68rem; font-weight: 600;
+  color: var(--gold); border: 1px solid var(--bdr);
+  border-radius: 5px; padding: 0.22rem 0.55rem;
+  transition: all 0.2s;
+}
+.cert-view:hover { background: var(--gold-dim); border-color: var(--gold); }
 
 /* =============================================
    CONTACT
@@ -743,10 +770,10 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: 2rem
     <div>
       <div class="eyebrow">Joseph Kamanja · Nairobi, Kenya</div>
       <h1 class="hero-h">I build real-world systems that solve <span class="hl">African problems</span></h1>
-      <p class="hero-sub">Full-stack developer shipping production AI systems across healthcare, education, civic infrastructure, and climate — not demos, real users.</p>
+      <p class="hero-sub">Full-stack developer shipping production AI systems across healthcare, education, civic infrastructure, fintech, and climate — not demos, real users.</p>
       <div class="trust">
         <span class="tdot">●</span>
-        <span>5+ systems</span>
+        <span>7+ systems</span>
         <span class="tsep">|</span>
         <span>Real users</span>
         <span class="tsep">|</span>
@@ -769,8 +796,8 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: 2rem
         <div class="pname">Joseph Kamanja</div>
         <div class="prole">Systems Builder · Full-Stack Developer</div>
         <div class="sgrid">
-          <div class="sbox"><div class="snum">5+</div><div class="slbl">Systems</div></div>
-          <div class="sbox"><div class="snum">4</div><div class="slbl">Live Platforms</div></div>
+          <div class="sbox"><div class="snum">7+</div><div class="slbl">Systems</div></div>
+          <div class="sbox"><div class="snum">6</div><div class="slbl">Live Platforms</div></div>
           <div class="sbox"><div class="snum">10/10</div><div class="slbl">GoldenEcho</div></div>
           <div class="sbox"><div class="snum">95%</div><div class="slbl">CyberShujaa</div></div>
         </div>
@@ -800,8 +827,8 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: 2rem
     <p class="sec-sub">Every line of code is pointed at a real problem that real people in Africa face every day.</p>
     <div class="about-grid">
       <div>
-        <p class="atext">I'm a recent graduate with training in cybersecurity, data analysis, and full-stack development. I completed an intensive Cyber Security Analyst programme at CyberShujaa achieving <strong>95% performance</strong>, then went further and shipped five production systems.</p>
-        <p class="atext">In recent months I've shipped a full-stack AI nutrition platform, a digital queue management system for Kenya, an AI-powered LMS aligned to the CBC curriculum, an AI companionship platform, and a satellite-powered grazing intelligence tool for Kenyan pastoralists — all deployed, production-ready.</p>
+        <p class="atext">I'm a recent graduate with training in cybersecurity, data analysis, and full-stack development. I completed an intensive Cyber Security Analyst programme at CyberShujaa achieving <strong>95% performance</strong>, then went further and shipped seven production systems.</p>
+        <p class="atext">In recent months I've shipped a full-stack AI nutrition platform, a digital queue management system, an AI-powered LMS aligned to CBC, an AI companionship platform, a satellite-powered grazing intelligence tool, a chama savings platform for Kenyan women's groups, and a digital chess academy for children aged 7–17 — all deployed and production-ready.</p>
         <p class="atext" style="margin-bottom:1.5rem">Seeking internships, collaborations, and partnerships where systems-thinking meets real impact.</p>
         <div style="display:flex;gap:0.65rem;flex-wrap:wrap">
           <a href="https://www.linkedin.com/in/jkamanja" target="_blank" rel="noopener" class="btn btn-outline btn-sm"><i class="fab fa-linkedin"></i>LinkedIn</a>
@@ -810,7 +837,7 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: 2rem
         </div>
       </div>
       <div class="astats">
-        <div class="sbox" style="padding:1.25rem"><div class="snum">5+</div><div class="slbl">Systems Live</div></div>
+        <div class="sbox" style="padding:1.25rem"><div class="snum">7+</div><div class="slbl">Systems Live</div></div>
         <div class="sbox" style="padding:1.25rem"><div class="snum">4</div><div class="slbl">Certifications</div></div>
         <div class="sbox" style="padding:1.25rem"><div class="snum">21+</div><div class="slbl">Training Modules</div></div>
         <div class="sbox" style="padding:1.25rem"><div class="snum">95%</div><div class="slbl">Top Performance</div></div>
@@ -829,6 +856,7 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: 2rem
     <p class="sec-sub">Not demos. Not class projects. Deployed systems with real architecture, real users, and real impact.</p>
     <div class="sys-grid">
 
+      <!-- HealthAI -->
       <div class="scard fu">
         <div class="scard-top">
           <div class="scard-hdr"><div class="sname">HealthAI</div><span class="badge live">Live</span></div>
@@ -849,6 +877,7 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: 2rem
         </div>
       </div>
 
+      <!-- SmartQueue -->
       <div class="scard fu d1">
         <div class="scard-top">
           <div class="scard-hdr"><div class="sname">SmartQueue</div><span class="badge live">Live</span></div>
@@ -869,6 +898,7 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: 2rem
         </div>
       </div>
 
+      <!-- StMartin EDU -->
       <div class="scard fu d2">
         <div class="scard-top">
           <div class="scard-hdr"><div class="sname">StMartin EDU</div><span class="badge mvp">MVP</span></div>
@@ -889,6 +919,7 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: 2rem
         </div>
       </div>
 
+      <!-- GoldenEcho -->
       <div class="scard fu d3">
         <div class="scard-top">
           <div class="scard-hdr"><div class="sname">GoldenEcho</div><span class="badge live">Live</span></div>
@@ -909,7 +940,7 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: 2rem
         </div>
       </div>
 
-      <!-- PASTURE AI — NEW -->
+      <!-- Pasture AI -->
       <div class="scard fu">
         <div class="scard-top">
           <div class="scard-hdr"><div class="sname">Pasture AI</div><span class="badge live">Live</span></div>
@@ -926,6 +957,48 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: 2rem
             <a href="https://pasture-ai-one.vercel.app" target="_blank" rel="noopener" class="act act-gold"><i class="fas fa-external-link-alt"></i>Live Demo</a>
             <a href="#cs-pastureai" class="act act-out"><i class="fas fa-file-alt"></i>Case Study</a>
             <a href="https://github.com/josmiles/pasture-ai" target="_blank" rel="noopener" class="act act-gh" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pamoja -->
+      <div class="scard fu d1">
+        <div class="scard-top">
+          <div class="scard-hdr"><div class="sname">Pamoja</div><span class="badge live">Live</span></div>
+          <p class="sprob">Digital chama savings platform empowering Kenyan women's groups with M-Pesa, AI assistant, and full financial management.</p>
+          <ul class="sfeat">
+            <li>M-Pesa Daraja STK Push integration (sandbox)</li>
+            <li>Msaidizi — bilingual AI assistant (EN/SW) via Groq</li>
+            <li>Web + Android, 2 roles: Admin & Member</li>
+          </ul>
+        </div>
+        <div class="scard-bot">
+          <div class="tags"><span class="tag">Next.js 14</span><span class="tag">TypeScript</span><span class="tag">MongoDB</span><span class="tag">NextAuth</span><span class="tag">M-Pesa</span><span class="tag">Groq AI</span><span class="tag">Expo</span></div>
+          <div class="acts">
+            <a href="https://pamoja-two.vercel.app" target="_blank" rel="noopener" class="act act-gold"><i class="fas fa-external-link-alt"></i>Live Demo</a>
+            <a href="#cs-pamoja" class="act act-out"><i class="fas fa-file-alt"></i>Case Study</a>
+            <a href="https://github.com/josmiles/pamoja" target="_blank" rel="noopener" class="act act-gh" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- BrightKnight -->
+      <div class="scard fu d2">
+        <div class="scard-top">
+          <div class="scard-hdr"><div class="sname">BrightKnight</div><span class="badge live">Live</span></div>
+          <p class="sprob">Digital chess academy enabling tutors to teach children aged 7–17 remotely with real-time multiplayer and Stockfish AI.</p>
+          <ul class="sfeat">
+            <li>Stockfish 18 AI — levels 1–20, live tutor vs student chess</li>
+            <li>Embedded Jitsi video classes, daily Lichess puzzles</li>
+            <li>4 roles: Admin, Tutor, Parent, Student (PIN login)</li>
+          </ul>
+        </div>
+        <div class="scard-bot">
+          <div class="tags"><span class="tag">React 18</span><span class="tag">TypeScript</span><span class="tag">Node.js</span><span class="tag">Socket.io</span><span class="tag">MongoDB</span><span class="tag">Stockfish</span><span class="tag">Jitsi</span></div>
+          <div class="acts">
+            <a href="https://queenmind-xi.vercel.app" target="_blank" rel="noopener" class="act act-gold"><i class="fas fa-external-link-alt"></i>Live Demo</a>
+            <a href="#cs-brightknight" class="act act-out"><i class="fas fa-file-alt"></i>Case Study</a>
+            <a href="https://github.com/josmiles/Queenmind" target="_blank" rel="noopener" class="act act-gh" aria-label="GitHub"><i class="fab fa-github"></i></a>
           </div>
         </div>
       </div>
@@ -1094,7 +1167,7 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: 2rem
       </div>
     </div>
 
-    <!-- PASTURE AI — NEW -->
+    <!-- Pasture AI -->
     <div class="cs fu" id="cs-pastureai">
       <div class="cs-side">
         <div class="cs-name">Pasture AI</div>
@@ -1134,6 +1207,89 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: 2rem
       </div>
     </div>
 
+    <!-- ====== PAMOJA (NEW) ====== -->
+    <div class="cs fu" id="cs-pamoja">
+      <div class="cs-side">
+        <div class="cs-name">Pamoja</div>
+        <div><div class="cs-score">Live</div><div class="cs-sl">Production Status</div></div>
+        <div class="cs-meta">
+          <div><div class="cml">Platform</div><div class="cmv">Web + Android (Expo)</div></div>
+          <div><div class="cml">Database</div><div class="cmv">MongoDB Atlas</div></div>
+          <div><div class="cml">Payments</div><div class="cmv">M-Pesa Daraja STK Push</div></div>
+          <div><div class="cml">Released</div><div class="cmv">April 2026</div></div>
+        </div>
+        <a href="https://pamoja-two.vercel.app" target="_blank" rel="noopener" class="act act-gold" style="justify-content:center"><i class="fas fa-external-link-alt"></i>Open Live App</a>
+      </div>
+      <div class="cs-body">
+        <div><div class="cbt">The Problem</div><p class="cbx">Kenya's chama savings groups — the backbone of grassroots financial inclusion — are managed through notebooks and WhatsApp groups. Members lack transparency into contributions, loans, and welfare decisions, leading to disputes and mistrust.</p></div>
+        <div><div class="cbt">The Solution</div><p class="cbx">A full-stack digital chama platform with M-Pesa STK Push payments, an AI assistant (Msaidizi) that speaks Swahili and English, PDF/CSV financial statements, investment voting, welfare management, and PIN-based security — all live on web and Android.</p></div>
+        <div class="cs-full"><div class="cbt">Architecture</div><p class="cbx">Next.js 14 (App Router) + TypeScript on Vercel. MongoDB Atlas with Mongoose ODM — 10 models: User, Group, Member, Contribution, Loan, Penalty, WelfareRequest, MeetingMinutes, Goal, Notification. NextAuth.js v4 with JWT strategy + PIN-based auth and forced PIN change on first login. Groq API (Llama 3) for bilingual Msaidizi AI. M-Pesa Daraja API (sandbox) for STK Push. Expo React Native + EAS Build for Android. Custom security middleware: rate limiting, account lockout, XSS/injection threat detection, JWT blacklisting.</p></div>
+        <div>
+          <div class="cbt">Impact</div>
+          <ul class="clist">
+            <li><i class="fas fa-check-circle" style="color:var(--ok)"></i>Full Admin + Member dashboards live</li>
+            <li><i class="fas fa-check-circle" style="color:var(--ok)"></i>Bilingual AI assistant in EN & Swahili</li>
+            <li><i class="fas fa-check-circle" style="color:var(--ok)"></i>M-Pesa, loans, welfare, meetings all managed</li>
+            <li><i class="fas fa-check-circle" style="color:var(--ok)"></i>PDF + CSV financial statement export</li>
+          </ul>
+        </div>
+        <div>
+          <div class="cbt">Roadmap</div>
+          <ul class="clist">
+            <li><i class="fas fa-arrow-right" style="color:var(--gold)"></i>M-Pesa live production credentials</li>
+            <li><i class="fas fa-arrow-right" style="color:var(--gold)"></i>WhatsApp Business notifications via Msaidizi</li>
+            <li><i class="fas fa-arrow-right" style="color:var(--gold)"></i>Self-service group onboarding + QR invite</li>
+          </ul>
+        </div>
+        <div class="cs-img cs-full">
+          <!-- Add your screenshot: assets/pamoja.png -->
+          <img src="assets/pamoja.png" alt="Pamoja chama savings platform">
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== BRIGHTKNIGHT (NEW) ====== -->
+    <div class="cs fu" id="cs-brightknight">
+      <div class="cs-side">
+        <div class="cs-name">BrightKnight</div>
+        <div><div class="cs-score">Live</div><div class="cs-sl">Production Status</div></div>
+        <div class="cs-meta">
+          <div><div class="cml">Platform</div><div class="cmv">Web App (PWA-ready)</div></div>
+          <div><div class="cml">Backend</div><div class="cmv">queenmind.onrender.com</div></div>
+          <div><div class="cml">Database</div><div class="cmv">MongoDB Atlas (Frankfurt)</div></div>
+          <div><div class="cml">Released</div><div class="cmv">April 2026</div></div>
+        </div>
+        <a href="https://queenmind-xi.vercel.app" target="_blank" rel="noopener" class="act act-gold" style="justify-content:center"><i class="fas fa-external-link-alt"></i>Open Live App</a>
+      </div>
+      <div class="cs-body">
+        <div><div class="cbt">The Problem</div><p class="cbx">Chess tutors in Kenya teaching children aged 7–17 have no dedicated digital platform for remote classes. Parents pay via M-Pesa and get paper receipts. Students have no way to practice against AI, play live with tutors, or join video lessons without switching between multiple apps.</p></div>
+        <div><div class="cbt">The Solution</div><p class="cbx">A full digital chess academy with Stockfish 18 AI (levels 1–20), real-time multiplayer via Socket.io, embedded Jitsi video classes, daily Lichess puzzles, in-app messaging, M-Pesa payment tracking with PDF receipts, and a simplified PIN numpad login for children — all in one platform.</p></div>
+        <div class="cs-full"><div class="cbt">Architecture</div><p class="cbx">React 18 + TypeScript + Vite frontend on Vercel. Node.js + Express backend on Render (MongoDB Atlas Frankfurt cluster). JWT auth + bcryptjs (salt 12). Socket.io v4 for real-time chess rooms with spectator support. Stockfish 18 ASM (11MB) runs entirely in the browser. Jitsi Meet embedded via iframe — no redirect. pdfkit for PDF receipts and monthly reports. Nodemailer + Gmail SMTP for announcements. 4 user roles: Admin (one), Tutor, Parent, Student. Token blacklisting on logout, rate limiting, login lockout security.</p></div>
+        <div>
+          <div class="cbt">Impact</div>
+          <ul class="clist">
+            <li><i class="fas fa-check-circle" style="color:var(--ok)"></i>Live chess vs Stockfish AI — 20 difficulty levels</li>
+            <li><i class="fas fa-check-circle" style="color:var(--ok)"></i>Real-time tutor vs student multiplayer rooms</li>
+            <li><i class="fas fa-check-circle" style="color:var(--ok)"></i>Embedded video class — students never leave the app</li>
+            <li><i class="fas fa-check-circle" style="color:var(--ok)"></i>Per-tutor leaderboards + progress dashboards</li>
+          </ul>
+        </div>
+        <div>
+          <div class="cbt">Roadmap</div>
+          <ul class="clist">
+            <li><i class="fas fa-arrow-right" style="color:var(--gold)"></i>Socket.io auth — prevent unauthenticated connections</li>
+            <li><i class="fas fa-arrow-right" style="color:var(--gold)"></i>Stripe/Paystack for parents outside Kenya</li>
+            <li><i class="fas fa-arrow-right" style="color:var(--gold)"></i>Swahili interface — multi-language support</li>
+            <li><i class="fas fa-arrow-right" style="color:var(--gold)"></i>Mobile app — Capacitor wrap for iOS/Android</li>
+          </ul>
+        </div>
+        <div class="cs-img cs-full">
+          <!-- Add your screenshot: assets/brightknight.png -->
+          <img src="assets/brightknight.png" alt="BrightKnight Chess Academy platform">
+        </div>
+      </div>
+    </div>
+
     <!-- TESTIMONIALS -->
     <div class="lbl" style="margin-top:3rem">What people say</div>
     <div class="tgrid">
@@ -1159,15 +1315,17 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: 2rem
           <div class="focus"><div class="ficon"><i class="fas fa-heartbeat"></i></div><div><div class="ftitle">Healthcare Access</div><div class="fdesc">AI tools bringing expert health guidance to people who can't afford specialists.</div></div></div>
           <div class="focus"><div class="ficon"><i class="fas fa-graduation-cap"></i></div><div><div class="ftitle">Education Infrastructure</div><div class="fdesc">Curriculum-aligned learning systems built specifically for Kenyan students.</div></div></div>
           <div class="focus"><div class="ficon"><i class="fas fa-bolt"></i></div><div><div class="ftitle">Civic Efficiency</div><div class="fdesc">Eliminating wasted time at service centres and bureaucratic touchpoints.</div></div></div>
+          <div class="focus"><div class="ficon"><i class="fas fa-coins"></i></div><div><div class="ftitle">Financial Inclusion</div><div class="fdesc">Digitising chama savings groups and grassroots financial systems for Kenyan communities.</div></div></div>
           <div class="focus"><div class="ficon"><i class="fas fa-leaf"></i></div><div><div class="ftitle">Climate & Environment</div><div class="fdesc">Satellite-powered tools for pastoralist communities under climate pressure.</div></div></div>
         </div>
       </div>
       <div>
         <div class="bcard">
           <div class="btitle"><span class="ldot"></span>Currently Building</div>
+          <div class="bitem"><div class="bname">Pamoja v2</div><div class="bdesc">M-Pesa live production, WhatsApp Business via Msaidizi, self-service group onboarding + QR invite.</div></div>
+          <div class="bitem"><div class="bname">BrightKnight v2</div><div class="bdesc">Socket.io auth, Stripe/Paystack for global parents, Swahili interface, Capacitor mobile app.</div></div>
           <div class="bitem"><div class="bname">Pasture AI v2</div><div class="bdesc">Historical NDVI time slider, SMS alerts via Africa's Talking, ML grazing forecasts, PWA offline support.</div></div>
           <div class="bitem"><div class="bname">HealthAI v2</div><div class="bdesc">Nutritionix food database, Stripe Pro tier, iOS build, push notifications.</div></div>
-          <div class="bitem"><div class="bname">StMartin EDU v2</div><div class="bdesc">Security hardening, assessment module, quiz features → 10/10 rating.</div></div>
           <div class="opento">
             <div class="ot-t">Open To</div>
             <div class="ot-x">Internships · Collaborations · Partnerships<br><span style="color:var(--gold);font-weight:600">Nairobi-based or remote</span></div>
@@ -1191,9 +1349,9 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: 2rem
     <p class="sec-sub">Skills acquired through real production systems — not just tutorials.</p>
     <div class="sk-grid">
       <div class="sk-card fu"><div class="sk-h"><i class="fas fa-layer-group"></i>Frontend</div><ul class="sk-ul"><li>React / Next.js 14</li><li>React Native + Expo SDK 52</li><li>TypeScript</li><li>Tailwind CSS</li><li>HTML / CSS / JavaScript</li></ul></div>
-      <div class="sk-card fu d1"><div class="sk-h"><i class="fas fa-server"></i>Backend</div><ul class="sk-ul"><li>Node.js 20 + Express.js</li><li>Python 3.14 + FastAPI</li><li>REST API design</li><li>WebSocket (ws)</li><li>JWT authentication</li></ul></div>
-      <div class="sk-card fu d2"><div class="sk-h"><i class="fas fa-database"></i>Data & Storage</div><ul class="sk-ul"><li>PostgreSQL 15</li><li>Firebase Firestore</li><li>MongoDB</li><li>Redis 7</li><li>Cloudinary</li></ul></div>
-      <div class="sk-card fu d3"><div class="sk-h"><i class="fas fa-brain"></i>AI & Integrations</div><ul class="sk-ul"><li>Groq (Llama 3.3 70B, Llama 4)</li><li>Groq Whisper (voice-to-text)</li><li>Google Earth Engine (NDVI)</li><li>Africa's Talking (SMS/WhatsApp)</li><li>Stripe Payments</li></ul></div>
+      <div class="sk-card fu d1"><div class="sk-h"><i class="fas fa-server"></i>Backend</div><ul class="sk-ul"><li>Node.js 20 + Express.js</li><li>Python 3.14 + FastAPI</li><li>REST API design</li><li>WebSocket + Socket.io</li><li>JWT authentication</li></ul></div>
+      <div class="sk-card fu d2"><div class="sk-h"><i class="fas fa-database"></i>Data & Storage</div><ul class="sk-ul"><li>PostgreSQL 15</li><li>Firebase Firestore</li><li>MongoDB + Mongoose</li><li>Redis 7</li><li>Cloudinary</li></ul></div>
+      <div class="sk-card fu d3"><div class="sk-h"><i class="fas fa-brain"></i>AI & Integrations</div><ul class="sk-ul"><li>Groq (Llama 3.3 70B, Llama 4)</li><li>Groq Whisper (voice-to-text)</li><li>Google Earth Engine (NDVI)</li><li>M-Pesa Daraja API</li><li>Africa's Talking (SMS/WhatsApp)</li><li>Stripe Payments</li></ul></div>
       <div class="sk-card fu"><div class="sk-h"><i class="fas fa-cloud"></i>Deployment</div><ul class="sk-ul"><li>Vercel (CI/CD)</li><li>Render (backend)</li><li>Netlify</li><li>Expo EAS (Android)</li><li>Firebase Hosting</li></ul></div>
       <div class="sk-card fu d1"><div class="sk-h"><i class="fas fa-shield-alt"></i>Security</div><ul class="sk-ul"><li>Penetration testing</li><li>Metasploit / Burp Suite</li><li>Network security & Wireshark</li><li>Threat detection + IR</li><li>Linux (Nmap, Ffuf)</li></ul></div>
     </div>
@@ -1208,10 +1366,92 @@ footer { background: var(--bg2); border-top: 1px solid var(--bdr); padding: 2rem
     <div class="lbl">Certifications</div>
     <h2 class="sec-h">Formal credentials</h2>
     <div class="cert-grid">
-      <div class="cert fu"><div class="cert-img"><img src="https://www.michaelpage.com.cn/sites/michaelpage.com.cn/files/legacy/cybersecurity_analyst.jpeg" alt="Cyber Security Analyst" loading="lazy"></div><div class="cert-body"><div class="cert-n">Cyber Security Analyst</div><div class="cert-org"><i class="fas fa-shield-alt"></i> Cyber Shujaa</div><div class="cert-yr">2025 · 95% Achievement</div></div></div>
-      <div class="cert fu d1"><div class="cert-img"><img src="https://savanna.alxafrica.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBekhzTEE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--d0f1a992ee5c3e20e9c10e0ddb3ea402e67841dd/107-ent-110-introduction-to-venture-creation-certificate-joseph-kamanja.png" alt="Pathway Foundations" loading="lazy"></div><div class="cert-body"><div class="cert-n">Pathway Foundations</div><div class="cert-org"><i class="fas fa-building"></i> ALX Africa</div><div class="cert-yr">2025</div></div></div>
-      <div class="cert fu d2"><div class="cert-img"><img src="https://savanna.alxafrica.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBM0Z5TWc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--c4e212eb1e1c207416ea2c95b48d83001f5edda7/140-alx-aice-ai-career-essentials-2-0-certificate-joseph-kamanja.png" alt="AI Career Essentials" loading="lazy"></div><div class="cert-body"><div class="cert-n">AI Career Essentials</div><div class="cert-org"><i class="fas fa-building"></i> ALX Africa</div><div class="cert-yr">2025</div></div></div>
-      <div class="cert fu d3"><div class="cert-img"><img src="https://savanna.alxafrica.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNU1sTXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--c56e542d1312245235ee7b43b963f3585d4326a4/72-virtual-assistant-certificate-joseph-kamanja.png" alt="Virtual Assistant" loading="lazy"></div><div class="cert-body"><div class="cert-n">Virtual Assistant Skills</div><div class="cert-org"><i class="fas fa-building"></i> ALX Africa</div><div class="cert-yr">2025</div></div></div>
+
+      <!-- CyberShujaa — certificate image viewable like ALX certs -->
+      <div class="cert fu">
+        <div class="cert-img">
+          <a
+            href="https://drive.google.com/file/d/1fj3SNkfh6mRcgnS7U9lxA3rEG-0iZtoC/view?usp=sharing"
+            target="_blank"
+            rel="noopener"
+            class="cert-img-link"
+            title="View CyberShujaa Certificate"
+          >
+            <img
+              src="https://drive.google.com/thumbnail?id=1fj3SNkfh6mRcgnS7U9lxA3rEG-0iZtoC&sz=w400"
+              alt="Cyber Security Analyst Certificate — CyberShujaa"
+              loading="lazy"
+              onerror="this.style.display='none';this.parentElement.parentElement.style.background='var(--bg3)';this.parentElement.innerHTML='<div style=\'display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:0.4rem;color:var(--dim)\'><i class=\'fas fa-shield-alt\' style=\'font-size:2rem;color:var(--gold);opacity:0.6\'></i><span style=\'font-size:0.68rem\'>CyberShujaa</span></div>'"
+            >
+          </a>
+        </div>
+        <div class="cert-body">
+          <div class="cert-n">Cyber Security Analyst</div>
+          <div class="cert-org"><i class="fas fa-shield-alt"></i> Cyber Shujaa</div>
+          <div class="cert-yr">2026 · With Distinction · 95%</div>
+          <a
+            href="https://drive.google.com/file/d/1fj3SNkfh6mRcgnS7U9lxA3rEG-0iZtoC/view?usp=sharing"
+            target="_blank"
+            rel="noopener"
+            class="cert-view"
+          ><i class="fas fa-external-link-alt"></i> View Certificate</a>
+        </div>
+      </div>
+
+      <!-- ALX Pathway Foundations -->
+      <div class="cert fu d1">
+        <div class="cert-img">
+          <a
+            href="https://savanna.alxafrica.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBekhzTEE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--d0f1a992ee5c3e20e9c10e0ddb3ea402e67841dd/107-ent-110-introduction-to-venture-creation-certificate-joseph-kamanja.png"
+            target="_blank" rel="noopener" class="cert-img-link" title="View Pathway Foundations Certificate"
+          >
+            <img src="https://savanna.alxafrica.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBekhzTEE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--d0f1a992ee5c3e20e9c10e0ddb3ea402e67841dd/107-ent-110-introduction-to-venture-creation-certificate-joseph-kamanja.png" alt="Pathway Foundations" loading="lazy">
+          </a>
+        </div>
+        <div class="cert-body">
+          <div class="cert-n">Pathway Foundations</div>
+          <div class="cert-org"><i class="fas fa-building"></i> ALX Africa</div>
+          <div class="cert-yr">2025</div>
+          <a href="https://savanna.alxafrica.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBekhzTEE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--d0f1a992ee5c3e20e9c10e0ddb3ea402e67841dd/107-ent-110-introduction-to-venture-creation-certificate-joseph-kamanja.png" target="_blank" rel="noopener" class="cert-view"><i class="fas fa-external-link-alt"></i> View Certificate</a>
+        </div>
+      </div>
+
+      <!-- ALX AI Career Essentials -->
+      <div class="cert fu d2">
+        <div class="cert-img">
+          <a
+            href="https://savanna.alxafrica.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBM0Z5TWc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--c4e212eb1e1c207416ea2c95b48d83001f5edda7/140-alx-aice-ai-career-essentials-2-0-certificate-joseph-kamanja.png"
+            target="_blank" rel="noopener" class="cert-img-link" title="View AI Career Essentials Certificate"
+          >
+            <img src="https://savanna.alxafrica.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBM0Z5TWc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--c4e212eb1e1c207416ea2c95b48d83001f5edda7/140-alx-aice-ai-career-essentials-2-0-certificate-joseph-kamanja.png" alt="AI Career Essentials" loading="lazy">
+          </a>
+        </div>
+        <div class="cert-body">
+          <div class="cert-n">AI Career Essentials</div>
+          <div class="cert-org"><i class="fas fa-building"></i> ALX Africa</div>
+          <div class="cert-yr">2025</div>
+          <a href="https://savanna.alxafrica.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBM0Z5TWc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--c4e212eb1e1c207416ea2c95b48d83001f5edda7/140-alx-aice-ai-career-essentials-2-0-certificate-joseph-kamanja.png" target="_blank" rel="noopener" class="cert-view"><i class="fas fa-external-link-alt"></i> View Certificate</a>
+        </div>
+      </div>
+
+      <!-- ALX Virtual Assistant -->
+      <div class="cert fu d3">
+        <div class="cert-img">
+          <a
+            href="https://savanna.alxafrica.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNU1sTXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--c56e542d1312245235ee7b43b963f3585d4326a4/72-virtual-assistant-certificate-joseph-kamanja.png"
+            target="_blank" rel="noopener" class="cert-img-link" title="View Virtual Assistant Certificate"
+          >
+            <img src="https://savanna.alxafrica.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNU1sTXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--c56e542d1312245235ee7b43b963f3585d4326a4/72-virtual-assistant-certificate-joseph-kamanja.png" alt="Virtual Assistant" loading="lazy">
+          </a>
+        </div>
+        <div class="cert-body">
+          <div class="cert-n">Virtual Assistant Skills</div>
+          <div class="cert-org"><i class="fas fa-building"></i> ALX Africa</div>
+          <div class="cert-yr">2025</div>
+          <a href="https://savanna.alxafrica.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNU1sTXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--c56e542d1312245235ee7b43b963f3585d4326a4/72-virtual-assistant-certificate-joseph-kamanja.png" target="_blank" rel="noopener" class="cert-view"><i class="fas fa-external-link-alt"></i> View Certificate</a>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
